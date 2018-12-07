@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteBase /
+
+RewriteRule usuarios /user.html
+
+RewriteRule administrar /admin.html
