@@ -9,7 +9,7 @@
 
       $user = $_GET['user'];
       $title = $_GET['campain'];
-      $md5 = md5($user."secretcodepez".strtolower($title));
+      $md5 = md5($user."secretcodepez".mb_strtolower($title));
       $sqlReadReactives = "SELECT * FROM reactives_{$md5} ORDER BY id DESC";
       $reactives = readReactives($sqlReadReactives,$conn);
       if (!$reactives) {

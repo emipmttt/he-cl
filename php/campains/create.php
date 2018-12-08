@@ -5,14 +5,15 @@
   $user = $_POST['user'];
   $title = $_POST['title'];
   $numberOfParticipants = $_POST['numberOfParticipants'];
-  $md5 = md5($user."secretcodepez".strtolower($title));
+  $status = $_POST['status'];
+  $md5 = md5($user.'secretcodepez'.mb_strtolower($title));
 
   $sqlFindCampains = "SELECT campains FROM users WHERE id = {$user} ";
   $resultFindCampains = mysqli_query($conn, $sqlFindCampains);
   if (mysqli_num_rows($resultFindCampains) > 0) {
       $rowFindCampains = mysqli_fetch_assoc($resultFindCampains);
       $campains = json_decode($rowFindCampains['campains']);
-      array_push($campains,array("title" => $title, "numberOfParticipants" => $numberOfParticipants));
+      array_push($campains,array("title" => $title, "numberOfParticipants" => $numberOfParticipants,"status" => $status));
       $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);
 
       $sqlUpdateCampains = "UPDATE users SET campains='{$campains}' WHERE id = '{$user}' ";

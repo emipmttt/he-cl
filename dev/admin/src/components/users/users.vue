@@ -17,7 +17,7 @@
 
     <div v-if="users.length">
       <div>
-        <user-item @update:change="get" v-for="(user, index) in filteredUsers" :key="user.id" :user="user" />
+        <user-item @update:change="get()" v-for="(user, index) in filteredUsers" :key="user.id" :user="user" />
       </div>
     </div>
     <div v-else class=" center">
