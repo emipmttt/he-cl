@@ -11,7 +11,7 @@
   $dependency = $_POST['dependency'];
 
 
-  $sqlFindDoubleTextualRange = "SELECT * FROM textualRanges WHERE typeDependency = '{$typeDependency}' AND dependency = '{$dependency}' AND rangeNum = '{$rangeNum}' "; 
+  $sqlFindDoubleTextualRange = "SELECT * FROM textualRanges WHERE typeDependency = '{$typeDependency}' AND dependency = '{$dependency}' AND rangeNum = '{$rangeNum}' ";
   $resultFindDoubleTextualRange = mysqli_query($conn, $sqlFindDoubleTextualRange);
   if (mysqli_num_rows($resultFindDoubleTextualRange) > 0) {
     $response->status = false;
@@ -21,7 +21,7 @@
     $sqlUpdateTextualRanges = "UPDATE textualRanges SET diagnosis = '{$diagnosis}', recommendations = '{$recommendations}', rangeNum='{$rangeNum}' WHERE id = '{$id}' ";
     if (mysqli_query($conn, $sqlUpdateTextualRanges)) {
       $response->status = true;
-      $response->message = 'Rango actualizado correctamente'; 
+      $response->message = 'Rango actualizado correctamente';
       $response->textualRanges = readTextualRanges($sqlReadTextualRanges,$conn);
       echo json_encode($response);
     } else {

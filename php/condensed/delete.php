@@ -8,7 +8,7 @@
   $sqlDeleteCondensed = "DELETE FROM condensed WHERE id = '{$id}' ";
   if (mysqli_query($conn, $sqlDeleteCondensed)) {
     $response->status = true;
-    $response->message = 'Aspecto eliminado correctamente'; 
+    $response->message = 'Aspecto eliminado correctamente';
     $response->condensed = readCondensed($sqlReadCondensed,$conn);
     echo json_encode($response);
   } else {
@@ -16,4 +16,3 @@
     $response->message = 'Algo salió mal, intentalo nuevamente más tarde';
     echo json_encode($response);
   }
-

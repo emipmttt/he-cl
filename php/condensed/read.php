@@ -5,7 +5,7 @@
   $sqlReadCondensed = "SELECT * FROM condensed ORDER BY id DESC";
 
   switch ($query) {
-    case '*':      
+    case '*':
         $condensed = readCondensed($sqlReadCondensed,$conn);
         if (!$condensed) {
           $response->status = false;
@@ -16,7 +16,7 @@
           $response->condensed = $condensed;
           echo json_encode($response);
         }
-      
+
       break;
   }
 

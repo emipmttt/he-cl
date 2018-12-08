@@ -7,7 +7,7 @@
   $sqlReadTextualRanges = "SELECT * FROM textualRanges WHERE dependency = '{$dependency}' AND typeDependency = '{$typeDependency}' ORDER BY id DESC";
 
   switch ($query) {
-    case '*':      
+    case '*':
         $textualRanges = readTextualRanges($sqlReadTextualRanges,$conn);
         if (!$textualRanges) {
           $response->status = false;
@@ -18,7 +18,7 @@
           $response->textualRanges = $textualRanges;
           echo json_encode($response);
         }
-      
+
       break;
   }
 

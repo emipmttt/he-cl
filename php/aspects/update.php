@@ -9,7 +9,7 @@
   $sqlUpdateAspects = "UPDATE aspects SET title = '{$title}' WHERE id = '{$id}' ";
   if (mysqli_query($conn, $sqlUpdateAspects)) {
     $response->status = true;
-    $response->message = 'Aspecto actualizado correctamente'; 
+    $response->message = 'Aspecto actualizado correctamente';
     $response->aspects = readAspects($sqlReadAspects,$conn);
     echo json_encode($response);
   } else {

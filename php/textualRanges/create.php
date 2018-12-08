@@ -9,7 +9,7 @@
   $rangeNum = $_POST['rangeNum'];
   $typeDependency = $_POST['typeDependency'];
 
-  $sqlFindDoubleTextualRange = "SELECT * FROM textualRanges WHERE typeDependency = '{$typeDependency}' AND dependency = '{$dependency}' AND rangeNum = '{$rangeNum}' "; 
+  $sqlFindDoubleTextualRange = "SELECT * FROM textualRanges WHERE typeDependency = '{$typeDependency}' AND dependency = '{$dependency}' AND rangeNum = '{$rangeNum}' ";
   $resultFindDoubleTextualRange = mysqli_query($conn, $sqlFindDoubleTextualRange);
   if (mysqli_num_rows($resultFindDoubleTextualRange) > 0) {
     $response->status = false;
@@ -19,7 +19,7 @@
     $sqlCreateTextualRange = "INSERT INTO textualRanges (dependency,diagnosis,recommendations,rangeNum,typeDependency) VALUES ('{$dependency}','{$diagnosis}','{$recommendations}','{$rangeNum}','{$typeDependency}')";
     if (mysqli_query($conn, $sqlCreateTextualRange)) {
       $response->status = true;
-      $response->message = 'Rango creado correctamente'; 
+      $response->message = 'Rango creado correctamente';
       $response->aspects = readTextualRanges($sqlReadtextualRange,$conn);
       echo json_encode($response);
     } else {

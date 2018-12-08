@@ -1,16 +1,16 @@
-<?php
+  <?php
 
   require '../conn.php';
 
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $sqlFindAccount = "SELECT * FROM users WHERE email = '{$email}' "; 
+  $sqlFindAccount = "SELECT * FROM users WHERE email = '{$email}' ";
   $resultFindAccount = mysqli_query($conn, $sqlFindAccount);
   if (mysqli_num_rows($resultFindAccount) > 0) {
 
-    $rowFindAccount = mysqli_fetch_assoc($resultFindAccount); 
-    
+    $rowFindAccount = mysqli_fetch_assoc($resultFindAccount);
+
     if (password_verify($password,$rowFindAccount['password'])) {
 
       $_SESSION['id'] = $rowFindAccount['id'];
@@ -21,7 +21,7 @@
       $response->message = "Bienvenido";
       $response->userData = $_SESSION;
       echo json_encode($response);
-      
+
     } else {
 
       $response->status = false;

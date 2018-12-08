@@ -8,7 +8,7 @@
   $sqlCreateAspects = "INSERT INTO aspects (title) VALUES ('{$title}')";
   if (mysqli_query($conn, $sqlCreateAspects)) {
     $response->status = true;
-    $response->message = 'Aspecto creado correctamente'; 
+    $response->message = 'Aspecto creado correctamente';
     $response->aspects = readAspects($sqlReadAspects,$conn);
     echo json_encode($response);
   } else {

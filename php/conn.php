@@ -2,13 +2,13 @@
 
   session_start();
   error_reporting(E_ERROR | E_PARSE);
-  date_default_timezone_set('America/Mexico_City');  
-  header("Access-Control-Allow-Origin: *"); 
+  date_default_timezone_set('America/Mexico_City');
+  header("Access-Control-Allow-Origin: *");
 
   $response = new stdClass();
 
   $DATABASE_SERVER = "localhost";
-  $DATABASE_USER = "humanexpress_clima-laboral"; 
+  $DATABASE_USER = "humanexpress_clima-laboral";
   $DATABASE_PASSWORD = "climadbpass";
   $DATABASE_NAME = "humanexpress_clima-laboral";
 
@@ -26,7 +26,7 @@
   }
 
   function getUserData ($conn,$id) {
-    $sqlGetUserData = "SELECT * FROM users WHERE id = '{$id}' "; 
+    $sqlGetUserData = "SELECT * FROM users WHERE id = '{$id}' ";
     $resultGetUserData = mysqli_query($conn, $sqlGetUserData);
     if (mysqli_num_rows($resultGetUserData) > 0) {
       $rowGetUserData = mysqli_fetch_assoc($resultGetUserData);
@@ -38,18 +38,18 @@
       $_SESSION['properties'] = json_decode($rowGetUserData['properties']);
 
       return $_SESSION;
-      
+
     } else {
       return false;
     }
   }
 
   function weekOfMonth($date) {
-    //Get the first day of the month. 
-    $firstOfMonth = strtotime(date("Y-m-01", strtotime($date))); 
-    //Apply above formula. 
-    return intval(date("W", strtotime($date))) - intval(date("W", $firstOfMonth)) + 1; 
-  } 
+    //Get the first day of the month.
+    $firstOfMonth = strtotime(date("Y-m-01", strtotime($date)));
+    //Apply above formula.
+    return intval(date("W", strtotime($date))) - intval(date("W", $firstOfMonth)) + 1;
+  }
 
   function getRealIP() {
 

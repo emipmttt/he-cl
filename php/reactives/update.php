@@ -11,7 +11,7 @@
   $sqlUpdateReactives = "UPDATE reactives SET title = '{$title}', answersList = '{$answersList}', timer = '{$timer}' WHERE id = '{$id}' ";
   if (mysqli_query($conn, $sqlUpdateReactives)) {
     $response->status = true;
-    $response->message = 'Reactivo actualizado correctamente'; 
+    $response->message = 'Reactivo actualizado correctamente';
     $response->reactives = readReactives($sqlReadReactives,$conn);
     echo json_encode($response);
   } else {

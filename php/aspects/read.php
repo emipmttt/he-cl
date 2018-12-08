@@ -5,7 +5,7 @@
   $sqlReadAspects = "SELECT * FROM aspects ORDER BY id DESC";
 
   switch ($query) {
-    case '*':      
+    case '*':
         $aspects = readAspects($sqlReadAspects,$conn);
         if (!$aspects) {
           $response->status = false;
@@ -16,7 +16,7 @@
           $response->aspects = $aspects;
           echo json_encode($response);
         }
-      
+
       break;
   }
 

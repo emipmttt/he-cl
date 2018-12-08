@@ -10,7 +10,7 @@
   $sqlUpdateCondensed = "UPDATE condensed SET title = '{$title}', aspects = '{$aspects}' WHERE id = '{$id}' ";
   if (mysqli_query($conn, $sqlUpdateCondensed)) {
     $response->status = true;
-    $response->message = 'Aspecto actualizado correctamente'; 
+    $response->message = 'Aspecto actualizado correctamente';
     $response->condensed = readCondensed($sqlReadCondensed,$conn);
     echo json_encode($response);
   } else {

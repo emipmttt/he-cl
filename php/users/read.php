@@ -6,7 +6,7 @@
   switch ($query) {
     case '*':
 
-      $sql = "SELECT id,name,email,campains FROM users";  
+      $sql = "SELECT id,name,email,campains FROM users";
       $result = mysqli_query($conn, $sql);
       if (mysqli_num_rows($result) > 0) {
         $users = array();

@@ -10,7 +10,7 @@
   $sqlCreateReactives = "INSERT INTO reactives (title, answersList, timer) VALUES ('{$title}', '{$answersList}', '{$timer}')";
   if (mysqli_query($conn, $sqlCreateReactives)) {
     $response->status = true;
-    $response->message = 'Reactivo creado correctamente'; 
+    $response->message = 'Reactivo creado correctamente';
     $response->reactives = readReactives($sqlReadReactives,$conn);
     echo json_encode($response);
   } else {
