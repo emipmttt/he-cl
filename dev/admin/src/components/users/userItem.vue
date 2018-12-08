@@ -36,14 +36,13 @@
         </thead>
 
         <tbody>
-          <tr v-for="campain in campains">
+          <tr v-for="(campain,index) in campains">
             <td>{{campain.title}}</td>
             <td>{{campain.numberOfParticipants}}</td>
             <td>
-              {{campain.status}}
               <div class="switch" style="display:inline-block" title="Activar/Desactivar">
                 <label>
-                  <input type="checkbox" v-model="campain.status">
+                  <input type="checkbox" :checked="campain.status == true || campain.status == 'true'" @click.prevent="changeStatus(campain.status,index)">
                   <span class="lever"></span>
                 </label>
               </div>
@@ -164,9 +163,47 @@ export default {
           })
         })
     },
-    toUrl(string) {
+    updateStatus(newStatus, dataCampains) {
+
+      let data = {
+        user: this.id,
+        campains: JSON.stringify(this.campains)
+      }
+
+      axios
+        .post('https://clima-laboral.human-express.com/php/campains/update.php', this.createFormData(data))
+        .then(response => {
+          console.log(response.data);
+          if (response.data.status) {
+            this.$emit('update:change');
+          }
+          M.toast({
+            html: response.data.message
+          });
+        })
+        .catch(error => {
+          M.toast({
+            html: "No se pudo procesar la información, intentalo de nuevo más tarde " + error
+          })
+        })
+    },
+    toUrl(string, index) {
       return string.replace(/ /g, "-").toLowerCase();
     },
+    changeStatus(status, index) {
+      if (status == 'false' || status == false) {
+        if (!confirm("Haz click en aceptar para ACTIVAR el diagnóstico")) {} else {
+          this.campains[index].status = true;
+          this.updateStatus();
+        }
+      } else if (status == 'true' || status == true) {
+        if (!confirm("Haz click en aceptar para DESACTIVAR el diagnóstico")) {} else {
+          this.campains[index].status = false;
+          this.updateStatus();
+        }
+      }
+    },
+
     createFormData(postData) {
       var formDa = new FormData();
       for (var key in postData) {
