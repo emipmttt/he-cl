@@ -163,7 +163,7 @@ export default {
           })
         })
     },
-    updateStatus(newStatus, dataCampains) {
+    updateStatus() {
 
       let data = {
         user: this.id,
