@@ -30,6 +30,7 @@
         $rowGetId = mysqli_fetch_assoc($resultGetId);
 
         $_SESSION['id'] = $rowGetId['id'];
+        $_SESSION['campains'] = $rowGetId['campains'];
         $_SESSION['name'] = $name;
         $_SESSION['email'] = $email;
 

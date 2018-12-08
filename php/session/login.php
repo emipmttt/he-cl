@@ -15,6 +15,7 @@
 
       $_SESSION['id'] = $rowFindAccount['id'];
       $_SESSION['name'] = $rowFindAccount['name'];
+      $_SESSION['campains'] = $rowFindAccount['campains'];
       $_SESSION['email'] = $email;
 
       $response->status = true;

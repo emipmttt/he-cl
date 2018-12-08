@@ -163,11 +163,11 @@ export default {
             console.log(response.data)
             this.buttonDisabled = false;
             if (response.data.status) {
-              localStorage.sessionData = response.data.userData;
+              localStorage.sessionData = JSON.stringify(response.data.userData);
               M.toast({
                 html: '¡Bienvenido!'
               });
-              this.$router.push('/panel');
+              location.href = '/panel'
             } else {
               M.toast({
                 html: response.data.message
@@ -178,7 +178,7 @@ export default {
           .catch(error => {
             this.buttonDisabled = false;
             M.toast({
-              html: 'No se procesar la información intentalo de nuevo más tarde'
+              html: 'No se pudo procesar la información intentalo de nuevo más tarde'
             });
             this.responseSignin = 'No se procesar la información intentalo de nuevo más tarde' + error;
           })
@@ -206,11 +206,11 @@ export default {
           console.log(response.data)
           this.buttonDisabled = false;
           if (response.data.status) {
-            localStorage.sessionData = response.data.userData;
+            localStorage.sessionData = JSON.stringify(response.data.userData);
             M.toast({
               html: '¡Bienvenido!'
             });
-            this.$router.push('/panel');
+            location.href = '/panel'
           } else {
             M.toast({
               html: response.data.message

@@ -5,7 +5,7 @@
       <img src="./assets/logo.png" alt="human express" class="responsive-img sidenav-logo">
     </li>
     <li>
-      <router-link to="/">
+      <router-link class="sidenav-close" to="/">
         <i class="material-icons">people</i>
         Clientes
       </router-link>
@@ -33,19 +33,19 @@
       <a class="subheader">Cuestionario base</a>
     </li>
     <li>
-      <router-link to="/reactivos">
+      <router-link class="sidenav-close" to="/reactivos">
         <i class="material-icons">bookmarks</i>
         Reactivos
       </router-link>
     </li>
     <li>
-      <router-link to="/aspectos">
+      <router-link class="sidenav-close" to="/aspectos">
         <i class="material-icons">bookmark</i>
         Aspectos
       </router-link>
     </li>
     <li>
-      <router-link to="/condensados">
+      <router-link class="sidenav-close" to="/condensados">
         <i class="material-icons">group_work</i>
         Condensados
       </router-link>
@@ -56,11 +56,12 @@
   <header class="navbar-fixed hide-on-large-only">
     <nav>
       <div class="nav-wrapper grey lighten-4">
-        <a href="#!" class="brand-logo navbar-logo"><img src="./assets/logo.png" alt="human express" class="responsive-img"></a>
-        <a href="#" data-target="slide-out" class="sidenav-trigger indigo-text"><i class="material-icons">menu</i></a>
+        <a class="brand-logo navbar-logo"><img src="./assets/logo.png" alt="human express" class="responsive-img"></a>
+        <a data-target="slide-out" class="sidenav-trigger indigo-text"><i class="material-icons">menu</i></a>
       </div>
     </nav>
   </header>
+
   <main>
     <router-view />
   </main>
