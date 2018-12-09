@@ -34,6 +34,7 @@
       } else {
         $response->status = false;
         $response->message = "El usuario no existe";
+        $response->sql = $sql;
         echo json_encode($response);
       }
       break;
