@@ -41,7 +41,7 @@ export default {
   methods: {
     getUserdata() {
       axios
-        .post("https://clima-laboral.human-express.com/php/users/read.php?query=user")
+        .post("https://clima-laboral.human-express.com/php/users/read.php?query=user&user=" + this.user.id)
         .then(response => {
           console.log(response.data)
           if (response.data.status) {
