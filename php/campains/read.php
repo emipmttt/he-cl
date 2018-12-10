@@ -15,11 +15,12 @@
       if (!$reactives) {
         $response->status = false;
         $response->reactives = [];
-        $response->campains = readUser($conn, $user);
         echo json_encode($response);
-      } else{
+      } else {
         $response->status = true;
         $response->reactives = $reactives;
+        $response->campains = readUser($conn, $user);
+
         echo json_encode($response);
       }
       break;

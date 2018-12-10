@@ -124,7 +124,7 @@ export default {
           console.log(this.questionnaireStatus);
 
 
-          console.log(response.data.reactives);
+          console.log(response.data);
         })
     },
     urlToString(string) {
