@@ -2,17 +2,21 @@
 <div class="card-panel">
 
   <div class="row">
-    <div class="col s12 m4" title="Diagnóstico">
+    <div class="col s12 m3" title="Diagnóstico">
       <i class="material-icons left">assignment_ind</i>
       {{title}}
     </div>
-    <div class="col s12 m4" :title="numberOfParticipants + 'particiantes'">
+    <div class="col s12 m3" :title="numberOfParticipants + 'particiantes'">
       <i class=" material-icons left">people</i>
       {{numberOfParticipants}}
     </div>
-    <div class="col s12 m4" :title="textualStatus">
+    <div class="col s12 m3" :title="textualStatus">
       <i class="material-icons left">{{iconStatus}}</i>
       {{displayStatus}}
+    </div>
+    <div class="col s12 m3" :title="Código para usuarios">
+      <i class="material-icons left">lock</i>
+      {{userCode}}
     </div>
   </div>
   <div class="divider"></div>
@@ -61,6 +65,7 @@ export default {
       title: this.campain.title,
       numberOfParticipants: this.campain.numberOfParticipants,
       status: this.campain.status,
+      userCode: this.campain.userCode,
       displayStatus: '',
       iconStatus: '',
       textualStatus: '',

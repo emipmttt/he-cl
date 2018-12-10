@@ -15,6 +15,7 @@
       if (!$reactives) {
         $response->status = false;
         $response->reactives = [];
+        $response->campains = readUser($conn, $user);
         echo json_encode($response);
       } else{
         $response->status = true;
@@ -36,6 +37,16 @@
         array_push($reactives,$rowReadReactives);
       }
       return $reactives;
+    } else {
+      return false;
+    }
+  }
+
+  function readUser ($conn, $user) {
+    $resultReadReactives = mysqli_query($conn, "SELECT campains FROM users WHERE id = '{$user}' ");
+    if (mysqli_num_rows($resultReadReactives) > 0) {
+      $rowReadReactives = mysqli_fetch_assoc($resultReadReactives);
+      return $rowReadReactives;
     } else {
       return false;
     }

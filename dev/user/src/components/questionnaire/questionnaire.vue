@@ -7,37 +7,59 @@
         <div class="center white-text">
           <h4>{{displayTitle}}</h4>
         </div>
-        <div v-if="!questionnaireStarted" class="card-panel" style="min-height:80vh">
-          <div class="input-field col s6">
-            <input id="first_name" type="text" class="validate">
-            <label for="first_name">First Name</label>
-          </div>
-        </div>
-        <div v-else>
-          <div v-for="(reactive,index) in reactives">
-            <div :id="'cover' + reactive.id" v-if="reactive.status == 1" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)" class="valign-wrapper card-panel indigo lighten-1" style="min-height:80vh">
-              <div class=" white-text center" style="margin:0 auto">
-                <i class="material-icons" style="font-size:6rem">timer</i><br>
-                <h2 class="large-text">Cronómetro</h2>
-                <p>Haz click aquí para mostrar la pregunta</p>
-                <p>Tendrás <strong>{{reactive.timer}}</strong> segundos para contestar </p>
+        <div v-if="questionnaireStatus">
+          <div v-if="!userCodeStatus">
+            <form @submit.prevent="verifyUserCode" class="card-panel">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">lock</i>
+                <input id="userCode" type="password" class="validate" v-model:value="userCode">
+                <label for="userCode">Código</label>
               </div>
-            </div>
-            <div v-else-if="reactive.status == 2" :id="'question' + reactive.id" class="card-panel" style="min-height:80vh">
-              <div class="medium-text">{{reactive.title}}</div>
-              <div style="margin:5% 0">
-                <i class="material-icons left">timer</i>
-                La pregunta finalizará en <strong :id="'timer'+reactive.id" class="indigo white-text" style="border-radius: 1rem;padding:2px">{{reactive.timer}}</strong> segundos
-              </div>
-              <form @submit.prevent="answered(reactive.id,answer.aspect,answer.value)" v-for="answer in answersStringToObject(reactive.answersList)">
-                <button class="btn indigo waves-effect waves-light" style="text-align:left !important;width:100%;margin-bottom:5px">
-                  {{answer.value}} {{answer.text}}
+              <div class="right-align">
+                <button class="btn waves-effect indigo">
+                  <i class="material-icons left">send</i>
+                  Entrar
                 </button>
-              </form>
+              </div>
+            </form>
+          </div>
+          <div v-else>
+            <div v-if="!questionnaireStarted" class="card-panel" style="min-height:80vh">
+              <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+              </div>
+            </div>
+            <div v-else>
+              <div v-for="(reactive,index) in reactives">
+                <div :id="'cover' + reactive.id" v-if="reactive.status == 1" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)" class="valign-wrapper card-panel indigo lighten-1" style="min-height:80vh">
+                  <div class=" white-text center" style="margin:0 auto">
+                    <i class="material-icons" style="font-size:6rem">timer</i><br>
+                    <h2 class="large-text">Cronómetro</h2>
+                    <p>Haz click aquí para mostrar la pregunta</p>
+                    <p>Tendrás <strong>{{reactive.timer}}</strong> segundos para contestar </p>
+                  </div>
+                </div>
+                <div v-else-if="reactive.status == 2" :id="'question' + reactive.id" class="card-panel" style="min-height:80vh">
+                  <div class="medium-text">{{reactive.title}}</div>
+                  <div style="margin:5% 0">
+                    <i class="material-icons left">timer</i>
+                    La pregunta finalizará en <strong :id="'timer'+reactive.id" class="indigo white-text" style="border-radius: 1rem;padding:2px">{{reactive.timer}}</strong> segundos
+                  </div>
+                  <form @submit.prevent="answered(reactive.id,answer.aspect,answer.value)" v-for="answer in answersStringToObject(reactive.answersList)">
+                    <button class="btn indigo waves-effect waves-light" style="text-align:left !important;width:100%;margin-bottom:5px">
+                      {{answer.value}} {{answer.text}}
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
+        <div v-else class="card-panel" style="min-height:80vh">
+          Cuestionario inactivo
+        </div>
         <div v-if="finish" class="card-panel">
           <h1 class="large-text">Has terminado</h1>
           <div class="row">
@@ -76,10 +98,19 @@ export default {
       calculatedAspects: {},
       isCounted: true,
       questionStarted: true,
-      questionnaireStarted: false
+      questionnaireStarted: false,
+      userCodeStatus: false,
+      userCode: '',
+      questionnaireStatus: false
     }
   },
   methods: {
+    verifyUserCode() {
+      let data = {
+        user: this.user
+      }
+      axios.post('https://clima-laboral.human-express.com/php/campains/verifyUserCode.php', this.createFormData(data))
+    },
     get() {
       axios.get('https://clima-laboral.human-express.com/php/campains/read.php?query=*&campain=' + this.displayTitle + "&user=" + this.user)
         .then(response => {
@@ -89,6 +120,8 @@ export default {
           response.data.reactives.reverse()[0].status = 1;
           this.reactives = response.data.reactives.reverse();
           this.reactivesLength = response.data.reactives.reverse().length + 1;
+          this.questionnaireStatus = response.data.campains;
+          console.log(this.questionnaireStatus);
 
 
           console.log(response.data.reactives);
