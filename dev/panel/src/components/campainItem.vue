@@ -17,7 +17,22 @@
   </div>
   <div class="divider"></div>
   <div v-if="status">
-
+    <div class="center">
+      <h5 class="green-text">Activo</h5>
+      <p>{{textualStatus}}</p>
+    </div>
+    <div class="divider"></div>
+    <br>
+    <div class="right-align">
+      <a :href="'/#/cuestionario/' + user.id + '/' + toUrl(title)" target="_blank" class="btn-flat waves-effect waves-green">
+        <i class="material-icons left">person</i>
+        individual / en linea
+      </a>
+      <button class="btn waves-effect indigo">
+        <i class="material-icons left">list</i>
+        Captura masiva
+      </button>
+    </div>
   </div>
   <div v-else class="center grey-text text-darken-1">
     <h5>Diagnóstico inactivo</h5>
@@ -42,6 +57,7 @@ export default {
   },
   data() {
     return {
+      user: JSON.parse(localStorage.sessionData),
       title: this.campain.title,
       numberOfParticipants: this.campain.numberOfParticipants,
       status: this.campain.status,
@@ -61,10 +77,17 @@ export default {
         this.iconStatus = "toggle_off";
         this.textualStatus = "Mientras el diagnóstico esté inactivo, los participantes no podrán resolver cuestionarios y todos los resultados estarán disponibles"
       }
-    }
+    },
+    toUrl(string, index) {
+      return string.replace(/ /g, "-").toLowerCase();
+    },
+    urlToString(string) {
+      return string.replace(/-/g, " ");
+    },
   },
   mounted() {
     this.verifyStatus();
+    //this.$emit('update:change');
   }
 }
 </script>

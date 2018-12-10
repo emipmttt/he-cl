@@ -1,3 +1,8 @@
+
+*{
+  user-select: none;
+}
+
 .navbar-logo {
   width: 120px;
   margin: 3px 0;
@@ -16,6 +21,12 @@
 
 .preloader {
   margin-right: 25px;
+}
+
+.background{
+  height: 40vh;
+  width: 100%;
+  position: absolute;
 }
 
 /* text size */

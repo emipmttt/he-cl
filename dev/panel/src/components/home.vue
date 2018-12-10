@@ -2,15 +2,9 @@
 <div>
 
   <div class="container">
-    <form>
-      <div class="input-field">
-        <i class="material-icons prefix">search</i>
-        <input type="text" v-model:value="search" placeholder="Buscar">
-      </div>
-    </form>
     <div v-if="campains.length">
-      <div>
-        <campain-item v-for="(campain, index) in filteredCampains" :key="index" :campain="campain" />
+      <div v-for="(campain, index) in campains" :key="index">
+        <campain-item @update:change="getUserData" :campain="campain" />
       </div>
     </div>
     <div v-else class=" center">
@@ -39,7 +33,7 @@ export default {
     }
   },
   methods: {
-    getUserdata() {
+    getUserData(message) {
       axios
         .post("https://clima-laboral.human-express.com/php/users/read.php?query=user&user=" + this.user.id)
         .then(response => {
@@ -47,7 +41,7 @@ export default {
           if (response.data.status) {
             localStorage.sessionData = JSON.stringify(response.data.userData);
             M.toast({
-              html: '¡Bienvenido!'
+              html: message
             });
           } else {
             M.toast({
@@ -68,19 +62,9 @@ export default {
   },
   mounted() {
     this.campains = JSON.parse(this.user.campains);
-    this.getUserdata();
+    console.log(this.campains);
+    this.getUserData("¡Bienvenido de nuevo!");
   },
-  computed: {
-    filteredCampains() {
-      console.log(this.campains);
-      return this.campains.filter(campain => {
-        return campain.title.toLowerCase().includes(this.search.toLowerCase()) ||
-          campain.numberOfPaticipants.toLowerCase().includes(this.search.toLowerCase()) ||
-          campain.status.toLowerCase().includes(this.search.toLowerCase());
-      })
-    }
-  },
-
 }
 </script>
 

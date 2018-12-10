@@ -109,7 +109,7 @@
       <img src="https://clima-laboral.human-express.com/user/img/logo.de0ec56.png">
       <p style="text-align:left">
         Recibiste este email porque solicitaste un cambio de contraseña en clima laboral | human express.</p>
-      <a href="https://clima-laboral.human-express.com/usuarios#/reestablecer/'.$code.'" style="width:90%;text-decoration:none;background:#3f51b5;padding:10px 10px; border-radius:5rem;color:#e9e9e9">Restablecer contraseña</a>
+      <a href="https://clima-laboral.human-express.com/#/reestablecer/'.$code.'" style="width:90%;text-decoration:none;background:#3f51b5;padding:10px 10px; border-radius:5rem;color:#e9e9e9">Restablecer contraseña</a>
 
       <p style="text-align:left">
         Si no solicitaste ningún cambio sólo ignora este mensaje
@@ -117,8 +117,8 @@
 
       Puedes copiar y pegar el siguiente link a tu navegador:
       <br>
-      <a href="https://clima-laboral.human-express.com/usuarios#/reestablecer/'.$code.'">
-        https://clima-laboral.human-express.com/usuarios#/reestablecer/'.$code.'
+      <a href="https://clima-laboral.human-express.com/#/reestablecer/'.$code.'">
+        https://clima-laboral.human-express.com/#/reestablecer/'.$code.'
       </a>
 
       <hr>

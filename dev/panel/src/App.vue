@@ -20,10 +20,25 @@
         <a><span class="white-text email">{{user.email}}</span></a>
       </div>
     </li>
-    <li><a><i class="material-icons">assignment_turned_in</i>Diagnósticos</a></li>
+    <li>
+      <a>
+        <i class="material-icons">assignment_turned_in</i>Diagnósticos
+      </a>
+    </li>
+    <li>
+      <a>
+        <i class="material-icons">phone</i>Ayuda
+      </a>
+    </li>
     <li>
       <div class="divider"></div>
     </li>
+    <li @click="logout">
+      <a>
+        <i class="material-icons">exit_to_app</i>Salir
+      </a>
+    </li>
+
     <!-- <li><a class="subheader">Subheader</a></li>
       <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
   </ul>
@@ -42,9 +57,27 @@ export default {
       user: JSON.parse(localStorage.sessionData)
     }
   },
+  methods: {
+    logout() {
+
+      axios
+        .post("https://clima-laboral.human-express.com/php/session/logout.php")
+        .then(response => {
+          localStorage.clear();
+          location.href = "/";
+        })
+        .catch(error => {
+          M.toast({
+            html: 'No se pudo cerrar sesión: ' + error
+          });
+        });
+    },
+
+  },
   mounted() {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, {});
+
   }
 }
 </script>

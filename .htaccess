@@ -2,6 +2,8 @@ RewriteEngine on
 
 RewriteBase /
 
-RewriteRule usuarios /user.html
+RewriteRule /$ /user.html
 
 RewriteRule administrar /admin.html
+RewriteRule panel /panel.html
+RewriteRule cuestionario /cuestionario.html
