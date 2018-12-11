@@ -25,10 +25,31 @@
           </div>
           <div v-else>
             <div v-if="!questionnaireStarted" class="card-panel" style="min-height:80vh">
-              <div class="input-field col s6">
-                <input id="first_name" type="text" class="validate">
-                <label for="first_name">First Name</label>
-              </div>
+
+              <label>Browser Select</label>
+              <select class="browser-default">
+                <option value="" disabled selected>Entidad</option>
+                <option value="1">Ciudad 1</option>
+                <option value="2">Ciudad 2</option>
+                <option value="3">Ciudad 3</option>
+              </select>
+
+              <label>Browser Select</label>
+              <select class="browser-default">
+                <option value="" disabled selected>Ciudad</option>
+                <option value="1">Ciudad 1</option>
+                <option value="2">Ciudad 2</option>
+                <option value="3">Ciudad 3</option>
+              </select>
+
+              <label>Browser Select</label>
+              <select class="browser-default">
+                <option value="" disabled selected>Ciudad</option>
+                <option value="1">Ciudad 1</option>
+                <option value="2">Ciudad 2</option>
+                <option value="3">Ciudad 3</option>
+              </select>
+
             </div>
             <div v-else>
               <div v-for="(reactive,index) in reactives">
@@ -57,8 +78,8 @@
           </div>
 
         </div>
-        <div v-else class="card-panel" style="min-height:80vh">
-          Cuestionario inactivo
+        <div v-else class="card-panel center grey-text valign-wrapper" style="min-height:80vh">
+          <h4>Cuestionario inactivo</h4>
         </div>
         <div v-if="finish" class="card-panel">
           <h1 class="large-text">Has terminado</h1>
@@ -101,17 +122,27 @@ export default {
       questionnaireStarted: false,
       userCodeStatus: false,
       userCode: '',
-      questionnaireStatus: false
+      serverCode: '',
+      questionnaireStatus: false,
+      campains: 0
     }
   },
   methods: {
     verifyUserCode() {
-      let data = {
-        user: this.user
+      if (this.userCode == this.serverCode) {
+        this.userCodeStatus = true;
+        M.toast({
+          html: 'Bienvenido'
+        })
+      } else {
+        M.toast({
+          html: 'Código incorrecto'
+        })
+
       }
-      axios.post('https://clima-laboral.human-express.com/php/campains/verifyUserCode.php', this.createFormData(data))
     },
     get() {
+      console.clear();
       axios.get('https://clima-laboral.human-express.com/php/campains/read.php?query=*&campain=' + this.displayTitle + "&user=" + this.user)
         .then(response => {
           response.data.reactives.forEach(question => {
@@ -120,10 +151,16 @@ export default {
           response.data.reactives.reverse()[0].status = 1;
           this.reactives = response.data.reactives.reverse();
           this.reactivesLength = response.data.reactives.reverse().length + 1;
-          this.questionnaireStatus = response.data.campains;
-          console.log(this.questionnaireStatus);
+          this.campains = response.data.campains;
 
-
+          let campains = JSON.parse(this.campains.campains);
+          campains.forEach(campain => {
+            if (campain.title.toLowerCase() == this.displayTitle.toLowerCase()) {
+              this.questionnaireStatus = campain.status;
+              this.serverCode = campain.userCode;
+            }
+          })
+          console.log(campains);
           console.log(response.data);
         })
     },

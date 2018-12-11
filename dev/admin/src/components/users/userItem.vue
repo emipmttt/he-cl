@@ -79,6 +79,13 @@
               <input v-model:value="numberOfParticipants" id="numberOfParticipants" type="number" class="validate" required>
               <label for="numberOfParticipants">Número de participantes</label>
             </div>
+
+            <div class="input-field">
+              <i class="material-icons prefix">place</i>
+              <input v-model:value="entities" id="entities" type="text" class="validate" required>
+              <label for="entities">Entidades</label>
+            </div>
+
           </div>
         </div>
       </div>
@@ -122,6 +129,7 @@ export default {
       title: '',
       numberOfParticipants: '',
       response: '',
+      entities: '',
 
       //edit
       edit: false,
@@ -136,7 +144,7 @@ export default {
         user: this.id,
         title: this.title,
         numberOfParticipants: this.numberOfParticipants,
-        status: false
+        entities: this.entities.split(',')
       }
       axios
         .post('https://clima-laboral.human-express.com/php/campains/create.php', this.createFormData(data))
