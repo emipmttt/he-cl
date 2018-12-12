@@ -31,6 +31,7 @@
           <tr>
             <th> <i class="material-icons left">assignment_turned_in</i> Diagnóstico</th>
             <th> <i class="material-icons left">people</i> Participantes</th>
+            <th> <i class="material-icons left">place</i> Entidades</th>
             <th> </th>
           </tr>
         </thead>
@@ -39,6 +40,7 @@
           <tr v-for="(campain,index) in campains">
             <td>{{campain.title}}</td>
             <td>{{campain.numberOfParticipants}}</td>
+            <td>{{campain.entities}}</td>
             <td>
               <div class="switch" style="display:inline-block" title="Activar/Desactivar">
                 <label>
@@ -159,6 +161,7 @@ export default {
             M.toast({
               html: response.data.message
             });
+            location.href = '';
           } else {
             this.response = response.data.message;
           }

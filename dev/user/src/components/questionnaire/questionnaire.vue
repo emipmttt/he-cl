@@ -24,33 +24,70 @@
             </form>
           </div>
           <div v-else>
-            <div v-if="!questionnaireStarted" class="card-panel" style="min-height:80vh">
+            <form @submit.prevent="questionnaireStarted = !questionnaireStarted" v-if="!questionnaireStarted" class="card-panel" style="min-height:80vh">
 
-              <label>Browser Select</label>
-              <select class="browser-default">
+              <h4>
+                <i class="material-icons left">person</i>
+                Datos del participante
+              </h4>
+
+              <label>Selecciona una entidad</label>
+              <select v-model:value="entitie" class="browser-default">
                 <option value="" disabled selected>Entidad</option>
-                <option value="1">Ciudad 1</option>
-                <option value="2">Ciudad 2</option>
-                <option value="3">Ciudad 3</option>
+                <option :value="entitie" v-for="entitie in entitiesParse(thisCampain.entities)">{{ entitie }}</option>
               </select>
 
-              <label>Browser Select</label>
-              <select class="browser-default">
-                <option value="" disabled selected>Ciudad</option>
-                <option value="1">Ciudad 1</option>
-                <option value="2">Ciudad 2</option>
-                <option value="3">Ciudad 3</option>
+              <label>Selecciona un Area / Departamento</label>
+              <select v-model:value="area" class="browser-default">
+                <option value="" disabled selected>Area / Departamento</option>
+                <option value="1">Area 1</option>
+                <option value="2">Area 2</option>
+                <option value="3">Area 3</option>
               </select>
 
-              <label>Browser Select</label>
-              <select class="browser-default">
-                <option value="" disabled selected>Ciudad</option>
-                <option value="1">Ciudad 1</option>
-                <option value="2">Ciudad 2</option>
-                <option value="3">Ciudad 3</option>
+              <label>Selecciona tu turno</label>
+              <select v-model:value="turn" class="browser-default">
+                <option value="" disabled selected>Turno</option>
+                <option value="1">Turno 1</option>
+                <option value="2">Turno 2</option>
               </select>
 
-            </div>
+              <label>Selecciona tu genero</label>
+              <select v-model:value="gender" class="browser-default">
+                <option value="" disabled selected>Genero</option>
+                <option value="1">Masculino</option>
+                <option value="2">Femenino</option>
+              </select>
+
+              <label>Selecciona tu rango de edad</label>
+              <select v-model:value="age" class="browser-default">
+                <option value="" disabled selected>Rango de edad</option>
+                <option value="1"> rango 1</option>
+                <option value="2"> rango 2 </option>
+              </select>
+
+              <label>Selecciona tu antigüedad en la empresa</label>
+              <select v-model:value="antiquity" class="browser-default">
+                <option value="" disabled selected>Antigüedad en la empresa</option>
+                <option value="1"> antiguedad 1 </option>
+                <option value="2"> antiguedad 2 </option>
+              </select>
+
+              <label>Selecciona tu máximo grado de estudios concluídos</label>
+              <select v-model:value="studies" class="browser-default">
+                <option value="" disabled selected>Estudios concluídos</option>
+                <option value="1"> edad 1 </option>
+                <option value="2"> edad 2 </option>
+              </select>
+
+              <div class="right-align">
+                <button class="btn waves-effect indigo">
+                  <i class="material-icons left">check</i>
+                  Comenzar
+                </button>
+              </div>
+
+            </form>
             <div v-else>
               <div v-for="(reactive,index) in reactives">
                 <div :id="'cover' + reactive.id" v-if="reactive.status == 1" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)" class="valign-wrapper card-panel indigo lighten-1" style="min-height:80vh">
@@ -83,16 +120,23 @@
         </div>
         <div v-if="finish" class="card-panel">
           <h1 class="large-text">Has terminado</h1>
-          <div class="row">
-            <div class="col m5">
-              <pre>{{aspectsList}}</pre>
-            </div>
-            <div class="col m5">
-              <pre>{{aspectsTotalList}}</pre>
-            </div>
-          </div>
+          <form @submit.prevent="send">
 
-          <pre>{{calculatedAspects}}</pre>
+            <div class="input-field">
+              <textarea id="textarea1" v-model="suggestion" class="materialize-textarea"></textarea>
+              <label for="textarea1">¿Cómo podríamos mejorar?</label>
+            </div>
+
+            <p>{{response}}</p>
+
+            <button class="btn waves-effect indigo">
+              <i class="material-icons left">send</i>
+              Enviar
+            </button>
+
+          </form>
+
+
         </div>
 
       </div>
@@ -108,26 +152,89 @@ export default {
   name: 'questionnaire',
   data() {
     return {
+      // questionnaire data
       user: this.$route.params.user,
       title: this.$route.params.campainName,
       displayTitle: this.urlToString(this.$route.params.campain).toUpperCase(),
+      questionnaireStatus: false,
+
+      // user data
+      entitie: '',
+      area: '',
+      turn: '',
+      gender: '',
+      age: '',
+      antiquity: '',
+      studies: '',
+      suggestion: '',
+
+      // questionnaire reactives
       reactives: [],
       aspectsList: {},
       aspectsTotalList: {},
       stopSetInterval: false,
       finish: false,
-      calculatedAspects: {},
       isCounted: true,
       questionStarted: true,
-      questionnaireStarted: false,
+      thisCampain: {},
+
+      // access data
       userCodeStatus: false,
       userCode: '',
       serverCode: '',
-      questionnaireStatus: false,
-      campains: 0
+
+      //finish questionnaire
+      calculatedAspects: {},
+      questionnaireStarted: false,
+
+      // extra data
+      campains: 0,
+      response: ''
     }
   },
   methods: {
+    send() {
+      this.response = '';
+      this.buttonDisabled = true;
+      let data = {
+        entitie: this.entitie,
+        area: this.area,
+        turn: this.trun,
+        gender: this.gender,
+        age: this.age,
+        antiquity: this.antiquity,
+        studies: this.studies,
+        suggestion: this.suggestion,
+        aspects: this.calculatedAspects,
+        user: this.user,
+        title: this.displayTitle.toLowerCase()
+
+      }
+      axios
+        .post('https://clima-laboral.human-express.com/php/questionnaire/create.php', this.createFormData(data))
+        .then(response => {
+          console.log(response.data);
+          if (response.data.status) {
+            M.toast({
+              html: response.data.message
+            });
+            setTimeout(() => {
+              location.href = "https://google.com";
+            }, 1000)
+          } else {
+            this.response = response.data.message;
+          }
+        })
+        .catch(error => {
+          this.response = "No se pudo procesar la información, intentalo de nuevo más tarde";
+          M.toast({
+            html: "No se pudo procesar la información, intentalo de nuevo más tarde"
+          })
+        })
+    },
+    entitiesParse(entities) {
+      return entities.split(',')
+    },
     verifyUserCode() {
       if (this.userCode == this.serverCode) {
         this.userCodeStatus = true;
@@ -156,6 +263,7 @@ export default {
           let campains = JSON.parse(this.campains.campains);
           campains.forEach(campain => {
             if (campain.title.toLowerCase() == this.displayTitle.toLowerCase()) {
+              this.thisCampain = campain;
               this.questionnaireStatus = campain.status;
               this.serverCode = campain.userCode;
             }
