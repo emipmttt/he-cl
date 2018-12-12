@@ -14,7 +14,7 @@
       <i class="material-icons left">{{iconStatus}}</i>
       {{displayStatus}}
     </div>
-    <div class="col s12 m3" :title="Código para usuarios">
+    <div class="col s12 m3" title="Código para usuario">
       <i class="material-icons left">lock</i>
       {{userCode}}
     </div>
