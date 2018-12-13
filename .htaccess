@@ -2,7 +2,7 @@ RewriteEngine on
 
 RewriteBase /
 
-RewriteRule /$ /user.html
+RewriteRule / /user.html
 
 RewriteRule administrar /admin.html
 RewriteRule panel /panel.html
