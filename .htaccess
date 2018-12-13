@@ -3,4 +3,4 @@ RewriteEngine on
 RewriteBase /
 
 RewriteRule administrar /admin.html
-RewriteRule panel /panel.html
+RewriteRule user /panel.html
