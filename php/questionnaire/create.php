@@ -24,5 +24,6 @@
     $response->status = false;
     $response->message = "¡Ha ocurrido un error al guardar tu cuestionario!";
     $response->sql = $sql;
+    $response->aspects = $aspects;
     echo json_encode($response);
   }
