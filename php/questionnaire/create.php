@@ -12,7 +12,7 @@
   $antiquity = htmlentities($_POST['antiquity']);
   $studies = htmlentities($_POST['studies']);
   $suggestion = htmlentities($_POST['suggestion']);
-  $aspects = $_POST['aspects'];
+  $aspects = json_encode(json_decode($_POST['aspects']),JSON_UNESCAPED_UNICODE);
 
   $sql = "INSERT INTO questionnaires values (user,campain,entitie,area,turn,gender,age,antiquity,studies,suggestion,aspects)
   VALUES ('{$user}','{$title}','{$entitie}','{$area}','{$turn}','{$gender}','{$age}','{$antiquity}','{$studies}','{$suggestion}','{$aspects}')";

@@ -6,6 +6,7 @@
         <div class="container">
           <div class="center white-text">
             <h4>{{displayTitle}}</h4>
+            {{JSON.stringify(calculatedAspects)}}
           </div>
           <div v-if="questionnaireStatus">
             <div v-if="!userCodeStatus">
@@ -202,7 +203,7 @@
         let data = {
           entitie: this.entitie,
           area: this.area,
-          turn: this.trun,
+          turn: this.turn,
           gender: this.gender,
           age: this.age,
           antiquity: this.antiquity,
