@@ -23,5 +23,6 @@
   } else {
     $response->status = false;
     $response->message = "¡Ha ocurrido un error al guardar tu cuestionario!";
+    $response->sql = $sql;
     echo json_encode($response);
   }
