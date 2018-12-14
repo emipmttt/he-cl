@@ -31,6 +31,7 @@
 
         $_SESSION['id'] = $rowGetId['id'];
         $_SESSION['campains'] = $rowGetId['campains'];
+        $_SESSION['type'] = $rowGetId['type'];
         $_SESSION['name'] = $name;
         $_SESSION['email'] = $email;
 
