@@ -2,16 +2,16 @@
 
   require '../conn.php';
 
-  $user = htmlentities($_POST['user']);
-  $title = htmlentities($_POST['title']);
-  $entitie = htmlentities($_POST['entitie']);
-  $area = htmlentities($_POST['area']);
-  $turn = htmlentities($_POST['turn']);
-  $gender = htmlentities($_POST['gender']);
-  $age = htmlentities($_POST['age']);
-  $antiquity = htmlentities($_POST['antiquity']);
-  $studies = htmlentities($_POST['studies']);
-  $suggestion = htmlentities($_POST['suggestion']);
+  $user = htmlentities($_POST['user'], ENT_QUOTES,'UTF-8');
+  $title = htmlentities($_POST['title'], ENT_QUOTES,'UTF-8');
+  $entitie = htmlentities($_POST['entitie'], ENT_QUOTES,'UTF-8');
+  $area = htmlentities($_POST['area'], ENT_QUOTES,'UTF-8');
+  $turn = htmlentities($_POST['turn'], ENT_QUOTES,'UTF-8');
+  $gender = htmlentities($_POST['gender'], ENT_QUOTES,'UTF-8');
+  $age = htmlentities($_POST['age'], ENT_QUOTES,'UTF-8');
+  $antiquity = htmlentities($_POST['antiquity'], ENT_QUOTES,'UTF-8');
+  $studies = htmlentities($_POST['studies'], ENT_QUOTES,'UTF-8');
+  $suggestion = htmlentities($_POST['suggestion'], ENT_QUOTES,'UTF-8');
   $aspects = json_encode(json_decode($_POST['aspects']),JSON_UNESCAPED_UNICODE);
 
   $sql = "INSERT INTO questionnaires (user,campain,entitie,area,turn,gender,age,antiquity,studies,suggestion,aspects)

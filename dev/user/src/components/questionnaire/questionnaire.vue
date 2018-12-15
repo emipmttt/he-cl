@@ -6,7 +6,6 @@
         <div class="container">
           <div class="center white-text">
             <h4>{{displayTitle}}</h4>
-            {{JSON.stringify(calculatedAspects)}}
           </div>
           <div v-if="questionnaireStatus">
             <div v-if="!userCodeStatus">
