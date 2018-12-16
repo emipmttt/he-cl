@@ -2,16 +2,16 @@
 
   require '../conn.php';
 
-  $user = stript_tags($_POST['user']);
-  $title = stript_tags($_POST['title']);
-  $entitie = stript_tags($_POST['entitie']);
-  $area = stript_tags($_POST['area']);
-  $turn = stript_tags($_POST['turn']);
-  $gender = stript_tags($_POST['gender']);
-  $age = stript_tags($_POST['age']);
-  $antiquity = stript_tags($_POST['antiquity']);
-  $studies = stript_tags($_POST['studies']);
-  $suggestion = stript_tags($_POST['suggestion']);
+  $user = $_POST['user'];
+  $title = $_POST['title'];
+  $entitie = $_POST['entitie'];
+  $area = $_POST['area'];
+  $turn = $_POST['turn'];
+  $gender = $_POST['gender'];
+  $age = $_POST['age'];
+  $antiquity = $_POST['antiquity'];
+  $studies = $_POST['studies'];
+  $suggestion = $_POST['suggestion'];
   $aspects = json_encode(json_decode($_POST['aspects']),JSON_UNESCAPED_UNICODE);
 
   $sql = "INSERT INTO questionnaires (user,campain,entitie,area,turn,gender,age,antiquity,studies,suggestion,aspects)
