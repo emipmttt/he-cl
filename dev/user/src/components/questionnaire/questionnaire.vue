@@ -33,13 +33,13 @@
                 </h4>
 
                 <label>Selecciona una entidad</label>
-                <select v-model:value="entitie" class="browser-default">
+                <select required v-model:value="entitie" class="browser-default">
                   <option value="" disabled selected>Entidad</option>
                   <option :value="entitie" v-for="entitie in entitiesParse(thisCampain.entities)">{{ entitie }}</option>
                 </select>
 
                 <label>Selecciona un Area / Departamento</label>
-                <select v-model:value="area" class="browser-default">
+                <select required v-model:value="area" class="browser-default">
                   <option value="" disabled selected>Area / Departamento</option>
                   <option value="1">Area 1</option>
                   <option value="2">Area 2</option>
@@ -47,35 +47,35 @@
                 </select>
 
                 <label>Selecciona tu turno</label>
-                <select v-model:value="turn" class="browser-default">
+                <select required v-model:value="turn" class="browser-default">
                   <option value="" disabled selected>Turno</option>
                   <option value="1">Turno 1</option>
                   <option value="2">Turno 2</option>
                 </select>
 
                 <label>Selecciona tu genero</label>
-                <select v-model:value="gender" class="browser-default">
+                <select required v-model:value="gender" class="browser-default">
                   <option value="" disabled selected>Genero</option>
                   <option value="1">Masculino</option>
                   <option value="2">Femenino</option>
                 </select>
 
                 <label>Selecciona tu rango de edad</label>
-                <select v-model:value="age" class="browser-default">
+                <select required v-model:value="age" class="browser-default">
                   <option value="" disabled selected>Rango de edad</option>
                   <option value="1"> rango 1</option>
                   <option value="2"> rango 2 </option>
                 </select>
 
                 <label>Selecciona tu antigüedad en la empresa</label>
-                <select v-model:value="antiquity" class="browser-default">
+                <select required v-model:value="antiquity" class="browser-default">
                   <option value="" disabled selected>Antigüedad en la empresa</option>
                   <option value="1"> antiguedad 1 </option>
                   <option value="2"> antiguedad 2 </option>
                 </select>
 
                 <label>Selecciona tu máximo grado de estudios concluídos</label>
-                <select v-model:value="studies" class="browser-default">
+                <select required v-model:value="studies" class="browser-default">
                   <option value="" disabled selected>Estudios concluídos</option>
                   <option value="1"> edad 1 </option>
                   <option value="2"> edad 2 </option>

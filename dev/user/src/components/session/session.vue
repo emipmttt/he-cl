@@ -171,9 +171,9 @@
                 M.toast({
                   html: '¡Bienvenido!'
                 });
-                if (response.userData.type == 0) {
+                if (response.data.userData.type == 0) {
                   location.href = "/usuario";
-                } else if (response.userData.type == 1) {
+                } else if (response.data.userData.type == 1) {
                   location.href = "/administrar";
                 }
               } else {
@@ -218,9 +218,9 @@
               M.toast({
                 html: '¡Bienvenido!'
               });
-              if (response.userData.type == 0) {
+              if (response.data.userData.type == 0) {
                 location.href = "/usuario";
-              } else if (response.userData.type == 1) {
+              } else if (response.data.userData.type == 1) {
                 location.href = "/administrar";
               }
             } else {

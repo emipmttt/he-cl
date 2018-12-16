@@ -2,21 +2,13 @@
   <div class="container">
     <h1 class="large-text">
       <i class=" material-icons">assignment_turned_in</i>
-      {{ displayTitle }}
+      {{ displayTitle }} | <span class="green-text text-lighten-2">CAPTURA MASIVA</span>
     </h1>
-    <div class="card-panel">
-      <pre>{{thisCampain}}</pre>
+    <div>
       <div v-if="thisCampain.status">
-        <div v-for="(reactive, index) in reactives">
-          <i class="material-icons left" :title="reactive.title">info</i>
-          <div v-for="answer in answersStringToObject(reactive.answersList)">
-            <input type="radio" class="btn indigo waves-effect waves-light" style="text-align:left !important;width:100%;margin-bottom:5px" />
-            {{answer.value}} {{answer.text}}
-          </div>
-          <pre>{{reactive}}</pre>
-        </div>
+        <questionnaire :campain="thisCampain" :title="displayTitle" :user="user" />
       </div>
-      <div v-else class="center grey-text valign-wrapper" style="min-height:80vh">
+      <div v-else class="center white grey-text valign-wrapper" style="min-height:80vh">
         <h4>Cuestionario inactivo</h4>
       </div>
     </div>
@@ -24,6 +16,7 @@
 </template>
 <script>
   import axios from 'axios';
+  import questionnaire from '@/components/questionnaire/questionnaire';
   export default {
     name: 'masiveCapture',
     data() {
@@ -96,6 +89,9 @@
     mounted() {
       this.get()
     },
+    components: {
+      questionnaire
+    }
   }
 
 </script>

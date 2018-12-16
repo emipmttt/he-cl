@@ -54,6 +54,7 @@
 </template>
 
 <script>
+  import axios from "axios";
   export default {
     name: 'campain-item',
     props: {
@@ -80,8 +81,8 @@
     methods: {
       get() {
         axios
-          .post("https://clima-laboral.human-express.com/php/questionnaires/read.php?query=*&user=" + this.user.id +
-            "&campain=" + title)
+          .get("https://clima-laboral.human-express.com/php/questionnaire/read.php?query=*&user=" + this.user.id +
+            "&campain=" + this.title)
           .then(response => {
             console.log(response.data)
             if (response.data.status) {
@@ -117,6 +118,7 @@
     },
     mounted() {
       this.verifyStatus();
+      this.get();
       //this.$emit('update:change');
     }
   }
