@@ -69,28 +69,35 @@
       </form>
       <div v-else>
         <div v-for="(reactive,index) in reactives">
-          <div :id="'cover' + reactive.id" v-if="reactive.status == 1" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)"
-            class="valign-wrapper card-panel indigo lighten-1" style="min-height:80vh">
-            <div class=" white-text center" style="margin:0 auto">
-              <i class="material-icons" style="font-size:6rem">timer</i><br>
-              <h2 class="large-text">Cronómetro</h2>
-              <p>Haz click aquí para mostrar la pregunta</p>
-              <p>Tendrás <strong>{{reactive.timer}}</strong> segundos para contestar </p>
+
+          <div v-if="reactive.status" class="card-panel" :id="'question' + reactive.id">
+            <div class="row">
+              <div class="col s3 m2">
+                <div :title="reactive.title">
+                  <i class="material-icons left indigo-text">not_listed_location</i> <b>{{reactive.id}}</b>
+                </div>
+                <br>
+                <div :title="reactive.title">
+                  <i class="material-icons left indigo-text">info</i> <b>título</b>
+                </div>
+                <br>
+                <div :title="reactive.title">
+                  <i class="material-icons left indigo-text">timer</i> <b>{{reactive.timer}}</b>
+                </div>
+              </div>
+              <div class="col s9 10">
+                <b>Respuesta</b><br><br>
+                <form style="margin:5px; display:inline-block" @submit.prevent="answered(reactives.id,answer.aspect,answer.value)"
+                  v-for="answer in answersStringToObject(reactive.answersList)">
+                  <button class="btn green waves-effect waves-light">
+                    {{answer.value}}
+                  </button>
+                </form>
+              </div>
             </div>
+
           </div>
-          <div v-else-if="reactive.status == 2" :id="'question' + reactive.id" class="card-panel" style="min-height:80vh">
-            <div class="medium-text">{{reactive.title}}</div>
-            <div style="margin:5% 0">
-              <i class="material-icons left">timer</i>
-              La pregunta finalizará en <strong :id="'timer'+reactive.id" class="indigo white-text" style="border-radius: 1rem;padding:2px">{{reactive.timer}}</strong>
-              segundos
-            </div>
-            <form @submit.prevent="answered(reactive.id,answer.aspect,answer.value)" v-for="answer in answersStringToObject(reactive.answersList)">
-              <button class="btn indigo waves-effect waves-light" style="text-align:left !important;width:100%;margin-bottom:5px">
-                {{answer.value}} {{answer.text}}
-              </button>
-            </form>
-          </div>
+
         </div>
       </div>
     </div>
@@ -231,9 +238,9 @@
             "&user=" + this.user)
           .then(response => {
             response.data.reactives.forEach(question => {
-              question.status = 0;
+              question.status = false;
             })
-            response.data.reactives.reverse()[0].status = 1;
+            response.data.reactives.reverse()[0].status = true;
             this.reactives = response.data.reactives.reverse();
             this.reactivesLength = response.data.reactives.reverse().length + 1;
             this.campains = response.data.campains;

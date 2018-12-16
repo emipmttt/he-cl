@@ -2,13 +2,13 @@
   <div class="container">
     <h1 class="large-text">
       <i class=" material-icons">assignment_turned_in</i>
-      {{ displayTitle }} | <span class="green-text text-lighten-2">CAPTURA MASIVA</span>
+      {{ displayTitle }} | <span class="green-text">CAPTURA MASIVA</span>
     </h1>
     <div>
       <div v-if="thisCampain.status">
         <questionnaire :campain="thisCampain" :title="displayTitle" :user="user" />
       </div>
-      <div v-else class="center white grey-text valign-wrapper" style="min-height:80vh">
+      <div v-else class="center white grey-text valign-wrapper card-panel" style="min-height:80vh">
         <h4>Cuestionario inactivo</h4>
       </div>
     </div>
