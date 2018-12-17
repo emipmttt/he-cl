@@ -53,6 +53,14 @@
             console.log(response.data);
           })
       },
+      verifyCampain() {
+        axios.get('https://clima-laboral.human-express.com/php/questionnaire/read.php?query=verify&campain=' +
+            this.displayTitle + "&user=" + this.user + "&numberOfParticipants=" + this.thisCampain.numberOfParticipants
+          )
+          .then(response => {
+            this.thisCampain.status = response.data.status;
+          })
+      },
       urlToString(string) {
         return string.replace(/-/g, " ");
       },
@@ -87,7 +95,11 @@
       }
     },
     mounted() {
-      this.get()
+      this.get();
+    },
+    updated() {
+      this.verifyCampain();
+      console.log(this.thisCampain.status);
     },
     components: {
       questionnaire

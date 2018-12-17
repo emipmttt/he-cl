@@ -248,13 +248,7 @@
             console.log(response.data);
           })
       },
-      verifyCampain() {
-        axios.get('https://clima-laboral.human-express.com/php/campains/read.php?query=verify&campain=' + this.title +
-            "&user=" + this.user)
-          .then(response => {
-            return response.data.status;
-          })
-      },
+
       urlToString(string) {
         return string.replace(/-/g, " ");
       },
@@ -375,9 +369,8 @@
     },
     mounted() {
 
-      if (this.verifyCampain()) {
-        this.get();
-      }
+      this.get();
+
 
     },
     updated() {
