@@ -69,7 +69,6 @@
       </form>
       <div v-else>
         <div v-for="(reactive,index) in reactives">
-
           <div v-if="reactive.status" class="card-panel" :id="'question' + reactive.id">
             <div class="row">
               <div class="col s3 m2">
@@ -95,9 +94,7 @@
                 </form>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </div>
@@ -105,26 +102,18 @@
     <div v-if="finish" class="card-panel">
       <h1 class="large-text">Has terminado</h1>
       <form @submit.prevent="send">
-
         <div class="input-field">
           <textarea id="textarea1" v-model="suggestion" class="materialize-textarea"></textarea>
           <label for="textarea1">¿Cómo podríamos mejorar?</label>
         </div>
-
         <p>{{response}}</p>
-
         <button class="btn waves-effect indigo">
           <i class="material-icons left">send</i>
           Enviar
         </button>
-
       </form>
-
-
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -191,7 +180,9 @@
           suggestion: this.suggestion,
           aspects: JSON.stringify(this.calculatedAspects),
           user: this.user,
-          title: this.title.toLowerCase()
+          title: this.title.toLowerCase(),
+          numberOfParticipants: this.campain.numberOfParticipants,
+          campain: this.campain
 
         }
         axios
@@ -203,7 +194,7 @@
                 html: response.data.message
               });
               setTimeout(() => {
-                location.href = "https://google.com";
+                location.reload();
               }, 1000)
             } else {
               this.response = response.data.message;
@@ -255,6 +246,13 @@
             })
             console.log(campains);
             console.log(response.data);
+          })
+      },
+      verifyCampain() {
+        axios.get('https://clima-laboral.human-express.com/php/campains/read.php?query=verify&campain=' + this.title +
+            "&user=" + this.user)
+          .then(response => {
+            return response.data.status;
           })
       },
       urlToString(string) {
@@ -376,7 +374,10 @@
       }
     },
     mounted() {
-      this.get();
+
+      if (this.verifyCampain()) {
+        this.get();
+      }
 
     },
     updated() {

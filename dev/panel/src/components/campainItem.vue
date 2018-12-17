@@ -33,7 +33,7 @@
           individual / en linea
         </a>
         <router-link :to="'captura-masiva/'+ user.id + '/' + toUrl(title)" class="btn waves-effect indigo">
-          <i class="material-icons left">list</i>
+          <i class="material-icons left">people</i>
           Captura masiva
         </router-link>
       </div>
