@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="col s12 m6">
-          <button data-target="createCampain" class="btn waves-effect waves-light indigo white-text button-action modal-trigger">
+          <button :data-target="'createCampain' + id" class="btn waves-effect waves-light indigo white-text button-action modal-trigger">
             <i class="material-icons left">add</i>
             Crear Diagnóstico
           </button>
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div id="createCampain" class="modal modal-fixed-footer" style="overflow-x: hidden">
+    <div :id="'createCampain'+id" class="modal modal-fixed-footer" style="overflow-x: hidden">
       <form @submit.prevent="send">
         <div class="modal-content" style="overflow-x: hidden">
           <h4> <i class="material-icons">add</i> Crear diagnóstico</h4>
@@ -164,7 +164,7 @@
               M.toast({
                 html: response.data.message
               });
-              location.href = '';
+              // location.reload();
             } else {
               this.response = response.data.message;
             }
