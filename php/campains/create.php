@@ -9,7 +9,7 @@
   $md5 = md5($user.'secretcodepez'.mb_strtolower($title));
   $userCode = date("myd") . rand(100,999);
 
-  $sqlFindCampains = "SELECT campains FROM users WHERE id = {$user} ";
+  $sqlFindCampains = "SELECT campains FROM users WHERE id = '{$user}' ";
   $resultFindCampains = mysqli_query($conn, $sqlFindCampains);
   if (mysqli_num_rows($resultFindCampains) > 0) {
       $rowFindCampains = mysqli_fetch_assoc($resultFindCampains);
