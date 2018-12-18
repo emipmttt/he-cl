@@ -33,6 +33,7 @@
           if (mysqli_query($conn, $sqlInsertDataToNewTable)) {
             $response->status = true;
             $response->message = "Se ha creado la campaña con exito";
+            $response->user = $user;
             echo json_encode($response);
           }
           else {
