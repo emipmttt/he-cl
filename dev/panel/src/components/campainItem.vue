@@ -44,12 +44,21 @@
       <div class="divider"></div>
       <div class="right-align">
         <br>
-        <button class="btn waves-effect indigo">
-          <i class="material-icons left">assignment</i>
+        <button @click="viewResults = !viewResults" class="btn waves-effect indigo">
+          <i class="material-icons left">assessment</i>
           Ver resultados
         </button>
       </div>
     </div>
+    <br>
+    <div v-if="viewResults">
+      <a v-for="(result,index) in results" :key="index" :href="'/resultados/'+result.category+'/'+user.id+'/'+title"
+        class="hoverable grey lighten-3" style="margin:5px;border-radius:2rem;padding:10px 20px;display:inline-block">
+        <i class="material-icons left">{{result.icon}}</i>
+        {{result.text}}
+      </a>
+    </div>
+
   </div>
 </template>
 
@@ -75,6 +84,42 @@
         displayStatus: '',
         iconStatus: '',
         textualStatus: '',
+
+        // view results
+
+        viewResults: false,
+
+        //results
+
+        results: [{
+          icon: 'place',
+          text: 'Entidad',
+          category: 'entidad'
+        }, {
+          icon: 'assignment',
+          text: 'Area / Departamento',
+          category: 'area'
+        }, {
+          icon: 'alarm',
+          text: 'Turno',
+          category: 'turno'
+        }, {
+          icon: 'wc',
+          text: 'Genero',
+          category: 'genero'
+        }, {
+          icon: 'date_range',
+          text: 'Rango de edad',
+          category: 'edad'
+        }, {
+          icon: 'school',
+          text: 'Estudios concluídos',
+          category: 'estudios'
+        }, {
+          icon: 'calendar_today',
+          text: 'Antigüedad en la empresa',
+          category: 'antiguedad'
+        }]
 
       }
     },
