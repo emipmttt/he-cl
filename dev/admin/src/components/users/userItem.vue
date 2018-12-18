@@ -148,6 +148,9 @@
           numberOfParticipants: this.numberOfParticipants,
           entities: this.entities.split(',')
         }
+
+        console.log(data);
+
         axios
           .post('https://clima-laboral.human-express.com/php/campains/create.php', this.createFormData(data))
           .then(response => {

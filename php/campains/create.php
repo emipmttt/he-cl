@@ -2,7 +2,7 @@
 
   require_once '../conn.php';
 
-  $user = $_POST['user'];
+  $user = intval($_POST['user']);
   $title = $_POST['title'];
   $entities = $_POST['entities'];
   $numberOfParticipants = $_POST['numberOfParticipants'];
@@ -21,6 +21,7 @@
         "userCode" => $userCode,
         "entities"=>$entities
       ));
+
       $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);
 
       $sqlUpdateCampains = "UPDATE users SET campains='{$campains}' WHERE id = '{$user}' ";
