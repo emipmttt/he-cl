@@ -45,5 +45,6 @@
   } else {
       $response->status = false;
       $response->message = "No existe este usuario";
+      $response->sql = $sqlFindUsers;
       echo json_encode($response);
   }
