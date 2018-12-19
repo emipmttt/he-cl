@@ -2,31 +2,19 @@
 
   require_once '../conn.php';
 
-  $user = intval($_POST['user']);
-  $title = $_POST['title'];
-  $entities = $_POST['entities'];
-  $areas = $_POST['areas'];
-  $turns = $_POST['turns'];
-  $numberOfParticipants = $_POST['numberOfParticipants'];
-  $md5 = md5($user.'secretcodepez'.mb_strtolower($title));
-  $userCode = date("d") . rand(100,999). date("m") . rand(10,99);
+  $user = $_POST['user'];
 
-  $sqlFindCampains = "SELECT campains FROM users WHERE id = '{$user}' ";
-  $resultFindCampains = mysqli_query($conn, $sqlFindCampains);
-  if (mysqli_num_rows($resultFindCampains) > 0) {
-      $rowFindCampains = mysqli_fetch_assoc($resultFindCampains);
-      $campains = json_decode($rowFindCampains['campains']);
-      array_push($campains,array(
-        "title" => $title,
-        "numberOfParticipants" => $numberOfParticipants,
-        "status" => false,
-        "userCode" => $userCode,
-        "entities"=>$entities,
-        "areas"=>$areas,
-        "turns"=>$tuns
-      ));
-
-      $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);
+  $sqlFindUsers= "SELECT campains FROM users WHERE id = '{$user}' ";
+  $resultFindUsers= mysqli_query($conn, $sqlFindUsers;
+  if (mysqli_num_rows($resultFindUsers > 0) {
+      $rowFindUsers= mysqli_fetch_assoc($resultFindUsers;
+      $campains = json_decode($rowFindUsers'campains']);
+      $tablesToDelete = array();
+      foreach ($campains as &$campain) {
+        $md5 = md5($user.'secretcodepez'.mb_strtolower($campain->title));
+        array_push($tablesToDelete,'reactives_'+$md5);
+      }
+      unset($campain);
 
       $sqlUpdateCampains = "UPDATE users SET campains='{$campains}' WHERE id = '{$user}' ";
       if (mysqli_query($conn, $sqlUpdateCampains)) {

@@ -73,15 +73,11 @@
             <div class="row">
               <div class="col s3 m2">
                 <div :title="reactive.title">
-                  <i class="material-icons left indigo-text">not_listed_location</i> <b>{{reactive.id}}</b>
+                  <i class="material-icons left indigo-text">info</i> <b>{{reactive.id}}</b>
                 </div>
                 <br>
-                <div :title="reactive.title">
-                  <i class="material-icons left indigo-text">info</i> <b>título</b>
-                </div>
-                <br>
-                <div :title="reactive.title">
-                  <i class="material-icons left indigo-text">timer</i> <b>{{reactive.timer}}</b>
+                <div :title="'Cronómetro: ' + reactive.timer + 'segundos'">
+                  <i class="material-icons left indigo-text">timer</i> <b>{{reactive.timer}} s</b>
                 </div>
               </div>
               <div class="col s9 10">
