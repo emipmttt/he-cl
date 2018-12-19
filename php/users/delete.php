@@ -1,6 +1,6 @@
 <?php
 
-  require_once '../conn.php';
+  require '../conn.php';
 
   $user = $_POST['user'];
 
@@ -39,8 +39,6 @@
         $response->tables = $sqlDeleteTables;
         echo json_encode($response);
       }
-
-      
 
   } else {
       $response->status = false;
