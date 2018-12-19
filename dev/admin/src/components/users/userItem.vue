@@ -203,34 +203,36 @@
           })
       },
       deleteUser() {
-        let data = {
-          user: this.id,
-        }
+        if (confirm("Eliminar usuario")) {
+          let data = {
+            user: this.id,
+          }
 
-        console.log(data);
+          console.log(data);
 
-        axios
-          .post('https://clima-laboral.human-express.com/php/users/delete.php', this.createFormData(data))
-          .then(response => {
-            console.log(response.data);
-            if (response.data.status) {
-              M.toast({
-                html: response.data.message
-              });
-              location.reload();
-            } else {
-              M.toast({
-                html: response.data.message
-              });
-            }
-          })
-          .catch(error => {
-            this.buttonDisabled = false;
-            this.response = "No se pudo procesar la información, intentalo de nuevo más tarde";
-            M.toast({
-              html: "No se pudo procesar la información, intentalo de nuevo más tarde"
+          axios
+            .post('https://clima-laboral.human-express.com/php/users/delete.php', this.createFormData(data))
+            .then(response => {
+              console.log(response.data);
+              if (response.data.status) {
+                M.toast({
+                  html: response.data.message
+                });
+                location.reload();
+              } else {
+                M.toast({
+                  html: response.data.message
+                });
+              }
             })
-          })
+            .catch(error => {
+              this.buttonDisabled = false;
+              this.response = "No se pudo procesar la información, intentalo de nuevo más tarde";
+              M.toast({
+                html: "No se pudo procesar la información, intentalo de nuevo más tarde"
+              })
+            })
+        }
       },
       updateStatus() {
 
