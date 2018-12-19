@@ -4,9 +4,9 @@
 
   $user = $_POST['user'];
 
-  $sqlFindUsers= "SELECT * FROM users WHERE id = `{$user}`";
+  $sqlFindUsers= "SELECT * FROM users WHERE id = {$user}";
   $resultFindUsers = mysqli_query($conn, $sqlFindUsers);
-  if (mysqli_num_rows($resultFindUsers > 0)) {
+  if (mysqli_num_rows($resultFindUsers) > 0) {
       $rowFindUsers= mysqli_fetch_assoc($resultFindUsers);
       $campains = json_decode($rowFindUsers['campains']);
       $tablesToDelete = array();
@@ -45,5 +45,6 @@
       $response->message = "No existe este usuario";
       $response->sql = $sqlFindUsers;
       $response->results = $resultFindUsers;
+      $response->num = $resultFindUsers;
       echo json_encode($response);
   }
