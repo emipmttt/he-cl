@@ -11,7 +11,7 @@
       $campains = json_decode($rowFindUsers['campains']);
       $tablesToDelete = array();
       foreach ($campains as $campain) {
-        $md5 = md5($user.'secretcodepez'.mb_strtolower($campain->title));
+        $md5 = md5($user.'secretcodepez'.mb_strtolower($campain['title']));
         array_push($tablesToDelete,('reactives_'.$md5));
         mysqli_query($conn, "DELETE FROM questionnaires WHERE user = '{$user}' AND campain = '{$campain}' ");
       }
@@ -43,6 +43,6 @@
   } else {
       $response->status = false;
       $response->message = "No existe este usuario";
-      $response->sql = $sqlDeleteTables;
+      $response->sql = $sqlFindUsers;
       echo json_encode($response);
   }

@@ -30,7 +30,7 @@
       </div>
       <div v-if="shown == 'edit'" class="center">
 
-        <form @click="deleteUser" style="padding:10px;border-radius:1rem">
+        <form @submit.revent="deleteUser" style="padding:10px;border-radius:1rem">
           <p style="font-weight: bold">
             ¿Realmente deseas eliminar este usuario?
           </p>
@@ -226,6 +226,7 @@
               }
             })
             .catch(error => {
+              console.log(error);
               this.buttonDisabled = false;
               this.response = "No se pudo procesar la información, intentalo de nuevo más tarde";
               M.toast({
