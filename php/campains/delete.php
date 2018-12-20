@@ -10,7 +10,7 @@
   if (mysqli_query($conn, $sqlDeleteQuestionnaires)) {
     $md5 = md5($user.'secretcodepez'.mb_strtolower($campain));
 
-    $sqlDeleteTables = "DROP TABLE IF EXISTS {$md5}";
+    $sqlDeleteTables = "DROP TABLE IF EXISTS reactives_{$md5}";
       if (mysqli_query($conn, $sqlDeleteTables)) {
 
         $sqlUpdateUserCampains = "UPDATE users SET campains='{$newCampains}' WHERE id = '{$user}' ";

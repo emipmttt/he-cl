@@ -242,9 +242,10 @@
       },
       deleteCampain(campain, index) {
         if (confirm("Eliminar diagnóstico")) {
+          this.campains.splice(index, 1);
           let data = {
             user: this.id,
-            newCampains: this.campains.splice(index, 1),
+            newCampains: this.campains,
             campain
           }
 
