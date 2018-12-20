@@ -62,7 +62,7 @@
                   title="Modificar">
                   <i class="material-icons">edit</i>
                 </router-link>
-                <button @click="deleteCampain(campain.title)" class="btn waves-effect red" title="Eliminar diagnóstico">
+                <button @click="deleteCampain(campain.title,index)" class="btn waves-effect red" title="Eliminar diagnóstico">
                   <i class="material-icons">close</i>
                 </button>
 
@@ -240,10 +240,11 @@
             })
         }
       },
-      deleteCampain(campain) {
+      deleteCampain(campain, index) {
         if (confirm("Eliminar diagnóstico")) {
           let data = {
             user: this.id,
+            newCampains: this.campains.splice(index, 1),
             campain
           }
 
@@ -257,7 +258,6 @@
                 M.toast({
                   html: response.data.message
                 });
-                location.reload();
               } else {
                 M.toast({
                   html: response.data.message
