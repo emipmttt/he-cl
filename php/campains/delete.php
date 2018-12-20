@@ -26,8 +26,6 @@
           } else {
             $campains = json_encode(array(),JSON_UNESCAPED_UNICODE);
           }
-         
-
 
           $sqlUpdateUserCampains = "UPDATE users SET campains='{$campains}' WHERE id = '{$user}' ";
           if (mysqli_query($conn, $sqlUpdateUserCampains)) {
