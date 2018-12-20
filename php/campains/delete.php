@@ -4,7 +4,7 @@
 
   $user = $_POST['user'];
   $campain = $_POST['campain'];
-  $newCampains = json_encode($_POST['newCampains'],JSON_UNESCAPED_UNICODE);
+  $newCampains = $_POST['newCampains'];
 
   $sqlDeleteQuestionnaires = "DELETE FROM questionnaires WHERE user = '{$user}' AND campain = '{$campain}' ";
   if (mysqli_query($conn, $sqlDeleteQuestionnaires)) {
