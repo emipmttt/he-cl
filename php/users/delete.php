@@ -1,6 +1,6 @@
 <?php
 
-  require '../conn.php';
+  require_once '../conn.php';
 
   $user = $_POST['user'];
 

@@ -1,6 +1,6 @@
 <?php
 
-  require '../conn.php';
+  require_once '../conn.php';
 
   $name = $_POST['name'];
   $email = $_POST['email'];

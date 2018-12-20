@@ -62,6 +62,9 @@
                   title="Modificar">
                   <i class="material-icons">edit</i>
                 </router-link>
+                <button @click="deleteCampain(campain.title)" class="btn waves-effect red" title="Eliminar diagnóstico">
+                  <i class="material-icons">close</i>
+                </button>
 
               </td>
             </tr>
@@ -173,7 +176,7 @@
           entities: this.entities.split(','),
           areas: this.areas.split(','),
           turns: this.turns.split(',')
-        }
+        };
 
         console.log(data);
 
@@ -183,7 +186,7 @@
             this.buttonDisabled = false;
             console.log(response.data);
             if (response.data.status) {
-              var instance = M.Modal.getInstance(document.querySelector("#createCampain"));
+              let instance = M.Modal.getInstance(document.querySelector("#createCampain" + this.id));
               instance.close();
               this.buttonDisabled = false;
               M.toast({
@@ -195,8 +198,10 @@
             }
           })
           .catch(error => {
+            console.log(error);
+
             this.buttonDisabled = false;
-            this.response = "No se pudo procesar la información, intentalo de nuevo más tarde";
+            this.response = "No se pudo procesar la información, intentalo de nuevo más tarde" + error;
             M.toast({
               html: "No se pudo procesar la información, intentalo de nuevo más tarde"
             })
@@ -218,7 +223,41 @@
                 M.toast({
                   html: response.data.message
                 });
-                // location.reload();
+                location.reload();
+              } else {
+                M.toast({
+                  html: response.data.message
+                });
+              }
+            })
+            .catch(error => {
+              console.log(error);
+              this.buttonDisabled = false;
+              this.response = "No se pudo procesar la información, intentalo de nuevo más tarde";
+              M.toast({
+                html: "No se pudo procesar la información, intentalo de nuevo más tarde"
+              })
+            })
+        }
+      },
+      deleteCampain(campain) {
+        if (confirm("Eliminar diagnóstico")) {
+          let data = {
+            user: this.id,
+            campain
+          }
+
+          console.log(data);
+
+          axios
+            .post('https://clima-laboral.human-express.com/php/campains/delete.php', this.createFormData(data))
+            .then(response => {
+              console.log(response.data);
+              if (response.data.status) {
+                M.toast({
+                  html: response.data.message
+                });
+                location.reload();
               } else {
                 M.toast({
                   html: response.data.message
