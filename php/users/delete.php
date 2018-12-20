@@ -43,7 +43,7 @@
           $response->status = true;
           $response->message = "Se ha eliminado el usuario correctamente";
           $response->users = $rowFindUsers;
-          $response->campain = $campain;
+          $response->campain = $campains;
           echo json_encode($response);
   } else {
       $response->status = false;
