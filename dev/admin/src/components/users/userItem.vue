@@ -245,7 +245,7 @@
           this.campains.splice(index, 1);
           let data = {
             user: this.id,
-            newCampains: JSON.stringify(this.campains),
+            newCampains: this.campains,
             campain
           }
 
