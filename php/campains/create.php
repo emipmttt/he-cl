@@ -23,7 +23,7 @@
         "userCode" => $userCode,
         "entities"=>$entities,
         "areas"=>$areas,
-        "turns"=>$tuns
+        "turns"=>$turns
       ));
 
       $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);

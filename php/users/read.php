@@ -10,7 +10,11 @@
       $result = mysqli_query($conn, $sql);
       if (mysqli_num_rows($result) > 0) {
         $users = array();
-        while($row = mysqli_fetch_assoc($result)) {
+        while(&$row = mysqli_fetch_assoc($result)) {
+          $campains = json_decode($row['campains']);
+          $campains = array_values($campains);
+          $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);
+          $row['campains'] = $campains;
           array_push($users,$row);
         }
         $response->status = true;
