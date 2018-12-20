@@ -8,7 +8,7 @@
   $resultFindUsers = mysqli_query($conn, $sqlFindUsers);
   if (mysqli_num_rows($resultFindUsers) > 0) {
       $rowFindUsers = mysqli_fetch_assoc($resultFindUsers);
-      // $campains = json_decode($rowFindUsers['campains']);
+      $campains = json_decode($rowFindUsers['campains']);
       // $tablesToDelete = array();
       // foreach ($campains as $campain) {
       //   $md5 = md5($user.'secretcodepez'.mb_strtolower($campain['title']));
@@ -43,6 +43,7 @@
           $response->status = true;
           $response->message = "Se ha eliminado el usuario correctamente";
           $response->users = $rowFindUsers;
+          $response->users = $campain;
           echo json_encode($response);
   } else {
       $response->status = false;

@@ -215,10 +215,11 @@
             .then(response => {
               console.log(response.data);
               if (response.data.status) {
+                console.log(response.data);
                 M.toast({
                   html: response.data.message
                 });
-                location.reload();
+                // location.reload();
               } else {
                 M.toast({
                   html: response.data.message
