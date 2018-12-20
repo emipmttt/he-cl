@@ -6,7 +6,7 @@
   $campain = $_POST['campain'];
 
   $sqlDeleteQuestionnaires = "DELETE FROM questionnaires WHERE user = '{$user}' AND campain = '{$campain}' ";
-  if (mysqli_query($conn, $sql)) {
+  if (mysqli_query($conn, $sqlDeleteQuestionnaires)) {
     $md5 = md5($user.'secretcodepez'.mb_strtolower($campain));
 
     $sqlDeleteTables = "DROP TABLE IF EXISTS {$md5}";
@@ -25,6 +25,7 @@
 
   } else {
     $response->status = false;
+    $response->message = "No se han podido eliminar los datos";
     $response->message = "No se han podido eliminar los datos";
     echo json_encode($response);
 
