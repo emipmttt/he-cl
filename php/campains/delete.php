@@ -20,6 +20,7 @@
 
           $campains = json_decode($rowFindUser['campains']);
           unset($campains[$index]);
+          array_values($campains);
           $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);
 
 
