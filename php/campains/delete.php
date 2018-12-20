@@ -19,9 +19,14 @@
           $rowFindUser= mysqli_fetch_assoc($resultFindUser);
 
           $campains = json_decode($rowFindUser['campains']);
-          unset($campains[$index]);
-          array_values($campains);
-          $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);
+          if (is_array($campains)){
+            unset($campains[$index]);
+            array_values($campains);
+            $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);
+          } else {
+            $campains = json_encode(array(),JSON_UNESCAPED_UNICODE);
+          }
+         
 
 
           $sqlUpdateUserCampains = "UPDATE users SET campains='{$campains}' WHERE id = '{$user}' ";

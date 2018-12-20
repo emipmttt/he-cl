@@ -242,7 +242,12 @@
       },
       deleteCampain(campain, index) {
         if (confirm("Eliminar diagnóstico")) {
-          this.campains.splice(index, 1);
+          if (Array.isArray(this.campains)) {
+            this.campains.splice(index, 1);
+          } else {
+            this.campains = [];
+          }
+          console.log(this.campains);
           let data = {
             user: this.id,
             index,
