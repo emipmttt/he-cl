@@ -215,7 +215,6 @@
             .then(response => {
               console.log(response.data);
               if (response.data.status) {
-                console.log(response.data);
                 M.toast({
                   html: response.data.message
                 });
