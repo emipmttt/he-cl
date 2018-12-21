@@ -16,11 +16,33 @@
         mysqli_query($conn, "DELETE FROM questionnaires WHERE user = '{$user}' AND campain = '{$campain->title}' ");
       }
       unset($campain);
-      $tablesToDelete = implode(",",$tablesToDelete);
 
-      $sqlDeleteTables = "DROP TABLE IF EXISTS {$tablesToDelete}";
-      if (mysqli_query($conn, $sqlDeleteTables)) {
+      if ($tablesToDelete > 0){
 
+        $tablesToDelete = implode(",",$tablesToDelete);
+
+        $sqlDeleteTables = "DROP TABLE IF EXISTS {$tablesToDelete}";
+        if (mysqli_query($conn, $sqlDeleteTables)) {
+  
+          $sqlDeleteUsers = "DELETE FROM users WHERE id = '{$user}'";
+          if (mysqli_query($conn, $sqlDeleteUsers)) {
+            $response->status = true;
+            $response->message = "Se ha eliminado el usuario correctamente";
+            echo json_encode($response);
+          } else {
+            $response->status = false;
+            $response->message = "Ha ocurrido un error al intentar eliminar el usuario";
+            $response->Users = $sqlDeleteUsers;
+            echo json_encode($response);
+          }
+  
+        } else {
+          $response->status = false;
+          $response->message = "Ha ocurrido un error al intentar eliminar las tablas del usuario";
+          $response->tables = $sqlDeleteTables;
+          echo json_encode($response);
+        }
+      } else {
         $sqlDeleteUsers = "DELETE FROM users WHERE id = '{$user}'";
         if (mysqli_query($conn, $sqlDeleteUsers)) {
           $response->status = true;
@@ -32,13 +54,8 @@
           $response->Users = $sqlDeleteUsers;
           echo json_encode($response);
         }
-
-      } else {
-        $response->status = false;
-        $response->message = "Ha ocurrido un error al intentar eliminar las tablas del usuario";
-        $response->tables = $sqlDeleteTables;
-        echo json_encode($response);
       }
+      
 
       
   } else {
