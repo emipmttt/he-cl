@@ -2,9 +2,9 @@
 
   require_once '../conn.php';
 
-  $category = $_POST['category'];
-  $campain = $_POST['campain'];
-  $user = $_POST['user'];
+  $category = $_GET['category'];
+  $campain = $_GET['campain'];
+  $user = $_GET['user'];
 
   $sql = "SELECT * FROM questionnaires WHERE user = '{$user}' AND campain = '{$campain}'"; 
   $result = mysqli_query($conn, $sql);

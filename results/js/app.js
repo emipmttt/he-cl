@@ -9,7 +9,7 @@ var app = new Vue({
   },
   methods: {
     get() {
-      axios.get(`https://clima-laboral.human-express.com/php/results/read.php?category=${this.category}&user=${this.user}&campain=${this.campain}`)
+      axios.get(`https://clima-laboral.human-express.com/php/results/read.php?user=${this.user}&campain=${this.campain}`)
         .then(response => {
           this.users = response.data.users;
           console.log(response.data);
