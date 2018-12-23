@@ -25,6 +25,21 @@
           </h1>
         </div>
       </div>
+
+      <div v-if="status == 0" class="grey-text center large-text">
+        Obteniendo datos ...
+      </div>
+      <div v-else-if="status == 1">
+        <div v-for="questionnaire in questionnaires">
+          <pre>
+            {{questionnaire}}
+          </pre>
+        </div>
+      </div>
+      <div v-else-if="status == 2" class="grey-text center large-text">
+        {{message}}
+      </div>
+
     </div>
   </div>
   <script src="/results/js/app.js"></script>

@@ -4,3 +4,4 @@ RewriteBase /
 
 RewriteRule administrar /admin.html
 RewriteRule usuario /panel.html
+RewriteRule resultados /results.html

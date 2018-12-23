@@ -5,6 +5,11 @@ var app = new Vue({
     campain: '',
     category: '',
     user: 0,
+    // status
+    status: 0,
+    message: '',
+    // questionnaires
+    questionnaires: []
 
   },
   methods: {
@@ -13,9 +18,19 @@ var app = new Vue({
         .then(response => {
           this.users = response.data.users;
           console.log(response.data);
+          if (response.data.status) {
+            this.status = 1;
+            this.questionnaires = response.data.questionnaires;
+          } else {
+            this.status = 2;
+            this.message = response.data.message;
+          }
         })
         .catch(error => {
           console.log(error);
+          this.status = 2;
+          this.message = 'Ha ocurrido un error: ' + error;
+
         })
     },
     getURLData() {
