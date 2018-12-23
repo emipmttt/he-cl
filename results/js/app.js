@@ -2,14 +2,14 @@ var app = new Vue({
   el: '#app',
   data: {
     // campain data
-    title: '',
+    campain: '',
     category: '',
     user: 0,
 
   },
   methods: {
     get() {
-      axios.get(`https://clima-laboral.human-express.com/php/results/read.php?category=${this.category}&user=${this.user}&title=${this.title}`)
+      axios.get(`https://clima-laboral.human-express.com/php/results/read.php?category=${this.category}&user=${this.user}&campain=${this.campain}`)
         .then(response => {
           this.users = response.data.users;
           console.log(response.data);
@@ -30,7 +30,7 @@ var app = new Vue({
           break;
       }
       this.user = url[1];
-      this.title = decodeURIComponent(escape(unescape(url[2])));
+      this.campain = decodeURIComponent(escape(unescape(url[2])));
     },
     createFormData(postData) {
       var formDa = new FormData();

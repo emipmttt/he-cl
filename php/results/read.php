@@ -3,10 +3,10 @@
   require_once '../conn.php';
 
   $category = $_POST['category'];
-  $title = $_POST['title'];
+  $campain = $_POST['campain'];
   $user = $_POST['user'];
 
-  $sql = "SELECT * FROM questionnaires WHERE user = '{$user}' AND title = '{$title}' AND category = {$category} "; 
+  $sql = "SELECT * FROM questionnaires WHERE user = '{$user}' AND campain = '{$campain}'"; 
   $result = mysqli_query($conn, $sql);
   if (mysqli_num_rows($result) > 0) {
     $questionnaires = array();
