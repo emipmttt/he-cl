@@ -15,10 +15,13 @@
         </div>
       </form>
 
-      <div v-if="Array.isArray(users)">
+      <div v-if="users">
         <div>
           <user-item @update:change="get()" v-for="(user, index) in filteredUsers" :key="user.id" :user="user" />
         </div>
+      </div>
+      <div v-else-if="!users" class=" center">
+        <p class="grey-text">{{response}}</p>
       </div>
       <div v-else class=" center">
         <loading />
@@ -39,15 +42,23 @@
       return {
         // show all users
         search: '',
-        users: []
+        users: [],
+
+        response: ''
       }
     },
     methods: {
       get() {
         axios.get('https://clima-laboral.human-express.com/php/users/read.php?query=*')
           .then(response => {
-            this.users = response.data.users;
             console.log(response.data);
+
+            if (response.data.status) {
+              this.users = response.data.users;
+            } else {
+              this.users = false;
+              this.response = response.data.message;
+            }
           })
           .catch(error => {
             console.log(error);

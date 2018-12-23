@@ -52,6 +52,7 @@
     </div>
     <br>
     <div v-if="viewResults">
+      <div class="divider"></div>
       <a v-for="(result,index) in results" :key="index" :href="'/resultados/'+result.category+'/'+user.id+'/'+title"
         class="hoverable grey lighten-3" style="margin:5px;border-radius:2rem;padding:10px 20px;display:inline-block">
         <i class="material-icons left">{{result.icon}}</i>

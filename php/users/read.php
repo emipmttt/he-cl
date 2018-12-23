@@ -22,7 +22,7 @@
         echo json_encode($response);
       } else {
         $response->status = false;
-        $response->message = "No hay usuarios";
+        $response->message = "Aún no hay usuarios en la plataforma";
         echo json_encode($response);
       }
 

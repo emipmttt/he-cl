@@ -1,11 +1,15 @@
 var app = new Vue({
   el: '#app',
   data: {
-    title: 'Resultados'
+    // campain data
+    title: '',
+    category: '',
+    user: 0,
+
   },
   methods: {
     get() {
-      axios.get(`https://clima-laboral.human-express.com/php/results/read.php?category=`)
+      axios.get(`https://clima-laboral.human-express.com/php/results/read.php?category=${this.category}&user=${this.user}&title=${this.title}`)
         .then(response => {
           this.users = response.data.users;
           console.log(response.data);
@@ -14,6 +18,20 @@ var app = new Vue({
           console.log(error);
         })
     },
+    getURLData() {
+      let url = location.href.split("/");
+      url.splice(0, 4);
+      switch (url[0]) {
+        case 'entidad':
+          this.category = 'entitie';
+          break;
+        case 'entidad':
+          this.category = 'entitie';
+          break;
+      }
+      this.user = url[1];
+      this.title = decodeURIComponent(escape(unescape(url[2])));
+    },
     createFormData(postData) {
       var formDa = new FormData();
       for (var key in postData) {
@@ -21,5 +39,9 @@ var app = new Vue({
       }
       return formDa;
     }
+  },
+  mounted() {
+    this.getURLData();
+    this.get();
   }
 });
