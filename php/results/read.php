@@ -19,5 +19,6 @@
   } else {
     $response->status = false;
     $response->message = "Este diagnóstico aún no recibe respuestas";
+    $response->sql = $sql;
     echo json_encode($response);
   }
