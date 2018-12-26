@@ -35,26 +35,27 @@
                 <label>Selecciona una entidad</label>
                 <select required v-model:value="entitie" class="browser-default">
                   <option value="" disabled selected>Entidad</option>
-                  <option :value="entitie" v-for="entitie in fieldParse(thisCampain.entities)">{{ entitie }}</option>
+                  <option :value="entitieItem" v-for="entitieItem in fieldParse(thisCampain.entities)">{{ entitieItem
+                    }}</option>
                 </select>
 
                 <label>Selecciona un Area / Departamento</label>
                 <select required v-model:value="area" class="browser-default">
                   <option value="" disabled selected>Area / Departamento</option>
-                  <option :value="entitie" v-for="area in fieldParse(thisCampain.areas)">{{ area }}</option>
+                  <option :value="areaItem" v-for="areaItem in fieldParse(thisCampain.areas)">{{ areaItem }}</option>
                 </select>
 
                 <label>Selecciona tu turno</label>
                 <select required v-model:value="turn" class="browser-default">
                   <option value="" disabled selected>Turno</option>
-                  <option :value="entitie" v-for="turn in fieldParse(thisCampain.turns)">{{ turn }}</option>
+                  <option :value="turnItem" v-for="turnItem in fieldParse(thisCampain.turns)">{{ turnItem }}</option>
                 </select>
 
                 <label>Selecciona tu genero</label>
                 <select required v-model:value="gender" class="browser-default">
                   <option value="" disabled selected>Genero</option>
-                  <option value="1">Masculino</option>
-                  <option value="2">Femenino</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
                 </select>
 
                 <label>Selecciona tu rango de edad</label>

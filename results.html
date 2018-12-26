@@ -20,21 +20,28 @@
         <div class="col s6 valign-wrapper" style="height: 100px;">
           <img src="results/logo.png" style="width: 150px; margin: 0 auto;">
         </div>
-        <div class="col s6 valign-wrapper" style="height: 100px;">
-          <h1 class="medium-text" style="margin: 0 auto;">Resultados de <span class="indigo-text">{{campain}}</span>
-          </h1>
+        <div class="col s6">
+          <div class="valign-wrapper " style="height:100px;">
+            <h1 class="medium-text" style="margin: 0 auto">
+              Resultados de
+              <span class="indigo-text">
+                <b>{{campain}}</b> | {{displayCategory}}
+              </span>
+            </h1>
+          </div>
         </div>
       </div>
+
+      <div class="divider"></div>
 
       <div v-if="status == 0" class="grey-text center large-text">
         Obteniendo datos ...
       </div>
       <div v-else-if="status == 1">
-        <div v-for="questionnaire in questionnaires">
-          <pre>
-            {{questionnaire}}
-          </pre>
-        </div>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <pre>
+          {{aspects}}
+        </pre>
       </div>
       <div v-else-if="status == 2" class="grey-text center large-text">
         {{message}}
@@ -42,6 +49,9 @@
 
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.min.js"></script>
+  <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
   <script src="/results/js/app.js"></script>
 </body>
 
