@@ -7,6 +7,10 @@
   $entities = $_POST['entities'];
   $areas = $_POST['areas'];
   $turns = $_POST['turns'];
+  $gender = $_POST['gender'];
+  $age = $_POST['age'];
+  $antiquity = $_POST['antiquity'];
+  $school = $_POST['school'];
   $numberOfParticipants = $_POST['numberOfParticipants'];
   $md5 = md5($user.'secretcodepez'.mb_strtolower($title));
   $userCode = date("d") . rand(100,999). date("m") . rand(10,99);
@@ -23,7 +27,11 @@
         "userCode" => $userCode,
         "entities"=>$entities,
         "areas"=>$areas,
-        "turns"=>$turns
+        "turns"=>$turns,
+        "gender"=>$gender,
+        "age"=>$age,
+        "antiquity"=>$antiquity,
+        "school"=>$school
       ));
 
       $campains = json_encode($campains,JSON_UNESCAPED_UNICODE);

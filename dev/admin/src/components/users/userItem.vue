@@ -112,6 +112,26 @@
                 <label for="turns">Turno</label>
               </div>
 
+              <div class="input-field">
+                <input v-model:value="gender" id="gender" type="text" class="validate" required>
+                <label for="gender">Genero</label>
+              </div>
+
+              <div class="input-field">
+                <input v-model:value="age" id="age" type="text" class="validate" required>
+                <label for="age">Rango de edad</label>
+              </div>
+
+              <div class="input-field">
+                <input v-model:value="antiquity" id="antiquity" type="text" class="validate" required>
+                <label for="antiquity">Antiguedad en la empresa</label>
+              </div>
+
+              <div class="input-field">
+                <input v-model:value="school" id="school" type="text" class="validate" required>
+                <label for="school">Estudios Concluidos</label>
+              </div>
+
             </div>
           </div>
         </div>
@@ -159,6 +179,10 @@
         entities: '',
         areas: '',
         turns: '',
+        gender: '',
+        antiquity: '',
+        age: '',
+        school: '',
 
         //edit
         edit: false,
@@ -175,7 +199,11 @@
           numberOfParticipants: this.numberOfParticipants,
           entities: this.entities.split(','),
           areas: this.areas.split(','),
-          turns: this.turns.split(',')
+          turns: this.turns.split(','),
+          gender: this.gender.split(','),
+          antiquity: this.antiquity.split(','),
+          age: this.age.split(','),
+          school: this.school.split(',')
         };
 
         console.log(data);

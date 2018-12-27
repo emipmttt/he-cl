@@ -54,29 +54,28 @@
                 <label>Selecciona tu genero</label>
                 <select required v-model:value="gender" class="browser-default">
                   <option value="" disabled selected>Genero</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Femenino">Femenino</option>
+                  <option :value="genderItem" v-for="genderItem in fieldParse(thisCampain.gender)">{{ genderItem }}</option>
                 </select>
 
                 <label>Selecciona tu rango de edad</label>
                 <select required v-model:value="age" class="browser-default">
                   <option value="" disabled selected>Rango de edad</option>
-                  <option value="1"> rango 1</option>
-                  <option value="2"> rango 2 </option>
+                  <option :value="ageItem" v-for="ageItem in fieldParse(thisCampain.age)">{{ ageItem }}</option>
                 </select>
 
                 <label>Selecciona tu antigüedad en la empresa</label>
                 <select required v-model:value="antiquity" class="browser-default">
                   <option value="" disabled selected>Antigüedad en la empresa</option>
-                  <option value="1"> antiguedad 1 </option>
-                  <option value="2"> antiguedad 2 </option>
+                  <option :value="antiquityItem" v-for="antiquityItem in fieldParse(thisCampain.antiquity)">{{
+                    antiquityItem }}</option>
+
                 </select>
 
                 <label>Selecciona tu máximo grado de estudios concluídos</label>
                 <select required v-model:value="studies" class="browser-default">
                   <option value="" disabled selected>Estudios concluídos</option>
-                  <option value="1"> edad 1 </option>
-                  <option value="2"> edad 2 </option>
+                  <option :value="schoolItem" v-for="schoolItem in fieldParse(thisCampain.school)">{{
+                    schoolItem }}</option>
                 </select>
 
                 <div class="right-align">
@@ -89,16 +88,31 @@
               </form>
               <div v-else>
                 <div v-for="(reactive,index) in reactives">
-                  <div :id="'cover' + reactive.id" v-if="reactive.status == 1" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)"
-                    class="valign-wrapper card-panel indigo lighten-1" style="min-height:80vh">
-                    <div class=" white-text center" style="margin:0 auto">
-                      <i class="material-icons" style="font-size:6rem">timer</i><br>
-                      <h2 class="large-text">Cronómetro</h2>
-                      <p>Haz click aquí para mostrar la pregunta</p>
-                      <p>Tendrás <strong>{{reactive.timer}}</strong> segundos para contestar </p>
+                  <div v-if="reactive.timer > 0">
+                    <div :id="'cover' + reactive.id" v-if="reactive.status == 1" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)"
+                      class="valign-wrapper card-panel indigo lighten-1" style="min-height:80vh">
+                      <div class=" white-text center" style="margin:0 auto">
+                        <i class="material-icons" style="font-size:6rem">timer</i><br>
+                        <h2 class="large-text">Cronómetro</h2>
+                        <p>Haz click aquí para mostrar la pregunta</p>
+                        <p>Tendrás <strong>{{reactive.timer}}</strong> segundos para contestar </p>
+                      </div>
+                    </div>
+                    <div v-else-if="reactive.status == 2" :id="'question' + reactive.id" class="card-panel" style="min-height:80vh">
+                      <div class="medium-text">{{reactive.title}}</div>
+                      <div style="margin:5% 0">
+                        <i class="material-icons left">timer</i>
+                        La pregunta finalizará en <strong :id="'timer'+reactive.id" class="indigo white-text" style="border-radius: 1rem;padding:2px">{{reactive.timer}}</strong>
+                        segundos
+                      </div>
+                      <form @submit.prevent="answered(reactive.id,answer.aspect,answer.value)" v-for="answer in answersStringToObject(reactive.answersList)">
+                        <button class="btn indigo waves-effect waves-light" style="text-align:left !important;width:100%;margin-bottom:5px">
+                          {{answer.value}} {{answer.text}}
+                        </button>
+                      </form>
                     </div>
                   </div>
-                  <div v-else-if="reactive.status == 2" :id="'question' + reactive.id" class="card-panel" style="min-height:80vh">
+                  <div v-else :id="'question' + reactive.id" class="card-panel" style="min-height:80vh">
                     <div class="medium-text">{{reactive.title}}</div>
                     <div style="margin:5% 0">
                       <i class="material-icons left">timer</i>
@@ -114,35 +128,36 @@
                 </div>
               </div>
             </div>
-
-          </div>
-          <div v-else class="card-panel center grey-text valign-wrapper" style="min-height:80vh">
-            <h4>Cuestionario inactivo</h4>
-          </div>
-          <div v-if="finish" class="card-panel">
-            <h1 class="large-text">Has terminado</h1>
-            <form @submit.prevent="send">
-
-              <div class="input-field">
-                <textarea id="textarea1" v-model="suggestion" class="materialize-textarea"></textarea>
-                <label for="textarea1">¿Cómo podríamos mejorar?</label>
-              </div>
-
-              <p>{{response}}</p>
-
-              <button class="btn waves-effect indigo">
-                <i class="material-icons left">send</i>
-                Enviar
-              </button>
-
-            </form>
-
-
           </div>
 
         </div>
+        <div v-else class="card-panel center grey-text valign-wrapper" style="min-height:80vh">
+          <h4>Cuestionario inactivo</h4>
+        </div>
+        <div v-if="finish" class="card-panel">
+          <h1 class="large-text">Has terminado</h1>
+          <form @submit.prevent="send">
+
+            <div class="input-field">
+              <textarea id="textarea1" v-model="suggestion" class="materialize-textarea"></textarea>
+              <label for="textarea1">¿Cómo podríamos mejorar?</label>
+            </div>
+
+            <p>{{response}}</p>
+
+            <button class="btn waves-effect indigo">
+              <i class="material-icons left">send</i>
+              Enviar
+            </button>
+
+          </form>
+
+
+        </div>
+
       </div>
     </div>
+  </div>
 
   </div>
 </template>
