@@ -13,51 +13,48 @@
         <label>Selecciona una entidad</label>
         <select required v-model:value="entitie" class="browser-default">
           <option value="" disabled selected>Entidad</option>
-          <option :value="entitie" v-for="entitie in entitiesParse(thisCampain.entities)">{{ entitie }}</option>
+          <option :value="entitieItem" v-for="entitieItem in fieldParse(thisCampain.entities)">{{ entitieItem
+            }}</option>
         </select>
 
         <label>Selecciona un Area / Departamento</label>
         <select required v-model:value="area" class="browser-default">
           <option value="" disabled selected>Area / Departamento</option>
-          <option value="1">Area 1</option>
-          <option value="2">Area 2</option>
-          <option value="3">Area 3</option>
+          <option :value="areaItem" v-for="areaItem in fieldParse(thisCampain.areas)">{{ areaItem }}</option>
         </select>
 
         <label>Selecciona tu turno</label>
         <select required v-model:value="turn" class="browser-default">
           <option value="" disabled selected>Turno</option>
-          <option value="1">Turno 1</option>
-          <option value="2">Turno 2</option>
+          <option :value="turnItem" v-for="turnItem in fieldParse(thisCampain.turns)">{{ turnItem }}</option>
         </select>
 
         <label>Selecciona tu genero</label>
         <select required v-model:value="gender" class="browser-default">
           <option value="" disabled selected>Genero</option>
-          <option value="1">Masculino</option>
-          <option value="2">Femenino</option>
+          <option :value="genderItem" v-for="genderItem in fieldParse(thisCampain.gender)">{{ genderItem }}</option>
         </select>
 
         <label>Selecciona tu rango de edad</label>
         <select required v-model:value="age" class="browser-default">
           <option value="" disabled selected>Rango de edad</option>
-          <option value="1"> rango 1</option>
-          <option value="2"> rango 2 </option>
+          <option :value="ageItem" v-for="ageItem in fieldParse(thisCampain.age)">{{ ageItem }}</option>
         </select>
 
         <label>Selecciona tu antigüedad en la empresa</label>
         <select required v-model:value="antiquity" class="browser-default">
           <option value="" disabled selected>Antigüedad en la empresa</option>
-          <option value="1"> antiguedad 1 </option>
-          <option value="2"> antiguedad 2 </option>
+          <option :value="antiquityItem" v-for="antiquityItem in fieldParse(thisCampain.antiquity)">{{
+            antiquityItem }}</option>
         </select>
 
         <label>Selecciona tu máximo grado de estudios concluídos</label>
         <select required v-model:value="studies" class="browser-default">
           <option value="" disabled selected>Estudios concluídos</option>
-          <option value="1"> edad 1 </option>
-          <option value="2"> edad 2 </option>
+          <option :value="schoolItem" v-for="schoolItem in fieldParse(thisCampain.school)">{{
+            schoolItem }}</option>
         </select>
+
 
         <div class="right-align">
           <button class="btn waves-effect indigo">
