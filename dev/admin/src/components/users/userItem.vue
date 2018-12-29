@@ -29,7 +29,6 @@
         </div>
       </div>
       <div v-if="shown == 'edit'" class="center">
-
         <form @submit.revent="deleteUser" style="padding:10px;border-radius:1rem">
           <p style="font-weight: bold">
             ¿Realmente deseas eliminar este usuario?
@@ -49,30 +48,38 @@
 
           <tbody>
             <tr v-for="(campain,index) in campains">
+
               <td>{{campain.title}}</td>
               <td>{{campain.numberOfParticipants}}</td>
-              <td>
+              <td class="right-align">
                 <div class="switch" style="display:inline-block" title="Activar/Desactivar">
                   <label>
                     <input type="checkbox" :checked="campain.status == true || campain.status == 'true'" @click.prevent="changeStatus(campain.status,index)">
                     <span class="lever"></span>
                   </label>
                 </div>
-                <router-link :to="'campain/'+id+'/'+campain.numberOfParticipants+'/'+toUrl(campain.title)" class="btn waves-effect indigo"
-                  title="Modificar">
-                  <i class="material-icons">edit</i>
+                <router-link :to="'campain/'+id+'/'+campain.numberOfParticipants+'/'+toUrl(campain.title)" class="btn waves-effect indigo button-action"
+                  title="Modificar reactivos">
+                  <i class="material-icons valign-wrapper">bookmarks</i>
                 </router-link>
-                <button @click="deleteCampain(campain.title,index)" class="btn waves-effect red" title="Eliminar diagnóstico">
-                  <i class="material-icons">close</i>
+                <button :data-target="'editCampain' + index" class="btn waves-effect blue button-action modal-trigger"
+                  title="Modificar campos">
+                  <i class="material-icons valign-wrapper">edit</i>
+                </button>
+                <button @click="deleteCampain(campain.title,index)" title="Eliminar diagnóstico" class="btn waves-effect red button-action">
+                  <i class="material-icons valign-wrapper">close</i>
                 </button>
 
+
+
               </td>
+
+              <edit-campain :campainProp="campain" :index="index" :campains="campains" :user="id" />
+
             </tr>
 
           </tbody>
         </table>
-        <div>
-        </div>
       </div>
     </div>
 
@@ -151,12 +158,14 @@
       </form>
     </div>
 
+
   </div>
 </template>
 
 <script>
   import axios from 'axios';
   import loading from '@/components/loading';
+  import editCampain from '@/components/users/editCampain';
   export default {
     name: 'user-item',
     props: {
@@ -183,6 +192,17 @@
         antiquity: '',
         age: '',
         school: '',
+
+        // participant data options edit
+        entitiesEdit: '',
+        areasEdit: '',
+        turnsEdit: '',
+        genderEdit: '',
+        antiquityEdit: '',
+        ageEdit: '',
+        schoolEdit: '',
+        numberOfParticipantsEdit: '',
+
 
         //edit
         edit: false,
@@ -364,9 +384,10 @@
       }
     },
     components: {
-      loading
+      loading,
+      editCampain
     },
-    mounted() {
+    updated() {
       var elems = document.querySelectorAll('.modal');
       var instances = M.Modal.init(elems, {});
     }

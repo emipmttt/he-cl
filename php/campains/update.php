@@ -3,8 +3,7 @@
   require_once '../conn.php';
 
   $user = $_POST['user'];
-  $campains = $_POST['campains'];
-
+  $campains = json_encode($_POST['campains'],JSON_UNESCAPED_UNICODE);
 
   $sql = "UPDATE users SET campains = '{$campains}' WHERE id = '{$user}' ";
   if (mysqli_query($conn, $sql)) {
