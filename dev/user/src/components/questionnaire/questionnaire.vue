@@ -89,7 +89,7 @@
               <div v-else>
                 <div v-for="(reactive,index) in reactives">
                   <div v-if="reactive.timer > 0">
-                    <div :id="'cover' + reactive.id" v-if="reactive.status == 1" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)"
+                    <div v-if="reactive.status == 1" :id="'cover' + reactive.id" @click="startQuestion(answersStringToObject(reactive.answersList)[0].aspect,reactive.timer,index)"
                       class="valign-wrapper card-panel indigo lighten-1" style="min-height:80vh">
                       <div class=" white-text center" style="margin:0 auto">
                         <i class="material-icons" style="font-size:6rem">timer</i><br>
@@ -128,36 +128,35 @@
                 </div>
               </div>
             </div>
+
+          </div>
+          <div v-else class="card-panel center grey-text valign-wrapper" style="min-height:80vh">
+            <h4>Cuestionario inactivo</h4>
+          </div>
+          <div v-if="finish" class="card-panel">
+            <h1 class="large-text">Has terminado</h1>
+            <form @submit.prevent="send">
+
+              <div class="input-field">
+                <textarea id="textarea1" v-model="suggestion" class="materialize-textarea"></textarea>
+                <label for="textarea1">¿Cómo podríamos mejorar?</label>
+              </div>
+
+              <p>{{response}}</p>
+
+              <button class="btn waves-effect indigo">
+                <i class="material-icons left">send</i>
+                Enviar
+              </button>
+
+            </form>
+
+
           </div>
 
         </div>
-        <div v-else class="card-panel center grey-text valign-wrapper" style="min-height:80vh">
-          <h4>Cuestionario inactivo</h4>
-        </div>
-        <div v-if="finish" class="card-panel">
-          <h1 class="large-text">Has terminado</h1>
-          <form @submit.prevent="send">
-
-            <div class="input-field">
-              <textarea id="textarea1" v-model="suggestion" class="materialize-textarea"></textarea>
-              <label for="textarea1">¿Cómo podríamos mejorar?</label>
-            </div>
-
-            <p>{{response}}</p>
-
-            <button class="btn waves-effect indigo">
-              <i class="material-icons left">send</i>
-              Enviar
-            </button>
-
-          </form>
-
-
-        </div>
-
       </div>
     </div>
-  </div>
 
   </div>
 </template>

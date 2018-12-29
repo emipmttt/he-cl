@@ -108,29 +108,29 @@
         console.log(data);
 
         axios
-        // .post('https://clima-laboral.human-express.com/php/campains/update.php', this.createFormData(data))
-        // .then(response => {
-        //   this.buttonDisabled = false;
-        //   console.log(response.data);
-        //   this.buttonDisabled = false;
-        //   if (response.data.status) {
-        //     M.toast({
-        //       html: response.data.message
-        //     });
-        //     location.reload();
-        //   } else {
-        //     this.response = response.data.message;
-        //   }
-        // })
-        // .catch(error => {
-        //   console.log(error);
+          .post('https://clima-laboral.human-express.com/php/campains/update.php', this.createFormData(data))
+          .then(response => {
+            this.buttonDisabled = false;
+            console.log(response.data);
+            this.buttonDisabled = false;
+            if (response.data.status) {
+              M.toast({
+                html: response.data.message
+              });
+              location.reload();
+            } else {
+              this.response = response.data.message;
+            }
+          })
+          .catch(error => {
+            console.log(error);
 
-        //   this.buttonDisabled = false;
-        //   this.response = "No se pudo procesar la información, intentalo de nuevo más tarde" + error;
-        //   M.toast({
-        //     html: "No se pudo procesar la información, intentalo de nuevo más tarde"
-        //   })
-        // })
+            this.buttonDisabled = false;
+            this.response = "No se pudo procesar la información, intentalo de nuevo más tarde" + error;
+            M.toast({
+              html: "No se pudo procesar la información, intentalo de nuevo más tarde"
+            })
+          })
 
       },
       createFormData(postData) {
