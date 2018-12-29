@@ -93,11 +93,13 @@
         });
 
         this.campain.numberOfParticipants = this.participants;
+
         this.campains[campainToEdit] = this.campain;
         console.log(this.campains);
 
         this.response = '';
         this.buttonDisabled = true;
+
         let data = {
           campains: this.campains,
           user: this.user
@@ -141,8 +143,13 @@
 
     },
     mounted() {
+      var elems = document.querySelectorAll('.modal');
+      var instances = M.Modal.init(elems, {});
       document.getElementById("editnumberOfParticipants" + this.index).value = this.campain.numberOfParticipants;
       M.updateTextFields();
+    },
+    components: {
+      loading
     }
   }
 
