@@ -9,13 +9,38 @@
           </div>
           <div v-if="questionnaireStatus">
             <div v-if="!userCodeStatus">
+
               <form @submit.prevent="verifyUserCode" class="card-panel">
+
+                <p class="left-align">
+                  <b class="medium-text">Te damos la Bienvenida a la Encuesta de Clima Laboral</b><br>
+                  <span class="normal-text">
+                    Toda la información que proporciones es estrictamente Confidencial y Anónima</span><br>
+                  <i> "Con tu participación podemos hacer grandes cosas”</i>
+                </p>
+                <ol>
+
+                  <li>a) Asegúrate de contar con el número de acceso para resolver la encuesta</li>
+                  <li>b) Conexión a Internet</li>
+                  <li>c) Resolver en computadora personal o laptop</li>
+                  <li>d) Toma en cuenta que son 45 preguntas a contestar en un tiempo promedio de 8 minutos como mínimo</li>
+                  <li>e) Lee y contesta con total naturalidad y confianza</li>
+                  <li>a) f) Cualquier situación contactar a Recursos Humanos</li>
+
+                </ol>
+
+                <div class="divider"></div>
+
                 <div class="input-field col s6">
                   <i class="material-icons prefix">lock</i>
                   <input id="userCode" type="password" class="validate" v-model:value="userCode">
-                  <label for="userCode">Código</label>
+                  <label for="userCode">Código de acceso</label>
                 </div>
                 <div class="right-align">
+                  <a href="https://www.google.com/" class="btn-flat waves-effect red-text">
+                    <i class="material-icons left">close</i>
+                    Salir
+                  </a>
                   <button class="btn waves-effect indigo">
                     <i class="material-icons left">send</i>
                     Entrar
@@ -113,17 +138,15 @@
                     </div>
                   </div>
                   <div v-else :id="'question' + reactive.id" class="card-panel" style="min-height:80vh">
-                    <div class="medium-text">{{reactive.title}}</div>
-                    <div style="margin:5% 0">
-                      <i class="material-icons left">timer</i>
-                      La pregunta finalizará en <strong :id="'timer'+reactive.id" class="indigo white-text" style="border-radius: 1rem;padding:2px">{{reactive.timer}}</strong>
-                      segundos
+                    <div v-if="reactive.status == 1" :id="'cover' + reactive.id">
+                      <div class="medium-text">{{reactive.title}}</div>
+                      <br>
+                      <form @submit.prevent="answered(reactive.id,answer.aspect,answer.value)" v-for="answer in answersStringToObject(reactive.answersList)">
+                        <button class="btn indigo waves-effect waves-light" style="text-align:left !important;width:100%;margin-bottom:5px">
+                          {{answer.value}} {{answer.text}}
+                        </button>
+                      </form>
                     </div>
-                    <form @submit.prevent="answered(reactive.id,answer.aspect,answer.value)" v-for="answer in answersStringToObject(reactive.answersList)">
-                      <button class="btn indigo waves-effect waves-light" style="text-align:left !important;width:100%;margin-bottom:5px">
-                        {{answer.value}} {{answer.text}}
-                      </button>
-                    </form>
                   </div>
                 </div>
               </div>
