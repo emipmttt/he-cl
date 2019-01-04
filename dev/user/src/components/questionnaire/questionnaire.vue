@@ -20,12 +20,12 @@
                 </p>
                 <ol>
 
-                  <li>a) Asegúrate de contar con el número de acceso para resolver la encuesta</li>
-                  <li>b) Conexión a Internet</li>
-                  <li>c) Resolver en computadora personal o laptop</li>
-                  <li>d) Toma en cuenta que son 45 preguntas a contestar en un tiempo promedio de 8 minutos como mínimo</li>
-                  <li>e) Lee y contesta con total naturalidad y confianza</li>
-                  <li>a) f) Cualquier situación contactar a Recursos Humanos</li>
+                  <li>Asegúrate de contar con el número de acceso para resolver la encuesta</li>
+                  <li>Conexión a Internet</li>
+                  <li>Resolver en computadora personal o laptop</li>
+                  <li>Toma en cuenta que son 45 preguntas a contestar en un tiempo promedio de 8 minutos como mínimo</li>
+                  <li>Lee y contesta con total naturalidad y confianza</li>
+                  <li>Cualquier situación contactar a Recursos Humanos</li>
 
                 </ol>
 

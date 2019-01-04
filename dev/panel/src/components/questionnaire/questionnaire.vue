@@ -176,7 +176,6 @@
           title: this.title.toLowerCase(),
           numberOfParticipants: this.campain.numberOfParticipants,
           campain: this.campain
-
         }
         axios
           .post('https://clima-laboral.human-express.com/php/questionnaire/create.php', this.createFormData(data))
@@ -217,7 +216,6 @@
         }
       },
       get() {
-        console.clear();
         axios.get('https://clima-laboral.human-express.com/php/campains/read.php?query=*&campain=' + this.title +
             "&user=" + this.user)
           .then(response => {
@@ -298,9 +296,11 @@
           }, 1010)
         }
       },
+      fieldParse(field) {
+        return field.split(',')
+      },
       answered(index, aspect, value) {
         this.reactives.shift();
-
 
         if (isNaN(this.aspectsList[aspect])) {
           this.aspectsList[aspect] = value;
