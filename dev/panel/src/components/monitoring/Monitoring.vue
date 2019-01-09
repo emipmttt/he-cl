@@ -1,10 +1,8 @@
 <template>
   <div class="container">
 
-    <h1 class="large-text">Monitoreo</h1>
-    {{user}} {{displayTitle}}
-
-    <div v-if="questionnaires">
+    <h1 class="large-text">Monitoreo | {{displayTitle}}</h1>
+    <div v-if="questionnaires != false">
       <canvas id="monitoringChart"></canvas>
     </div>
     <div v-else class="card-panel">
@@ -21,7 +19,9 @@
       return {
         displayTitle: this.urlToString(this.$route.params.campain).toUpperCase(),
         user: this.$route.params.user,
-        questionnaires: false
+        questionnaires: false,
+        monitoringArray: [],
+        totalQuestionnaires: 0
       }
     },
     methods: {
@@ -42,21 +42,91 @@
 
           })
       },
-      initChart() {
-        var ctx = document.getElementById('monitoringChart').getContext('2d');
-        var monitoringChart = new Chart(ctx, {
-          type: 'horizontalBar',
-          data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [{
-              label: "My First dataset",
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              data: [0, 10, 5, 2, 20, 30, 45],
-            }]
-          },
-          options: options
-        });
+      monitoringChart() {
+
+        setTimeout(() => {
+
+          var entities = [];
+          var areas = [];
+
+          this.questionnaires.forEach(element => {
+            entities.push(element.entitie);
+            areas.push(element.area);
+          });
+
+          var unique = (value, index, self) => {
+            return self.indexOf(value) === index;
+          }
+
+          entities = entities.filter(unique);
+          areas = areas.filter(unique);
+          console.log(entities);
+          console.log(areas);
+
+          entities.forEach(entitie => {
+
+            var areasArray = this.questionnaires.filter(element => {
+              if (element.entitie == entitie) {
+                return element
+              }
+            })
+
+            var areasNumber = {};
+
+            areasArray.forEach(element => {
+              if (isNaN(areasNumber[element.entitie])) {
+                areasNumber[element.entitie] = 1;
+              } else {
+                areasNumber[element.entitie]++
+              }
+
+              this.totalQuestionnaires++;
+
+            });
+
+
+            this.monitoringArray.push({
+              entitie,
+              areas: areasNumber
+            });
+          });
+
+          var data = [];
+
+          this.monitoringArray.forEach(element => {
+            data.push((element.areas[Object.keys(element.areas)] / this.totalQuestionnaires) * 100);
+          })
+
+
+
+          console.log(data)
+
+          let ctx = document.getElementById('monitoringChart').getContext('2d');
+          let monitoringChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+              labels: entities,
+              datasets: [{
+                label: "Monitoreo",
+                backgroundColor: '#4caf50',
+                data: data,
+              }]
+            },
+            options: {
+
+              scales: {
+                xAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    max: 100
+                  }
+
+                }]
+              }
+            }
+          });
+        }, 100)
+
       },
       urlToString(string) {
         return string.replace(/-/g, " ");

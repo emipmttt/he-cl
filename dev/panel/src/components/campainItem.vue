@@ -48,6 +48,10 @@
       <div class="divider"></div>
       <div class="right-align">
         <br>
+        <router-link :to="'/monitoreo/' + user.id + '/' + toUrl(title)" class="btn-flat waves-effect waves-green">
+          <i class="material-icons left">trending_up</i>
+          Monitoreo
+        </router-link>
         <button @click="viewResults = !viewResults" class="btn waves-effect indigo">
           <i class="material-icons left">assessment</i>
           Ver resultados
