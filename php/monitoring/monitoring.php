@@ -22,5 +22,6 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     $response->status = false;
     $response->message = "Todavía no hay participantes";
+    $response->sql = $sql;
     echo json_encode($response);
 }
