@@ -28,6 +28,10 @@
       <div class="divider"></div>
       <br>
       <div class="right-align">
+        <router-link :to="'/monitoreo/' + user.id + '/' + toUrl(title)" class="btn-flat waves-effect waves-green">
+          <i class="material-icons left">trending_up</i>
+          Monitoreo
+        </router-link>
         <a :href="'/#/cuestionario/' + user.id + '/' + toUrl(title)" target="_blank" class="btn-flat waves-effect waves-green">
           <i class="material-icons left">person</i>
           individual / en linea
