@@ -8,9 +8,9 @@ $campain = $_GET['campain'];
 $sql = "SELECT * FROM questionnaires WHERE user = '{$user}' AND campain = '{$campain}'";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
-    $sqlApects = "SELECT * FROM aspects";
-    $resultApects = mysqli_query($conn, $sqlApects);
-    if (mysqli_num_rows($resultApects) > 0) {
+    $sqlAspects = "SELECT * FROM aspects";
+    $resultAspects = mysqli_query($conn, $sqlAspects);
+    if (mysqli_num_rows($resultAspects) > 0) {
 
         $sqlCondensed = "SELECT * FROM condensed";
         $resultCondensed = mysqli_query($conn, $sqlCondensed);
