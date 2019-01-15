@@ -12,18 +12,20 @@ var app = new Vue({
     // questionnaires
     questionnaires: [],
     // results
-    aspects: {}
+    results: []
 
   },
   methods: {
     get() {
-      axios.get(`https://clima-laboral.human-express.com/php/results/read.php?user=${this.user}&campain=${this.campain}&category=${this.category}`)
+      axios.get(`https://clima-laboral.human-express.com/php/monitoring/monitoring.php?user=${this.user}&campain=${this.urlToString(this.campain)}`)
         .then(response => {
           this.users = response.data.users;
           console.log(response.data);
           if (response.data.status) {
             this.status = 1;
             this.questionnaires = response.data.questionnaires;
+            this.aspects = response.data.aspects;
+            this.condensed = response.data.condensed;
             this.getQuery();
             this.buildResults(this.questionnaires);
           } else {
@@ -36,6 +38,9 @@ var app = new Vue({
           this.status = 2;
           this.message = 'Ha ocurrido un error: ' + error;
         })
+    },
+    urlToString(string) {
+      return string.replace(/-/g, " ");
     },
     getQuery() {
 
@@ -71,26 +76,90 @@ var app = new Vue({
       this.campain = decodeURIComponent(escape(unescape(url[2])));
     },
     buildResults(questionnaires) {
-      let aspectsSumary = {};
-      var numberQuestionnaires = 0;
 
-      this.questionnaires.forEach(questionnaire => { // sumary
-        numberQuestionnaires++;
-        let aspects = JSON.parse(questionnaire.aspects);
-        Object.keys(aspects).forEach(key => {
-          if (isNaN(aspectsSumary[key])) {
-            aspectsSumary[key] = aspects[key];
-          } else {
-            aspectsSumary[key] = aspectsSumary[key] + aspects[key];
+      console.log(questionnaires);
+      let categoryList = [];
+      questionnaires.forEach(questionnaire => {
+        categoryList.push(questionnaire[this.category]);
+      });
+      var unique = (value, index, self) => {
+        return self.indexOf(value) === index;
+      }
+      categoryList = categoryList.filter(unique);
+
+      var questionnaireList = [];
+
+      categoryList.forEach((category, index) => {
+        console.log(index);
+
+        questionnaireList.push({
+          category,
+          questionnaires: []
+        });
+        questionnaires.forEach(questionnaire => {
+          if (questionnaire[this.category] == category) {
+            questionnaireList[index].questionnaires.push(questionnaire);
           }
         })
-      });
+      })
 
-      Object.keys(aspectsSumary).forEach(key => {
-        aspectsSumary[key] = parseFloat(aspectsSumary[key] / numberQuestionnaires).toFixed(2);
-      });
+      console.log(questionnaireList);
 
-      this.aspects = aspectsSumary;
+      this.results = questionnaireList;
+
+      this.results.forEach((result, index) => {
+        let labels = [];
+
+        setTimeout(() => {
+          let ctx = document.getElementById('resultsChart' + index).getContext('2d');
+          let resultsChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+              labels: result.category,
+              datasets: [{
+                label: "Monitoreo",
+                backgroundColor: '#4caf50',
+                data: [0, 0, 3],
+              }]
+            },
+            options: {
+
+              scales: {
+                xAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    max: 100
+                  }
+
+                }]
+              }
+            }
+          });
+        }, 100)
+
+      })
+
+
+      // let aspectsSumary = {};
+      // var numberQuestionnaires = 0;
+
+      // this.questionnaires.forEach(questionnaire => { // sumary
+      //   numberQuestionnaires++;
+      //   let aspects = JSON.parse(questionnaire.aspects);
+      //   Object.keys(aspects).forEach(key => {
+      //     if (isNaN(aspectsSumary[key])) {
+      //       aspectsSumary[key] = aspects[key];
+      //     } else {
+      //       aspectsSumary[key] = aspectsSumary[key] + aspects[key];
+      //     }
+      //   })
+      // });
+
+      // Object.keys(aspectsSumary).forEach(key => {
+      //   aspectsSumary[key] = parseFloat(aspectsSumary[key] / numberQuestionnaires).toFixed(2);
+      // });
+
+      // this.aspects = aspectsSumary;
     },
     renderChart() {
       var ctx = document.getElementById("myChart").getContext('2d');

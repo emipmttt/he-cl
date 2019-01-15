@@ -10,6 +10,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
   <title>Clima laboral | Resultados</title>
 </head>
 
@@ -18,14 +20,14 @@
     <div id="app">
       <div class="row">
         <div class="col s6 valign-wrapper" style="height: 100px;">
-          <img src="results/logo.png" style="width: 150px; margin: 0 auto;">
+          <img src="results/logo.png" style="width: 150px; ">
         </div>
-        <div class="col s6">
+        <div class=" col s6">
           <div class="valign-wrapper " style="height:100px;">
             <h1 class="medium-text" style="margin: 0 auto">
               Resultados de
               <span class="indigo-text">
-                <b>{{campain}}</b> | {{displayCategory}}
+                <b>{{urlToString(campain)}}</b> | {{displayCategory}}
               </span>
             </h1>
           </div>
@@ -38,10 +40,17 @@
         Obteniendo datos ...
       </div>
       <div v-else-if="status == 1">
-        <canvas id="myChart" width="400" height="400"></canvas>
-        <pre>
-          {{aspects}}
-        </pre>
+
+        <div v-for="(element,index) in results">
+          <h3 class="medium-text">
+            <!-- {{element.entitie}}   -->
+
+            <canvas :id="'resultsChart'+index"></canvas>
+
+
+          </h3>
+        </div>
+
       </div>
       <div v-else-if="status == 2" class="grey-text center large-text">
         {{message}}
@@ -52,7 +61,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.min.js"></script>
   <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-  <script src="/results/js/app.js"></script>
+  <script src="results/js/app2.js"></script>
 </body>
 
 </html>

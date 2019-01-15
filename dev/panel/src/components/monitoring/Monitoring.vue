@@ -229,8 +229,7 @@
               maxNumber += areaElement.questionnaires;
             })
             area.questionnaires.forEach(areaElement => {
-              areas.push(areaElement.area + ": " + ((areaElement.questionnaires / maxNumber) * 100)
-                .toFixed(1) + "%");
+              areas.push(areaElement.area + ": " + areaElement.questionnaires);
             });
             console.log(areas)
 
