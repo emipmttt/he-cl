@@ -11,7 +11,7 @@ var app = new Vue({
     message: '',
     // questionnaires
     questionnaires: [],
-    aspects: [],
+    aspectsPre: [],
     condensed: [],
     textualRanges: [],
     // results
@@ -26,10 +26,13 @@ var app = new Vue({
           if (response.data.status) {
             this.status = 1;
             this.questionnaires = response.data.questionnaires;
-            this.aspects = response.data.aspects;
+            this.aspectsPre = response.data.aspects;
             this.condensed = response.data.condensed;
             this.textualRanges = response.data.textualRanges;
             this.buildResults(this.category);
+            if (this.category == 'global') {
+              this.buildResultsGlobal();
+            }
           } else {
             this.status = 2;
             this.message = response.data.message;
@@ -79,10 +82,166 @@ var app = new Vue({
     },
     buildResults(category) {
 
-      this.aspects.forEach(aspect => {
-        console.log(aspect);
+      this.aspects.forEach((aspect, index) => {
+        var good = 0;
+        var bad = 0;
+
+        this.questionnaires.forEach(questionnaire => {
+          let aspectCalification = JSON.parse(questionnaire.aspects)[aspect];
+          if (aspectCalification < 3) {
+            bad++;
+          } else {
+            good++;
+          }
+        })
+
+        var goodPorcentage = ((good / this.questionnaires.length) * 100).toFixed(1);
+        var badPorcentage = ((bad / this.questionnaires.length) * 100).toFixed(1);
+
+        setTimeout(() => {
+            let ctx = document.getElementById('aspect-chart-' + index).getContext('2d');
+            let aspectChart = new Chart(ctx, {
+              type: 'pie',
+              data: {
+                labels: [`De 1 a 2 - ${badPorcentage} %`, `De 3 a 5 - ${goodPorcentage} %`],
+                datasets: [{
+                  data: [bad, good],
+                  backgroundColor: ["#bcd6ff", "#3f51b5"]
+                }]
+              },
+            });
+          },
+          100);
+
       });
 
+    },
+    buildResultsGlobal() {
+      console.log(this.aspects);
+
+      let aspects = {};
+      let aspectsParticipants = 0;
+
+      this.questionnaires.forEach(questionnaire => {
+        let aspect = JSON.parse(questionnaire.aspects);
+        Object.keys(aspect).sort().forEach(key => {
+
+          if (isNaN(aspects[key])) {
+            aspects[key] = aspect[key];
+          } else {
+            aspects[key] += aspect[key];
+          }
+
+        });
+
+        aspectsParticipants++;
+      });
+
+      var labels = [];
+      var data = [];
+      var backgroundColor = [];
+      var total = 0;
+
+      var globalData = [];
+
+      Object.keys(aspects).forEach(key => {
+        total += (aspects[key] / aspectsParticipants);
+        aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
+        labels.push(key);
+        backgroundColor.push("#bcd6ff");
+        data.push(aspects[key]);
+
+        globalData.push({
+          aspect: key,
+          value: aspects[key]
+        })
+
+      });
+
+      labels.push("Total");
+      backgroundColor.push("#3f51b5");
+      data.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
+      console.log(data);
+      console.log(labels);
+
+      setTimeout(() => {
+          let ctx = document.getElementById('aspect-chart-global').getContext('2d');
+          let aspectChartGlobal = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels,
+              datasets: [{
+                label: "Porcentaje %",
+                data,
+                backgroundColor,
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                xAxes: [{
+                  max: 100
+                }],
+
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    max: 100,
+                  }
+                }]
+              }
+            }
+          });
+        },
+        100);
+
+      var sortLabels = [];
+      var sortData = [];
+
+      globalData.sort((a, b) => {
+        if (a.value > b.value) return 1;
+        if (a.value < b.value) return -1;
+      });
+
+      globalData.forEach(element => {
+        sortData.push(element.value);
+        sortLabels.push(element.aspect);
+      })
+
+      sortLabels.push("Total");
+      sortData.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
+
+
+      setTimeout(() => {
+          let ctx = document.getElementById('aspect-chart-global-sort').getContext('2d');
+          let aspectChartGlobal = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: sortLabels,
+              datasets: [{
+                label: "Porcentaje %",
+                data: sortData,
+                backgroundColor,
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                xAxes: [{
+                  max: 100
+                }],
+
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    max: 100,
+                  }
+                }]
+              }
+            }
+          });
+        },
+        100);
     },
     createFormData(postData) {
       var formDa = new FormData();
@@ -92,9 +251,18 @@ var app = new Vue({
       return formDa;
     }
   },
+  computed: {
+    aspects() {
+      let aspects = [];
+      this.aspectsPre.forEach(aspect => {
+        aspects.push(aspect.title);
+      });
+      return aspects.sort();
+
+    }
+  },
   mounted() {
     this.getURLData();
     this.getCampainData();
-
   },
 })

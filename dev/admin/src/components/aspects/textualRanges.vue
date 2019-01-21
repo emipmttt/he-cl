@@ -129,7 +129,8 @@
           })
       },
       get() {
-        axios.get('https://clima-laboral.human-express.com/php/textualRanges/read.php?query=*&dependency=' + this.aspectId +
+        axios.get('https://clima-laboral.human-express.com/php/textualRanges/read.php?query=dependency&dependency=' +
+            this.aspectId +
             '&typeDependency=aspect')
           .then(response => {
             this.textualRanges = response.data.textualRanges;
