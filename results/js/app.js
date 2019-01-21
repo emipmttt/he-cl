@@ -15,7 +15,8 @@ var app = new Vue({
     condensed: [],
     textualRanges: [],
     // results
-    results: []
+    results: [],
+    globalData: {}
   },
   methods: {
     getCampainData() {
@@ -157,6 +158,8 @@ var app = new Vue({
         })
 
       });
+
+      this.globalData = globalData;
 
       labels.push("Total");
       backgroundColor.push("#3f51b5");
