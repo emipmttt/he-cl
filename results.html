@@ -15,7 +15,7 @@
   <title>Clima laboral | Resultados</title>
 </head>
 
-<body class="grey lighten-4">
+<body>
   <div class="container">
     <div id="app">
       <div class="row">
@@ -41,24 +41,48 @@
       </div>
       <div v-else-if="status == 1">
 
-        <div class="row">
-          <div class="col s12 m6" v-for="(aspect,index) in aspects">
-            <h3 class="medium-text"> {{aspect}} </h3>
-            <canvas :id="'aspect-chart-'+index"></canvas>
-          </div>
-        </div>
-
         <div v-if="category == 'global'">
+
+          <div class="row">
+            <div class="col s12 m6" v-for="(aspect,index) in aspects">
+              <h3 class="medium-text"> {{aspect}} </h3>
+              <canvas :id="'aspect-chart-'+index"></canvas>
+            </div>
+          </div>
+
           <div class="divider"></div>
+
           <h3 class="medium-text">Grafica Global</h3>
           <canvas id="aspect-chart-global" style="width:100%"></canvas>
-          <h3 class="medium-text">Grafica Global </h3>
+          <h3 class="medium-text">Grafica Global</h3>
           <p>De Menor a Mayor % de Satisfacción</p>
           <canvas id="aspect-chart-global-sort" style="width:100%"></canvas>
+          <textual-range :data="globalData"></textual-range>
+          <h3 class="medium-text">Grafica Condensados</h3>
+          <condensed-chart :data="globalData" :aspects="aspectsToUse"></condensed-chart>
+          <h3 class="medium-text">Grafica Entidad</h3>
+          <global-parcial-chart type="entitie" :data="questionnaires"></global-parcial-chart>
+          <h3 class="medium-text">Grafica Area/Departamento</h3>
+          <global-parcial-chart type="area" :data="questionnaires"></global-parcial-chart>
+          <h3 class="medium-text">Grafica Turno</h3>
+          <global-parcial-chart type="turn" :data="questionnaires"></global-parcial-chart>
+          <h3 class="medium-text">Grafica Rango de edad</h3>
+          <global-parcial-chart type="age" :data="questionnaires"></global-parcial-chart>
+          <h3 class="medium-text">Grafica Antigüedad en la empresa</h3>
+          <global-parcial-chart type="antiquity" :data="questionnaires"></global-parcial-chart>
+          <h3 class="medium-text">Grafica Genero</h3>
+          <global-parcial-chart type="gender" :data="questionnaires"></global-parcial-chart>
+          <h3 class="medium-text">Grafica Estudios Concluídos</h3>
+          <global-parcial-chart type="studies" :data="questionnaires"></global-parcial-chart>
+        </div>
+        <div v-else>
+
+          <h3 class="medium-text">Grafica Parcial</h3>
+
+          <parcial-chart :type="category" :data="questionnaires"></parcial-chart>
 
         </div>
 
-        <textual-range :data="globalData"></textual-range>
 
 
       </div>
@@ -71,6 +95,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.min.js"></script>
   <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
   <script src="results/js/components/textualRange.js"></script>
+  <script src="results/js/components/condensedChart.js"></script>
+  <script src="results/js/components/globalParcial.js"></script>
+  <script src="results/js/components/parcialChart.js"></script>
   <script src="results/js/app.js"></script>
 </body>
 

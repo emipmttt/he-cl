@@ -23,24 +23,23 @@ var app = new Vue({
       axios.get(`https://clima-laboral.human-express.com/php/monitoring/results.php?user=${this.user}&campain=${this.urlToString(this.campain)}`)
         .then(response => {
           this.users = response.data.users;
-          console.log(response.data);
           if (response.data.status) {
+
             this.status = 1;
             this.questionnaires = response.data.questionnaires;
             this.aspectsPre = response.data.aspects;
             this.condensed = response.data.condensed;
             this.textualRanges = response.data.textualRanges;
-            this.buildResults(this.category);
             if (this.category == 'global') {
               this.buildResultsGlobal();
             }
+            this.buildResults(this.category);
           } else {
             this.status = 2;
             this.message = response.data.message;
           }
         })
         .catch(error => {
-          console.log(error);
           this.status = 2;
           this.message = 'Ha ocurrido un error: ' + error;
         })
@@ -99,26 +98,28 @@ var app = new Vue({
         var goodPorcentage = ((good / this.questionnaires.length) * 100).toFixed(1);
         var badPorcentage = ((bad / this.questionnaires.length) * 100).toFixed(1);
 
-        setTimeout(() => {
-            let ctx = document.getElementById('aspect-chart-' + index).getContext('2d');
-            let aspectChart = new Chart(ctx, {
-              type: 'pie',
-              data: {
-                labels: [`De 1 a 2 - ${badPorcentage} %`, `De 3 a 5 - ${goodPorcentage} %`],
-                datasets: [{
-                  data: [bad, good],
-                  backgroundColor: ["#bcd6ff", "#3f51b5"]
-                }]
-              },
-            });
-          },
-          100);
+        if (this.category == 'global') {
+          setTimeout(() => {
+              let ctx = document.getElementById('aspect-chart-' + index).getContext('2d');
+              let aspectChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                  labels: [`De 1 a 2 - ${badPorcentage} %`, `De 3 a 5 - ${goodPorcentage} %`],
+                  datasets: [{
+                    data: [bad, good],
+                    backgroundColor: ["#bcd6ff", "#3f51b5"]
+                  }]
+                },
+              });
+            },
+            100);
+        }
+
 
       });
 
     },
     buildResultsGlobal() {
-      console.log(this.aspects);
 
       let aspects = {};
       let aspectsParticipants = 0;
@@ -160,12 +161,11 @@ var app = new Vue({
       });
 
       this.globalData = globalData;
+      console.log(aspects)
 
       labels.push("Total");
       backgroundColor.push("#3f51b5");
       data.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
-      console.log(data);
-      console.log(labels);
 
       setTimeout(() => {
           let ctx = document.getElementById('aspect-chart-global').getContext('2d');
@@ -261,7 +261,9 @@ var app = new Vue({
         aspects.push(aspect.title);
       });
       return aspects.sort();
-
+    },
+    aspectsToUse() {
+      return this.aspectsPre;
     }
   },
   mounted() {
