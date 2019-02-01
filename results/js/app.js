@@ -51,6 +51,9 @@ var app = new Vue({
       let url = location.href.split("/");
       url.splice(0, 4);
       switch (url[0]) {
+        case 'respuestas-global':
+          this.category = 'respuestas-global';
+          break;
         case 'global':
           this.category = 'global';
           break;
@@ -98,7 +101,7 @@ var app = new Vue({
         var goodPorcentage = ((good / this.questionnaires.length) * 100).toFixed(1);
         var badPorcentage = ((bad / this.questionnaires.length) * 100).toFixed(1);
 
-        if (this.category == 'global') {
+        if (this.category == 'respuestas-global') {
           setTimeout(() => {
               let ctx = document.getElementById('aspect-chart-' + index).getContext('2d');
               let aspectChart = new Chart(ctx, {
@@ -148,7 +151,7 @@ var app = new Vue({
 
       Object.keys(aspects).forEach(key => {
         total += (aspects[key] / aspectsParticipants);
-        aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
+        aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100);
         labels.push(key);
         backgroundColor.push("#bcd6ff");
         data.push(aspects[key]);
@@ -165,7 +168,7 @@ var app = new Vue({
 
       labels.push("Total");
       backgroundColor.push("#3f51b5");
-      data.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
+      data.push((((total / Object.keys(aspects).length) / 5) * 100));
 
       setTimeout(() => {
           let ctx = document.getElementById('aspect-chart-global').getContext('2d');
@@ -264,6 +267,9 @@ var app = new Vue({
     },
     aspectsToUse() {
       return this.aspectsPre;
+    },
+    newCategory() {
+      return this.category;
     }
   },
   mounted() {

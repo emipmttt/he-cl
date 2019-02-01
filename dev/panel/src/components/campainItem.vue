@@ -101,38 +101,44 @@
         //results
 
         results: [{
-          icon: 'public',
-          text: 'Global',
-          category: 'entidad'
-        }, {
-          icon: 'place',
-          text: 'Entidad',
-          category: 'entidad'
-        }, {
-          icon: 'assignment',
-          text: 'Area / Departamento',
-          category: 'area'
-        }, {
-          icon: 'alarm',
-          text: 'Turno',
-          category: 'turno'
-        }, {
-          icon: 'wc',
-          text: 'Genero',
-          category: 'genero'
-        }, {
-          icon: 'date_range',
-          text: 'Rango de edad',
-          category: 'edad'
-        }, {
-          icon: 'school',
-          text: 'Estudios concluídos',
-          category: 'estudios'
-        }, {
-          icon: 'calendar_today',
-          text: 'Antigüedad en la empresa',
-          category: 'antiguedad'
-        }]
+            icon: 'donut_large',
+            text: 'Respuestas Global',
+            category: 'respuestas-global'
+          },
+          {
+            icon: 'public',
+            text: 'Global',
+            category: 'global'
+          }, {
+            icon: 'place',
+            text: 'Entidad',
+            category: 'entidad'
+          }, {
+            icon: 'assignment',
+            text: 'Area / Departamento',
+            category: 'area'
+          }, {
+            icon: 'alarm',
+            text: 'Turno',
+            category: 'turno'
+          }, {
+            icon: 'wc',
+            text: 'Genero',
+            category: 'genero'
+          }, {
+            icon: 'date_range',
+            text: 'Rango de edad',
+            category: 'edad'
+          }, {
+            icon: 'school',
+            text: 'Estudios concluídos',
+            category: 'estudios'
+          }, {
+            icon: 'calendar_today',
+            text: 'Antigüedad en la empresa',
+            category: 'antiguedad'
+          }
+        ]
 
       }
     },

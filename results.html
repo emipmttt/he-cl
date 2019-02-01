@@ -41,14 +41,15 @@
       </div>
       <div v-else-if="status == 1">
 
-        <div v-if="category == 'global'">
-
+        <div v-if="newCategory == 'respuestas-global'">
           <div class="row">
             <div class="col s12 m6" v-for="(aspect,index) in aspects">
               <h3 class="medium-text"> {{aspect}} </h3>
               <canvas :id="'aspect-chart-'+index"></canvas>
             </div>
           </div>
+        </div>
+        <div v-else-if="newCategory == 'global'">
 
           <div class="divider"></div>
 
@@ -60,22 +61,12 @@
           <textual-range :data="globalData"></textual-range>
           <h3 class="medium-text">Grafica Condensados</h3>
           <condensed-chart :data="globalData" :aspects="aspectsToUse"></condensed-chart>
-          <h3 class="medium-text">Grafica Entidad</h3>
-          <global-parcial-chart type="entitie" :data="questionnaires"></global-parcial-chart>
-          <h3 class="medium-text">Grafica Area/Departamento</h3>
-          <global-parcial-chart type="area" :data="questionnaires"></global-parcial-chart>
-          <h3 class="medium-text">Grafica Turno</h3>
-          <global-parcial-chart type="turn" :data="questionnaires"></global-parcial-chart>
-          <h3 class="medium-text">Grafica Rango de edad</h3>
-          <global-parcial-chart type="age" :data="questionnaires"></global-parcial-chart>
-          <h3 class="medium-text">Grafica Antigüedad en la empresa</h3>
-          <global-parcial-chart type="antiquity" :data="questionnaires"></global-parcial-chart>
-          <h3 class="medium-text">Grafica Genero</h3>
-          <global-parcial-chart type="gender" :data="questionnaires"></global-parcial-chart>
-          <h3 class="medium-text">Grafica Estudios Concluídos</h3>
-          <global-parcial-chart type="studies" :data="questionnaires"></global-parcial-chart>
+
         </div>
         <div v-else>
+
+          <h3 class="medium-text">Grafica Global</h3>
+          <global-parcial-chart :type="category" :data="questionnaires"></global-parcial-chart>
 
           <h3 class="medium-text">Grafica Parcial</h3>
 
