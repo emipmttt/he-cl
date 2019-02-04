@@ -18,9 +18,12 @@ Vue.component("global-parcial-chart", {
     buildDataToUse() {
       var params = [];
 
+      console.log(this.data)
       this.data.forEach(element => {
         params.push(element[this.type]);
       });
+
+      console.log(params)
 
       var unique = (value, index, self) => {
         return self.indexOf(value) === index;
@@ -95,13 +98,17 @@ Vue.component("global-parcial-chart", {
               responsive: true,
               scales: {
                 xAxes: [{
-                  max: 100
+                  ticks: {
+                    fontSize: 16,
+                    autoSkip: true,
+                  }
                 }],
 
                 yAxes: [{
                   ticks: {
                     beginAtZero: true,
                     max: 100,
+                    fontSize: 20,
                   }
                 }]
               }

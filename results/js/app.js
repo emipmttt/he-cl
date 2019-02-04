@@ -16,7 +16,9 @@ var app = new Vue({
     textualRanges: [],
     // results
     results: [],
-    globalData: {}
+    globalData: {},
+    //impresión
+    printStart: true
   },
   methods: {
     getCampainData() {
@@ -96,7 +98,7 @@ var app = new Vue({
           } else {
             good++;
           }
-        })
+        });
 
         var goodPorcentage = ((good / this.questionnaires.length) * 100).toFixed(1);
         var badPorcentage = ((bad / this.questionnaires.length) * 100).toFixed(1);
@@ -107,12 +109,12 @@ var app = new Vue({
               let aspectChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                  labels: [`De 1 a 2 - ${badPorcentage} %`, `De 3 a 5 - ${goodPorcentage} %`],
+                  labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} participantes`, `De 3 a 5 - ${goodPorcentage}% - ${good} participantes `],
                   datasets: [{
                     data: [bad, good],
                     backgroundColor: ["#bcd6ff", "#3f51b5"]
                   }]
-                },
+                }
               });
             },
             100);
@@ -186,13 +188,17 @@ var app = new Vue({
               responsive: true,
               scales: {
                 xAxes: [{
-                  max: 100
+                  ticks: {
+                    fontSize: 16,
+                    autoSkip: true,
+                  }
                 }],
 
                 yAxes: [{
                   ticks: {
                     beginAtZero: true,
                     max: 100,
+                    fontSize: 20,
                   }
                 }]
               }
@@ -234,13 +240,17 @@ var app = new Vue({
               responsive: true,
               scales: {
                 xAxes: [{
-                  max: 100
+                  ticks: {
+                    fontSize: 16,
+                    autoSkip: true,
+                  }
                 }],
 
                 yAxes: [{
                   ticks: {
                     beginAtZero: true,
                     max: 100,
+                    fontSize: 20,
                   }
                 }]
               }
@@ -248,6 +258,16 @@ var app = new Vue({
           });
         },
         100);
+    },
+    print() {
+      this.printStart = false;
+      setTimeout(() => {
+        if (window.print()) {
+          this.printStart = true;
+        } else {
+          this.printStart = true;
+        }
+      }, 100)
     },
     createFormData(postData) {
       var formDa = new FormData();

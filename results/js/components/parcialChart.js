@@ -138,13 +138,17 @@ Vue.component("parcial-chart", {
                 responsive: true,
                 scales: {
                   xAxes: [{
-                    max: 100
+                    ticks: {
+                      fontSize: 16,
+                      autoSkip: true,
+                    }
                   }],
 
                   yAxes: [{
                     ticks: {
                       beginAtZero: true,
                       max: 100,
+                      fontSize: 20,
                     }
                   }]
                 }

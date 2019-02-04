@@ -81,8 +81,17 @@
         {{message}}
       </div>
 
+
+      <div v-show="printStart" @click="print" class="fixed-action-btn">
+        <a class="btn-floating btn-large green">
+          <i class="large material-icons">print</i>
+        </a>
+      </div>
+
     </div>
   </div>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.min.js"></script>
   <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
   <script src="results/js/components/textualRange.js"></script>

@@ -62,8 +62,7 @@ Vue.component("condensed-chart", {
       }];
 
       this.condensed.forEach(element => {
-        labels.push(element.title)
-
+        labels.push(element.title + " " + element.aspects + "%")
         datasets[0].data.push(element.aspects)
       });
 
@@ -79,13 +78,17 @@ Vue.component("condensed-chart", {
               responsive: true,
               scales: {
                 xAxes: [{
-                  max: 100
+                  ticks: {
+                    fontSize: 16,
+                    autoSkip: true,
+                  }
                 }],
 
                 yAxes: [{
                   ticks: {
                     beginAtZero: true,
                     max: 100,
+                    fontSize: 20,
                   }
                 }]
               }
