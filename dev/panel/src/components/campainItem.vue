@@ -48,6 +48,10 @@
       <div class="divider"></div>
       <div class="right-align">
         <br>
+        <button disabled class="btn waves-effect indigo">
+          <i class="material-icons left">people</i>
+          Captura masiva
+        </button>
         <router-link :to="'/monitoreo/' + user.id + '/' + toUrl(title)" class="btn-flat waves-effect waves-green">
           <i class="material-icons left">trending_up</i>
           Monitoreo

@@ -27,6 +27,12 @@
       <p>Nadie ha participado aún en el diagnóstico</p>
     </div>
 
+    <div v-show="printStart" @click="print" class="fixed-action-btn">
+      <a class="btn-floating btn-large green">
+        <i class="large material-icons">print</i>
+      </a>
+    </div>
+
   </div>
 </template>
 <script>
@@ -41,10 +47,34 @@
         questionnaires: "loading",
         monitoringArray: [],
         totalQuestionnaires: 0,
-        monitoringByArea: []
+        monitoringByArea: [],
+
+        printStart: true
       }
     },
     methods: {
+      print() {
+        let elem = document.getElementById("slide-out");
+        let header = document.getElementById("headerhidetoprint");
+        var instance = M.Sidenav.getInstance(elem);
+        header.style.display = "none";
+        instance.close();
+        this.printStart = false;
+        setTimeout(() => {
+          if (window.print()) {
+            this.printStart = true;
+            instance.open();
+            header.style.display = "block";
+
+          } else {
+            this.printStart = true;
+            instance.open();
+            header.style.display = "block";
+
+
+          }
+        }, 100)
+      },
       getMonitoringData() {
         axios
           .get("http://clima-laboral.human-express.com/php/monitoring/monitoring.php?user=" + this.user + "&campain=" +
@@ -172,17 +202,26 @@
 
           var data = [];
 
+          var participantsNumToTitle = [];
+          var participantsTitle = [];
+
           this.monitoringArray.forEach(element => {
             data.push((element.areas[Object.keys(element.areas)] / this.totalQuestionnaires) * 100);
+            participantsNumToTitle.push(element.areas[Object.keys(element.areas)]);
           })
+
+          entities.forEach((element, index) => {
+            participantsTitle.push(element + " " + participantsNumToTitle[index])
+          })
+
 
           let ctx = document.getElementById('monitoringChartByEntitie').getContext('2d');
           let monitoringChartByEntitie = new Chart(ctx, {
             type: 'horizontalBar',
             data: {
-              labels: entities,
+              labels: participantsTitle,
               datasets: [{
-                label: "Monitoreo",
+                label: "Monitoreo %",
                 backgroundColor: '#4caf50',
                 data: data,
               }]

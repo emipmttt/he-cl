@@ -81,7 +81,13 @@ var app = new Vue({
           this.category = 'studies';
           break;
       }
-      this.displayCategory = url[0];
+      if (url[0] == 'area') {
+        this.displayCategory = "área";
+      } else if (url[0] == 'genero') {
+        this.displayCategory = "género  ";
+      } else {
+        this.displayCategory = url[0];
+      }
       this.user = url[1];
       this.campain = decodeURIComponent(escape(unescape(url[2])));
     },

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class="navbar-fixed hide-on-large-only">
+    <header id="headerhidetoprint" class="navbar-fixed hide-on-large-only">
       <nav>
         <div class="nav-wrapper grey lighten-4">
           <a class="brand-logo navbar-logo"><img src="@/assets/logo.png" alt="human express" class="responsive-img"></a>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'App',
     data() {
