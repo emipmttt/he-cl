@@ -27,7 +27,7 @@
             <h1 class="medium-text" style="margin: 0 auto">
               Resultados de
               <span class="indigo-text">
-                <b>{{urlToString(campain)}}</b> | {{displayCategory}}
+                <b>{{urlToString(campain)}}</b> | <span style="text-transform: capitalize">{{displayCategory}}</span>
               </span>
             </h1>
           </div>
@@ -42,7 +42,7 @@
       <div v-else-if="status == 1">
 
         <div v-if="newCategory == 'respuestas-global'">
-          <h2 class="large-text">Gráficas por escala de Calificación-Porcentaje-Número de Participantes</h2>
+          <h2 class="large-text">Gráficas por Escala de Calificación-Porcentaje-Número de Participantes</h2>
           <div class="center">
             <div class="" v-for=" (aspect,index) in aspects" style="display:inline-block !important; width: 
             50%">
