@@ -26,7 +26,6 @@ var app = new Vue({
         .then(response => {
           this.users = response.data.users;
           if (response.data.status) {
-
             this.status = 1;
             this.questionnaires = response.data.questionnaires;
             this.aspectsPre = response.data.aspects;
@@ -115,7 +114,7 @@ var app = new Vue({
               let aspectChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                  labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} participantes`, `De 3 a 5 - ${goodPorcentage}% - ${good} participantes `],
+                  labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} participantes`, `De 3 a 5 - ${goodPorcentage}% - ${good} `],
                   datasets: [{
                     data: [bad, good],
                     backgroundColor: ["#bcd6ff", "#3f51b5"]
