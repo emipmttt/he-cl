@@ -159,7 +159,7 @@ var app = new Vue({
 
       Object.keys(aspects).forEach(key => {
         total += (aspects[key] / aspectsParticipants);
-        aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100);
+        aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
         labels.push(key);
         backgroundColor.push("#bcd6ff");
         data.push(aspects[key]);

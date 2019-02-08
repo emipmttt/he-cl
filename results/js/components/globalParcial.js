@@ -59,6 +59,8 @@ Vue.component("global-parcial-chart", {
     },
 
     buildChart(params) {
+      console.clear();
+
       console.log(params);
       var labels = [];
       var datasets = [{
@@ -67,32 +69,73 @@ Vue.component("global-parcial-chart", {
         backgroundColor: "#3f51b5"
       }];
 
+      this.valuesBuilt = params;
+      var totalValues = [];
+      var labels = [];
+
       params.forEach(param => {
 
-        labels.push(param.title);
+        console.log(param);
 
-        var porcentagePre = 0;
-        var porcentageMaxPre = param.questionnaires.length;
+        let aspects = {};
+        let aspectsParticipants = 0;
 
         param.questionnaires.forEach(questionnaire => {
-          let aspectsResults = JSON.parse(questionnaire.aspects)
-          Object.keys(aspectsResults).forEach(key => {
-            porcentagePre += aspectsResults[key];
+          let aspect = JSON.parse(questionnaire.aspects);
+          Object.keys(aspect).sort().forEach(key => {
+
+            if (isNaN(aspects[key])) {
+              aspects[key] = aspect[key];
+            } else {
+              aspects[key] += aspect[key];
+            }
+
+          });
+
+          aspectsParticipants++;
+        });
+
+        var data = [];
+        var backgroundColor = [];
+        var total = 0;
+
+        var globalData = [];
+        labels.push(param.title);
+
+        Object.keys(aspects).forEach(key => {
+          total += (aspects[key] / aspectsParticipants);
+          aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
+          // labels.push(key);
+          // backgroundColor.push("#bcd6ff");
+          // data.push(aspects[key]);
+
+          globalData.push({
+            aspect: key,
+            value: aspects[key]
           })
-        })
-        datasets[0].data.push(((porcentagePre / porcentageMaxPre) * 2).toFixed(1));
+
+        });
+
+        this.globalData = globalData;
+
+        // labels.push("Total");
+        // backgroundColor.push("#3f51b5");
+        // data.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
+        totalValues.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1))
+
 
       });
-
-
-
       setTimeout(() => {
           let ctx = document.getElementById('entitie-global-chart-' + this.type).getContext('2d');
           let aspectChartGlobal = new Chart(ctx, {
             type: 'bar',
             data: {
               labels,
-              datasets,
+              datasets: [{
+                label: "Porcentaje %",
+                data: totalValues,
+                backgroundColor: "#3f51b5",
+              }]
             },
             options: {
               responsive: true,
@@ -117,6 +160,67 @@ Vue.component("global-parcial-chart", {
         },
         100);
     }
+
+    // buildChart(params) {
+    //   console.log(params);
+    //   var labels = [];
+    //   var datasets = [{
+    //     label: "Porcentaje %",
+    //     data: [],
+    //     backgroundColor: "#3f51b5"
+    //   }];
+
+    //   params.forEach(param => {
+
+    //     labels.push(param.title);
+
+    //     var porcentagePre = 0;
+    //     var porcentageMaxPre = param.questionnaires.length;
+
+    //     param.questionnaires.forEach(questionnaire => {
+    //       let aspectsResults = JSON.parse(questionnaire.aspects)
+    //       Object.keys(aspectsResults).forEach(key => {
+    //         porcentagePre += aspectsResults[key];
+    //       })
+    //     })
+    //     console.log(porcentagePre, porcentageMaxPre)
+    //     datasets[0].data.push(((porcentagePre / porcentageMaxPre)).toFixed(1));
+
+    //   });
+
+
+
+    //   setTimeout(() => {
+    //       let ctx = document.getElementById('entitie-global-chart-' + this.type).getContext('2d');
+    //       let aspectChartGlobal = new Chart(ctx, {
+    //         type: 'bar',
+    //         data: {
+    //           labels,
+    //           datasets,
+    //         },
+    //         options: {
+    //           responsive: true,
+    //           scales: {
+    //             xAxes: [{
+    //               ticks: {
+    //                 fontSize: 16,
+    //                 autoSkip: true,
+    //               }
+    //             }],
+
+    //             yAxes: [{
+    //               ticks: {
+    //                 beginAtZero: true,
+    //                 max: 100,
+    //                 fontSize: 20,
+    //               }
+    //             }]
+    //           }
+    //         }
+    //       });
+    //     },
+    //     100);
+    // }
 
   },
   mounted() {
