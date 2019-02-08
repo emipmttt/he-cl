@@ -62,8 +62,8 @@ Vue.component("condensed-chart", {
       }];
 
       this.condensed.forEach(element => {
-        // labels.push(element.title + " " + element.aspects + "%")
-        labels.push(element.title)
+        labels.push(element.title + " " + element.aspects + "%")
+        // labels.push(element.title)
         datasets[0].data.push(element.aspects)
       });
 

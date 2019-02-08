@@ -114,7 +114,7 @@ var app = new Vue({
               let aspectChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                  labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} participantes`, `De 3 a 5 - ${goodPorcentage}% - ${good} `],
+                  labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} `, `De 3 a 5 - ${goodPorcentage}% - ${good} `],
                   datasets: [{
                     data: [bad, good],
                     backgroundColor: ["#bcd6ff", "#3f51b5"]
@@ -175,7 +175,7 @@ var app = new Vue({
 
       labels.push("Total");
       backgroundColor.push("#3f51b5");
-      data.push((((total / Object.keys(aspects).length) / 5) * 100));
+      data.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
 
       setTimeout(() => {
           let ctx = document.getElementById('aspect-chart-global').getContext('2d');
