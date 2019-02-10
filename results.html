@@ -65,6 +65,40 @@
           <condensed-chart :data="globalData" :aspects="aspectsToUse"></condensed-chart>
 
         </div>
+        <div v-else-if="newCategory = 'participantes'">
+
+          <h3> Paticipaciones </h3>
+          <button class="btn indigo" @click="exportTableToCSV('members.csv')">Exportar participaciones</button>
+          <table id="tableToExport" style="display: none">
+            <tr>
+              <th>#</th>
+              <th>Entidad</th>
+              <th>Area</th>
+              <th>Turno</th>
+              <th>Genero</th>
+              <th>Edad</th>
+              <th>Antiguedad</th>
+              <th>Estudios</th>
+              <th>Recomendación</th>
+              <th v-for="aspect in aspectQuestionaireParse(questionnaires[0].aspects)">{{aspect.aspect}}</th>
+            </tr>
+            <tr v-for="(questionnaire,index) in questionnaires">
+              <td>{{index + 1}}</td>
+              <td>{{questionnaire.entitie}}</td>
+              <td>{{questionnaire.area}}</td>
+              <td>{{questionnaire.turn}}</td>
+              <td>{{questionnaire.gender}}</td>
+              <td>{{questionnaire.age}}</td>
+              <td>{{questionnaire.antiquity}}</td>
+              <td>{{questionnaire.studies}}</td>
+              <td>{{questionnaire.suggestion}}</td>
+              <td v-for="aspect in aspectQuestionaireParse(questionnaire.aspects)">{{aspect.value}}</td>
+            </tr>
+          </table>
+
+
+
+        </div>
         <div v-else>
 
           <h3 class="medium-text">Gráfica Global</h3>

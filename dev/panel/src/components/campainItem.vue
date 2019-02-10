@@ -105,6 +105,10 @@
         //results
 
         results: [{
+            icon: 'people',
+            text: 'Participantes',
+            category: 'participantes'
+          }, {
             icon: 'donut_large',
             text: 'Respuestas Global',
             category: 'respuestas-global'

@@ -55,6 +55,9 @@ var app = new Vue({
         case 'respuestas-global':
           this.category = 'respuestas-global';
           break;
+        case 'participantes':
+          this.category = 'participants';
+          break;
         case 'global':
           this.category = 'global';
           break;
@@ -114,7 +117,8 @@ var app = new Vue({
               let aspectChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                  labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} `, `De 3 a 5 - ${goodPorcentage}% - ${good} `],
+                  // labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} `, `De 3 a 5 - ${goodPorcentage}% - ${good} `],
+                  labels: [`De 1 a 2 - ${badPorcentage}% `, `De 3 a 5 - ${goodPorcentage}%`],
                   datasets: [{
                     data: [bad, good],
                     backgroundColor: ["#bcd6ff", "#3f51b5"]
@@ -274,6 +278,62 @@ var app = new Vue({
         }
       }, 100)
     },
+    aspectQuestionaireParse(aspects) {
+      aspects = JSON.parse(aspects);
+      var aspectsParsed = [];
+      Object.keys(aspects).forEach(key => {
+        aspectsParsed.push({
+          aspect: key,
+          value: aspects[key].toFixed(1)
+        })
+      });
+      console.log(aspectsParsed);
+      return aspectsParsed;
+    },
+    exportTableToCSV(title) {
+      var csv = [];
+      var rows = document.querySelectorAll("table tr");
+
+      for (var i = 0; i < rows.length; i++) {
+        var row = [],
+          cols = rows[i].querySelectorAll("td, th");
+
+        for (var j = 0; j < cols.length; j++)
+          row.push(cols[j].innerText);
+
+        csv.push(row.join(","));
+      }
+
+      // Download CSV file
+      this.downloadCSV(csv.join("\n"), title);
+    },
+    downloadCSV(csv, title) {
+      var csvFile;
+      var downloadLink;
+
+      // CSV file
+      csvFile = new Blob([csv], {
+        type: "text/csv"
+      });
+
+      // Download link
+      downloadLink = document.createElement("a");
+
+      // File name
+      downloadLink.download = title;
+
+      // Create a link to the file
+      downloadLink.href = window.URL.createObjectURL(csvFile);
+
+      // Hide download link
+      downloadLink.style.display = "none";
+
+      // Add the link to DOM
+      document.body.appendChild(downloadLink);
+
+      // Click download link
+      downloadLink.click();
+    },
     createFormData(postData) {
       var formDa = new FormData();
       for (var key in postData) {
@@ -295,7 +355,8 @@ var app = new Vue({
     },
     newCategory() {
       return this.category;
-    }
+    },
+
   },
   mounted() {
     this.getURLData();

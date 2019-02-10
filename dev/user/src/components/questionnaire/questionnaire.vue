@@ -242,7 +242,7 @@
           age: this.age,
           antiquity: this.antiquity,
           studies: this.studies,
-          suggestion: this.suggestion,
+          suggestion: this.suggestion.replace(/(\r\n\t|\n|\r\t)/g, ""),
           aspects: JSON.stringify(this.calculatedAspects),
           user: this.user,
           title: this.displayTitle.toLowerCase()
