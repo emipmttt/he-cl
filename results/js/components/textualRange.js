@@ -4,7 +4,8 @@ Vue.component("textual-range", {
   <table class="responsive-table">
   <thead>
     <tr>
-        <th>Apecto</th>
+        <th> Apecto </th>
+        <th>%</th>
         <th>Rango</th>
         <th>Diagnóstico</th>
         <th>Recomendaciones</th>
@@ -15,6 +16,7 @@ Vue.component("textual-range", {
   
     <tr v-for="value in valuesBuilt">
       <td><b>{{value.aspect}}</b></td>
+      <td><b>{{value.value}}%</b></td>
       <td><b>{{value.range}}</b></td>
       <td style="text-align:justify">{{value.diagnosis}}</td>
       <td style="text-align:justify">{{value.recommendation}}</td>
@@ -40,7 +42,10 @@ Vue.component("textual-range", {
         })
     },
     compareData() {
-      this.data.forEach(element => {
+      this.data.sort((a, b) => {
+        if (a.aspect > b.aspect) return 1;
+        if (a.aspect < b.aspect) return -1;
+      }).forEach(element => {
         var value = parseInt((element.value / 10) / 2);
         var aspect = element.aspect;
         let textualRange = this.textualRanges.find(textualRange => {
@@ -49,6 +54,7 @@ Vue.component("textual-range", {
         this.valuesBuilt.push({
           aspect,
           range: value,
+          value: element.value,
           diagnosis: textualRange.diagnosis,
           recommendation: textualRange.recommendations
         })

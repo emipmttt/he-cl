@@ -227,7 +227,10 @@
 
         // extra data
         campains: 0,
-        response: ''
+        response: '',
+
+        // reactivos y respuestas
+        reactivesAnswers: []
       }
     },
     methods: {
@@ -245,7 +248,8 @@
           suggestion: this.suggestion.replace(/(\r\n\t|\n|\r\t)/g, ""),
           aspects: JSON.stringify(this.calculatedAspects),
           user: this.user,
-          title: this.displayTitle.toLowerCase()
+          title: this.displayTitle.toLowerCase(),
+          reactivesAnswers: JSON.stringify(this.reactivesAnswers)
 
         }
         axios
@@ -368,8 +372,13 @@
         }
       },
       answered(index, aspect, value) {
-        this.reactives.shift();
 
+        this.reactivesAnswers.push({ // guardar las respuestas de cada pregunta
+          aspect,
+          value
+        });
+
+        this.reactives.shift(); // eliminar de la vista la pregunta respondida
 
         if (isNaN(this.aspectsList[aspect])) {
           this.aspectsList[aspect] = value;

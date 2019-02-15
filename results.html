@@ -42,12 +42,17 @@
       <div v-else-if="status == 1">
 
         <div v-if="newCategory == 'respuestas-global'">
-          <h2 class="large-text">Gráficas por Escala de Calificación-Porcentaje-Número de Participantes</h2>
-          <div class="center">
-            <div class="" v-for=" (aspect,index) in aspects" style="display:inline-block !important; width: 
-            50%">
+          <h2 class="medium-text">Gráficas por Escala de Calificación-Porcentaje-Número de Participantes </h2>
+          <div class="">
+            <div style="display: inline-block; min-width: 90%;" v-for=" (aspect,index) in aspects">
               <h3 class="normal-text"> {{aspect}} </h3>
-              <canvas height="300px" :id="'aspect-chart-'+index"></canvas>
+              <div style="width: 300px; display:inline-block">
+                <canvas height="250px" :id="'aspect-chart-'+index"></canvas>
+
+              </div>
+              <div style="display:inline-block">
+                <div :id="'aspect-chart-text'+index"> </div>
+              </div>
             </div>
           </div>
         </div>
@@ -57,18 +62,19 @@
 
           <h3 class="medium-text">Gráfica Global</h3>
           <canvas id="aspect-chart-global" style="width:100%"></canvas>
+
           <h3 class="medium-text">Gráfica Global</h3>
           <p>De Menor a Mayor % de Satisfacción</p>
           <canvas id="aspect-chart-global-sort" style="width:100%"></canvas>
-          <textual-range :data="globalData"></textual-range>
+          <textual-range :data="abcGlobalData"></textual-range>
           <h3 class="medium-text">Gráfica Condensados</h3>
           <condensed-chart :data="globalData" :aspects="aspectsToUse"></condensed-chart>
 
         </div>
-        <div v-else-if="newCategory = 'participantes'">
+        <div v-else-if="newCategory == 'participants'">
 
-          <h3> Paticipaciones </h3>
-          <button class="btn indigo" @click="exportTableToCSV('members.csv')">Exportar participaciones</button>
+          <h3> Participantes </h3>
+          <button class="btn indigo" @click="exportTableToCSV('members.csv')">Exportar participantes</button>
           <table id="tableToExport" style="display: none">
             <tr>
               <th>#</th>
@@ -81,6 +87,8 @@
               <th>Estudios</th>
               <th>Recomendación</th>
               <th v-for="aspect in aspectQuestionaireParse(questionnaires[0].aspects)">{{aspect.aspect}}</th>
+              <th>Reactivos: </th>
+              <th v-for="(aspect,index) in aspectQuestionaireParse(questionnaires[0].reactivesAnswers)">{{index + 1}}</th>
             </tr>
             <tr v-for="(questionnaire,index) in questionnaires">
               <td>{{index + 1}}</td>
@@ -93,11 +101,10 @@
               <td>{{questionnaire.studies}}</td>
               <td>{{questionnaire.suggestion}}</td>
               <td v-for="aspect in aspectQuestionaireParse(questionnaire.aspects)">{{aspect.value}}</td>
+              <td></td>
+              <th v-for="(reactive, index) in JSON.parse(questionnaire.reactivesAnswers)">{{reactive.value}}</th>
             </tr>
           </table>
-
-
-
         </div>
         <div v-else>
 

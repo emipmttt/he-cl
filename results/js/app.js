@@ -17,7 +17,7 @@ var app = new Vue({
     // results
     results: [],
     globalData: {},
-    //impresión
+    abcGlobalData: {}, //impresión
     printStart: true
   },
   methods: {
@@ -86,7 +86,9 @@ var app = new Vue({
       if (url[0] == 'area') {
         this.displayCategory = "área";
       } else if (url[0] == 'genero') {
-        this.displayCategory = "género  ";
+        this.displayCategory = "género";
+      } else if (url[0] == 'respuestas-global') {
+        this.displayCategory = "Respuestas Global";
       } else {
         this.displayCategory = url[0];
       }
@@ -113,17 +115,49 @@ var app = new Vue({
 
         if (this.category == 'respuestas-global') {
           setTimeout(() => {
+
+              let divData = document.getElementById('aspect-chart-text' + index);
+              let dataToDivData = `
+              
+              <h3 class="normal-text"> De 1 a 2 </h3>
+              <b>Porcentaje:</b> ${badPorcentage}%<br>
+              <b>Participantes:</b> ${bad}
+
+              <h3 class="normal-text"> De 3 a 5 </h3>
+              <b>Porcentaje:</b> ${goodPorcentage}%<br>
+              <b>Participantes:</b> ${good}
+
+
+              `;
+
+              divData.innerHTML = dataToDivData;
+
+
               let ctx = document.getElementById('aspect-chart-' + index).getContext('2d');
               let aspectChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
                   // labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} `, `De 3 a 5 - ${goodPorcentage}% - ${good} `],
-                  labels: [`De 1 a 2 - ${badPorcentage}% `, `De 3 a 5 - ${goodPorcentage}%`],
+                  // labels: [`De 1 a 2 - ${badPorcentage}% `, `De 3 a 5 - ${goodPorcentage}%`],
+                  labels: [`De 1 a 2`, `De 3 a 5`],
                   datasets: [{
                     data: [bad, good],
                     backgroundColor: ["#bcd6ff", "#3f51b5"]
                   }]
-                }
+                },
+                // options: {
+                //   showAllTooltips: true,
+                //   legend: {
+                //     display: false
+                //   },
+                //   tooltips: {
+                //     callbacks: {
+                //       label: function (tooltipItem) {
+                //         return tooltipItem.yLabel;
+                //       }
+                //     }
+                //   }
+                // }
               });
             },
             100);
@@ -153,6 +187,7 @@ var app = new Vue({
         aspectsParticipants++;
       });
 
+
       var labels = [];
       var data = [];
       var backgroundColor = [];
@@ -160,7 +195,9 @@ var app = new Vue({
 
       var globalData = [];
 
+
       Object.keys(aspects).forEach(key => {
+        console.log(aspects)
         total += (aspects[key] / aspectsParticipants);
         aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
         labels.push(key);
@@ -174,8 +211,10 @@ var app = new Vue({
 
       });
 
+      this.abcGlobalData = globalData;
+
+
       this.globalData = globalData;
-      console.log(aspects)
 
       labels.push("Total");
       backgroundColor.push("#3f51b5");
@@ -218,6 +257,7 @@ var app = new Vue({
 
       var sortLabels = [];
       var sortData = [];
+
 
       globalData.sort((a, b) => {
         if (a.value > b.value) return 1;

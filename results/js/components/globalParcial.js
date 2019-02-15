@@ -3,6 +3,9 @@ Vue.component("global-parcial-chart", {
   
 <div>
   <canvas :id="'entitie-global-chart-'+type" style="width:100%"></canvas>
+  <div v-for="(data,index) in dataText.totalValues">
+    {{dataText.labels[index]}}: <b>{{dataText.totalValues[index]}}%</b>
+  </div>
 </div>
       
   `,
@@ -10,7 +13,8 @@ Vue.component("global-parcial-chart", {
   data() {
     return {
       condensed: [],
-      valuesBuilt: []
+      valuesBuilt: [],
+      dataText: ""
     }
   },
   methods: {
@@ -116,7 +120,10 @@ Vue.component("global-parcial-chart", {
 
         });
 
-        this.globalData = globalData;
+        this.dataText = {
+          labels,
+          totalValues
+        };
 
         // labels.push("Total");
         // backgroundColor.push("#3f51b5");

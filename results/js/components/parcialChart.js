@@ -5,6 +5,9 @@ Vue.component("parcial-chart", {
   <div v-for="value in valuesBuilt">
     Gráfica {{value.title}}
     <canvas :id="'entitie-global-chart-'+value.title" style="width:100%"></canvas>
+
+    
+
     <textual-range :data="globalData"></textual-range>
 
   </div>

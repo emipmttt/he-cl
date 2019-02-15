@@ -9,16 +9,19 @@
     <div v-else-if="questionnaires != false">
 
       <canvas id="monitoringChartByEntitie"></canvas>
+      <div v-for="data in dataTextGlobal">
+        {{data.element}}: <b>{{data.participants}}</b>
+      </div>
 
-      <h2 class="large-text">Monitoreo por area</h2>
+      <h2 class="large-text">Monitoreo por Área</h2>
       <div v-for="(element,index) in monitoringByArea">
         <h3 class="medium-text">
-          <!-- {{element.entitie}}   -->
-
-          <canvas :id="'monitoringChartByArea'+index"></canvas>
-
-
         </h3>
+        <canvas :id="'monitoringChartByArea'+index"></canvas>
+        <div :id="'monitoringTextArea'+index"></div>
+        <!-- <div v-if="[element.entitie]" v-for="entitieValue in dataTextParcialPost">
+          {{entitieValue.area}}: <b>{{entitieValue.questionnaires}}</b><br>
+        </div> -->
       </div>
 
 
@@ -49,7 +52,12 @@
         totalQuestionnaires: 0,
         monitoringByArea: [],
 
-        printStart: true
+        printStart: true,
+
+        //datos para poner en texto en gráfica global
+        dataTextGlobal: [],
+        dataTextParcial: {},
+        updateView: false
       }
     },
     methods: {
@@ -208,12 +216,17 @@
           this.monitoringArray.forEach(element => {
             data.push((element.areas[Object.keys(element.areas)] / this.totalQuestionnaires) * 100);
             participantsNumToTitle.push(element.areas[Object.keys(element.areas)]);
-          })
+          });
+
 
           entities.forEach((element, index) => {
-            participantsTitle.push(element + " " + participantsNumToTitle[index])
+            // participantsTitle.push(element + " " + participantsNumToTitle[index])
+            participantsTitle.push(element);
+            this.dataTextGlobal.push({
+              element,
+              participants: participantsNumToTitle[index]
+            })
           })
-
 
           let ctx = document.getElementById('monitoringChartByEntitie').getContext('2d');
           let monitoringChartByEntitie = new Chart(ctx, {
@@ -256,7 +269,9 @@
               entitie: monitoringElement.entitie,
               questionnaires
             })
+            this.dataTextParcial[monitoringElement.entitie] = [0]
           });
+
 
           areas.forEach((area, index) => {
             console.log(area, index);
@@ -266,9 +281,18 @@
             area.questionnaires.forEach(areaElement => {
               questionnaires.push(areaElement.questionnaires)
               maxNumber += areaElement.questionnaires;
-            })
-            area.questionnaires.forEach(areaElement => {
-              areas.push(areaElement.area + ": " + areaElement.questionnaires);
+
+              this.dataTextParcial[area.entitie].push({
+                area: areaElement.area,
+                questionnaires: areaElement.questionnaires
+              })
+
+              let datatext = `${ areaElement.area} : <b>${areaElement.questionnaires}</b><br>`;
+
+              document.getElementById('monitoringTextArea' + index).innerHTML += datatext;
+              // areas.push(areaElement.area + ": " + areaElement.questionnaires);
+              areas.push(areaElement.area);
+
             });
             console.log(areas)
 
@@ -307,8 +331,16 @@
         return string.replace(/-/g, " ");
       },
     },
+    computed: {
+      dataTextParcialPost() {
+        return this.dataTextParcial;
+      }
+    },
     mounted() {
       this.getMonitoringData();
+    },
+    updated() {
+      this.dataTextParcial = this.dataTextParcial
     },
     components: {
       loading

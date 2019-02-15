@@ -15,9 +15,10 @@ $suggestion = $_POST['suggestion'];
 $numberOfParticipants = $_POST['numberOfParticipants'];
 $campain = $_POST['campain'];
 $aspects = json_encode(json_decode($_POST['aspects']), JSON_UNESCAPED_UNICODE);
+$reactivesAnswers = json_encode(json_decode($_POST['reactivesAnswers']), JSON_UNESCAPED_UNICODE);
 
-$sqlCreateQuestionnaire = "INSERT INTO questionnaires (user,campain,entitie,area,turn,gender,age,antiquity,studies,suggestion,aspects)
-  VALUES ('{$user}','{$title}','{$entitie}','{$area}','{$turn}','{$gender}','{$age}','{$antiquity}','{$studies}','{$suggestion}','{$aspects}')";
+$sqlCreateQuestionnaire = "INSERT INTO questionnaires (user,campain,entitie,area,turn,gender,age,antiquity,studies,suggestion,aspects,reactivesAnswers)
+  VALUES ('{$user}','{$title}','{$entitie}','{$area}','{$turn}','{$gender}','{$age}','{$antiquity}','{$studies}','{$suggestion}','{$aspects}','{$reactivesAnswers}')";
 if (mysqli_query($conn, $sqlCreateQuestionnaire)) {
     $response->status = true;
     $response->message = "¡Has concluído el cuestionario!";
