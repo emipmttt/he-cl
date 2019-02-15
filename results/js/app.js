@@ -89,6 +89,8 @@ var app = new Vue({
         this.displayCategory = "género";
       } else if (url[0] == 'respuestas-global') {
         this.displayCategory = "Respuestas Global";
+      } else if (url[0] == 'antiguedad') {
+        this.displayCategory = "Antigüedad";
       } else {
         this.displayCategory = url[0];
       }
@@ -118,14 +120,21 @@ var app = new Vue({
 
               let divData = document.getElementById('aspect-chart-text' + index);
               let dataToDivData = `
+              <table>
+                <tr>
+                  <td>%</td>
+                  <td>Participantes</td>
+                </tr>
+                <tr>
+                  <td><span style="color:#bcd6ff">${badPorcentage}%</span>%</td>
+                  <td><span style="color:#bcd6ff">${bad}%</span>%</td>
+                </tr>
+                  <tr>
+                  <td><span style="color:#3f51b5">${goodPorcentage}%</span>%</td>
+                  <td><span style="color:#3f51b5">${good}%</span>%</td>
+                </tr>
+              </table>
               
-              <h3 class="normal-text"> De 1 a 2 </h3>
-              <b>Porcentaje:</b> ${badPorcentage}%<br>
-              <b>Participantes:</b> ${bad}
-
-              <h3 class="normal-text"> De 3 a 5 </h3>
-              <b>Porcentaje:</b> ${goodPorcentage}%<br>
-              <b>Participantes:</b> ${good}
 
 
               `;

@@ -131,7 +131,7 @@
             category: 'turno'
           }, {
             icon: 'wc',
-            text: 'Genero',
+            text: 'Género',
             category: 'genero'
           }, {
             icon: 'date_range',
