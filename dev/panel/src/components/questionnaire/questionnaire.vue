@@ -155,7 +155,10 @@
 
         // extra data
         campains: 0,
-        response: ''
+        response: '',
+
+        // reactivos y respuestas
+        reactivesAnswers: []
       }
     },
     methods: {
@@ -175,7 +178,9 @@
           user: this.user,
           title: this.title.toLowerCase(),
           numberOfParticipants: this.campain.numberOfParticipants,
-          campain: this.campain
+          campain: this.campain,
+          reactivesAnswers: JSON.stringify(this.reactivesAnswers)
+
         }
         axios
           .post('https://clima-laboral.human-express.com/php/questionnaire/create.php', this.createFormData(data))
@@ -300,6 +305,11 @@
         return field.split(',')
       },
       answered(index, aspect, value) {
+        this.reactivesAnswers.push({ // guardar las respuestas de cada pregunta
+          aspect,
+          value
+        });
+
         this.reactives.shift();
 
         if (isNaN(this.aspectsList[aspect])) {
