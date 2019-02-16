@@ -13,7 +13,7 @@
       <div v-else-if="campainsStatus == 2" class="center">
         <p class="grey-text card-panel">
           Aún no hay diagnósticos <br>
-          Contactanos para la asignación de diagnósticos
+          Contáctanos para la asignación de diagnósticos
         </p>
       </div>
 

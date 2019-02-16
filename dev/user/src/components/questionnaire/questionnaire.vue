@@ -76,7 +76,7 @@
                   <option :value="turnItem" v-for="turnItem in fieldParse(thisCampain.turns)">{{ turnItem }}</option>
                 </select>
 
-                <label>Selecciona tu genero</label>
+                <label>Selecciona tu género</label>
                 <select required v-model:value="gender" class="browser-default">
                   <option value="" disabled selected>Genero</option>
                   <option :value="genderItem" v-for="genderItem in fieldParse(thisCampain.gender)">{{ genderItem }}</option>

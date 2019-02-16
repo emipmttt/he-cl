@@ -121,6 +121,10 @@
         entities = entities.filter(unique);
         areas = areas.filter(unique);
 
+        entities.sort()
+        areas.sort()
+        console.log(areas, entities)
+
         entities.forEach(entitie => {
 
           var areasArray = [];
@@ -132,7 +136,7 @@
               areasArray = areasArray.filter(unique);
             }
           });
-
+          areasArray.sort()
           areasArray.forEach(area => {
             var quest = []
 
@@ -180,6 +184,10 @@
 
           entities = entities.filter(unique);
           areas = areas.filter(unique);
+
+          entities.sort()
+          areas.sort()
+
           entities.forEach(entitie => {
 
             var areasArray = this.questionnaires.filter(element => {
