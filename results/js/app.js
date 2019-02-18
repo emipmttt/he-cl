@@ -126,12 +126,12 @@ var app = new Vue({
                   <td>Participantes</td>
                 </tr>
                 <tr>
-                  <td><span style="color:#bcd6ff">${badPorcentage}%</span>%</td>
-                  <td><span style="color:#bcd6ff">${bad}%</span>%</td>
+                  <td><span style="color:#bcd6ff">${badPorcentage}%</span></td>
+                  <td><span style="color:#bcd6ff">${bad}%</span></td>
                 </tr>
                   <tr>
-                  <td><span style="color:#3f51b5">${goodPorcentage}%</span>%</td>
-                  <td><span style="color:#3f51b5">${good}%</span>%</td>
+                  <td><span style="color:#3f51b5">${goodPorcentage}%</span></td>
+                  <td><span style="color:#3f51b5">${good}%</span></td>
                 </tr>
               </table>
               
@@ -328,16 +328,18 @@ var app = new Vue({
       }, 100)
     },
     aspectQuestionaireParse(aspects) {
-      aspects = JSON.parse(aspects);
-      var aspectsParsed = [];
-      Object.keys(aspects).forEach(key => {
-        aspectsParsed.push({
-          aspect: key,
-          value: aspects[key].toFixed(1)
-        })
-      });
-      console.log(aspectsParsed);
-      return aspectsParsed;
+      // aspects = JSON.parse(aspects);
+      // var aspectsParsed = [];
+      // console.log(aspects);
+      // Object.keys(aspects).forEach(key => {
+      //   aspectsParsed.push({
+      //     aspect: key,
+      //     value: aspects[key].toFixed(1)
+      //   })
+      // });
+      // console.log(aspectsParsed);
+      // return aspectsParsed;
+      return aspects
     },
     exportTableToCSV(title) {
       var csv = [];
