@@ -82,7 +82,7 @@
     },
     mounted() {
       console.log(this.campains);
-      this.getUserData("¡Bienvenido de nuevo!");
+      this.getUserData("¡Bienvenido!");
     },
   }
 

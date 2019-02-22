@@ -28,7 +28,7 @@
 
             <div class="input-field">
               <input v-model:value="campain.gender" id="'editgender'+index" type="text" class="validate" required>
-              <label for="'editgender'+index">Genero</label>
+              <label for="'editgender'+index">Género</label>
             </div>
 
             <div class="input-field">
@@ -38,7 +38,7 @@
 
             <div class="input-field">
               <input v-model:value="campain.antiquity" id="'editantiquity'+index" type="text" class="validate" required>
-              <label for="'editantiquity'+index">Antiguedad en la empresa</label>
+              <label for="'editantiquity'+index">Antigüedad en la empresa</label>
             </div>
 
             <div class="input-field">

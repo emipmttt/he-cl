@@ -285,7 +285,7 @@
           })
         } else {
           M.toast({
-            html: 'Código incorrecto'
+            html: 'Código de acceso incorrecto'
           })
 
         }

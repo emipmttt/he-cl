@@ -14,7 +14,7 @@
         <i class="material-icons left">{{iconStatus}}</i>
         {{displayStatus}}
       </div>
-      <div class="col s12 m3" title="Código para usuario">
+      <div class="col s12 m3" title="Código de acceso">
         <i class="material-icons left">lock</i>
         {{userCode}}
       </div>
@@ -22,41 +22,44 @@
     <div class="divider"></div>
     <div v-if="status">
       <div class="center">
-        <h5 class="green-text">Activo</h5>
         <p class="grey-text text-darken-1">{{textualStatus}}</p>
       </div>
       <div class="divider"></div>
       <br>
       <div class="right-align">
-        <router-link :to="'/monitoreo/' + user.id + '/' + toUrl(title)" class="btn-flat waves-effect waves-green">
+        <router-link :to="'/monitoreo/' + user.id + '/' + toUrl(title)" class="shadow-hover btn-flat waves-effect waves-green">
           <i class="material-icons left">trending_up</i>
           Monitoreo
         </router-link>
-        <a :href="'/#/cuestionario/' + user.id + '/' + toUrl(title)" target="_blank" class="btn-flat waves-effect waves-green">
+        <a :href="'/#/cuestionario/' + user.id + '/' + toUrl(title)" target="_blank" class="shadow-hover btn-flat waves-effect waves-green">
           <i class="material-icons left">person</i>
           individual / en linea
         </a>
-        <router-link :to="'captura-masiva/'+ user.id + '/' + toUrl(title)" class="btn waves-effect indigo">
+        <router-link :to="'captura-masiva/'+ user.id + '/' + toUrl(title)" class="shadow-hover btn waves-effect indigo">
           <i class="material-icons left">people</i>
           Captura masiva
         </router-link>
       </div>
     </div>
     <div v-else class="center grey-text text-darken-1">
-      <h5>Inactivo</h5>
       <p>{{textualStatus}}</p>
       <div class="divider"></div>
       <div class="right-align">
         <br>
+
+        <router-link :to="'/monitoreo/' + user.id + '/' + toUrl(title)" class="shados-hover btn-flat waves-effect waves-green">
+          <i class="material-icons left">trending_up</i>
+          Monitoreo
+        </router-link>
+        <button disabled class="btn waves-effect indigo">
+          <i class="material-icons left">person</i>
+          individual / en linea
+        </button>
         <button disabled class="btn waves-effect indigo">
           <i class="material-icons left">people</i>
           Captura masiva
         </button>
-        <router-link :to="'/monitoreo/' + user.id + '/' + toUrl(title)" class="btn-flat waves-effect waves-green">
-          <i class="material-icons left">trending_up</i>
-          Monitoreo
-        </router-link>
-        <button @click="viewResults = !viewResults" class="btn waves-effect indigo">
+        <button @click="viewResults = !viewResults" class="shados-hover btn waves-effect indigo">
           <i class="material-icons left">assessment</i>
           Ver resultados
         </button>
@@ -197,5 +200,9 @@
 
 </script>
 
-<style>
+<style scoped>
+  shadow-hover:hover {
+    filter: brightness(70%)
+  }
+
 </style>
