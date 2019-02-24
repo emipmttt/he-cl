@@ -29,9 +29,9 @@
           <option :value="turnItem" v-for="turnItem in fieldParse(thisCampain.turns)">{{ turnItem }}</option>
         </select>
 
-        <label>Selecciona tu genero</label>
+        <label>Selecciona tu género</label>
         <select required v-model:value="gender" class="browser-default">
-          <option value="" disabled selected>Genero</option>
+          <option value="" disabled selected>Género</option>
           <option :value="genderItem" v-for="genderItem in fieldParse(thisCampain.gender)">{{ genderItem }}</option>
         </select>
 
@@ -48,9 +48,9 @@
             antiquityItem }}</option>
         </select>
 
-        <label>Selecciona tu máximo grado de estudios concluídos</label>
+        <label>Selecciona tu máximo grado de estudios concluidos</label>
         <select required v-model:value="studies" class="browser-default">
-          <option value="" disabled selected>Estudios concluídos</option>
+          <option value="" disabled selected>Estudios concluidos</option>
           <option :value="schoolItem" v-for="schoolItem in fieldParse(thisCampain.school)">{{
             schoolItem }}</option>
         </select>
@@ -173,7 +173,7 @@
           age: this.age,
           antiquity: this.antiquity,
           studies: this.studies,
-          suggestion: this.suggestion,
+          suggestion: this.suggestion.replace(/(\r\n\t|\n|\r\t)/g, ""),
           aspects: JSON.stringify(this.calculatedAspects),
           user: this.user,
           title: this.title.toLowerCase(),

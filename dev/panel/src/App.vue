@@ -26,9 +26,9 @@
         </router-link>
       </li>
       <li>
-        <a>
-          <i class="material-icons">phone</i>Ayuda
-        </a>
+        <router-link to="/ayuda">
+          <i class=" material-icons">help</i> Ayuda
+        </router-link>
       </li>
       <li>
         <div class="divider"></div>

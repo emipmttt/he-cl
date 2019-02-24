@@ -127,16 +127,13 @@ var app = new Vue({
                 </tr>
                 <tr>
                   <td><span style="color:#bcd6ff">${badPorcentage}%</span></td>
-                  <td><span style="color:#bcd6ff">${bad}%</span></td>
+                  <td><span style="color:#bcd6ff">${bad}</span></td>
                 </tr>
                   <tr>
                   <td><span style="color:#3f51b5">${goodPorcentage}%</span></td>
-                  <td><span style="color:#3f51b5">${good}%</span></td>
+                  <td><span style="color:#3f51b5">${good} </span></td>
                 </tr>
               </table>
-              
-
-
               `;
 
               divData.innerHTML = dataToDivData;
