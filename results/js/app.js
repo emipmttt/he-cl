@@ -112,8 +112,10 @@ var app = new Vue({
           }
         });
 
-        var goodPorcentage = ((good / this.questionnaires.length) * 100).toFixed(1);
-        var badPorcentage = ((bad / this.questionnaires.length) * 100).toFixed(1);
+        // var goodPorcentage = ((good / this.questionnaires.length) * 100).toFixed(1);
+        // var badPorcentage = ((bad / this.questionnaires.length) * 100).toFixed(1);
+        var goodPorcentage = ((good / this.questionnaires.length) * 100);
+        var badPorcentage = ((bad / this.questionnaires.length) * 100);
 
         if (this.category == 'respuestas-global') {
           setTimeout(() => {

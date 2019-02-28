@@ -13,8 +13,7 @@
         <label>Selecciona una entidad</label>
         <select required v-model:value="entitie" class="browser-default">
           <option value="" disabled selected>Entidad</option>
-          <option :value="entitieItem" v-for="entitieItem in fieldParse(thisCampain.entities)">{{ entitieItem
-            }}</option>
+          <option :value="entitieItem" v-for="entitieItem in fieldParse(thisCampain.entities)">{{ entitieItem }}</option>
         </select>
 
         <label>Selecciona un Area / Departamento</label>
