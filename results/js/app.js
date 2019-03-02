@@ -117,61 +117,6 @@ var app = new Vue({
         var goodPorcentage = ((good / this.questionnaires.length) * 100);
         var badPorcentage = ((bad / this.questionnaires.length) * 100);
 
-        if (this.category == 'respuestas-global') {
-          setTimeout(() => {
-
-              let divData = document.getElementById('aspect-chart-text' + index);
-              let dataToDivData = `
-              <table>
-                <tr>
-                  <td>%</td>
-                  <td>Participantes</td>
-                </tr>
-                <tr>
-                  <td><span style="color:#bcd6ff">${badPorcentage}%</span></td>
-                  <td><span style="color:#bcd6ff">${bad}</span></td>
-                </tr>
-                  <tr>
-                  <td><span style="color:#3f51b5">${goodPorcentage}%</span></td>
-                  <td><span style="color:#3f51b5">${good} </span></td>
-                </tr>
-              </table>
-              `;
-
-              divData.innerHTML = dataToDivData;
-
-
-              let ctx = document.getElementById('aspect-chart-' + index).getContext('2d');
-              let aspectChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                  // labels: [`De 1 a 2 - ${badPorcentage}% - ${bad} `, `De 3 a 5 - ${goodPorcentage}% - ${good} `],
-                  // labels: [`De 1 a 2 - ${badPorcentage}% `, `De 3 a 5 - ${goodPorcentage}%`],
-                  labels: [`De 1 a 2`, `De 3 a 5`],
-                  datasets: [{
-                    data: [bad, good],
-                    backgroundColor: ["#bcd6ff", "#3f51b5"]
-                  }]
-                },
-                // options: {
-                //   showAllTooltips: true,
-                //   legend: {
-                //     display: false
-                //   },
-                //   tooltips: {
-                //     callbacks: {
-                //       label: function (tooltipItem) {
-                //         return tooltipItem.yLabel;
-                //       }
-                //     }
-                //   }
-                // }
-              });
-            },
-            100);
-        }
-
-
       });
 
     },
