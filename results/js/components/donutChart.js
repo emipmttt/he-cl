@@ -2,7 +2,8 @@ Vue.component("donut-chart", {
   template: `
   <div>
 
-    <div style="display: inline-block; min-width: 90%;">
+
+ <div style="display: inline-block; min-width: 90%;">
       <h3 class="normal-text"> {{aspect}} </h3>
       <div style="width: 300px; display:inline-block">
         <canvas height="250px" :id="'donutChart' + index"></canvas>
@@ -14,16 +15,17 @@ Vue.component("donut-chart", {
               <td>Participantes</td>
             </tr>
             <tr>
-              <td><span style="color:#bcd6ff">{{bad.porcentage}}%</span></td>
+              <td><span style="color:#bcd6ff">{{bad.porcentage}}</span></td>
               <td><span style="color:#bcd6ff">{{bad.average}}</span></td>
             </tr>
               <tr>
-              <td><span style="color:#3f51b5">{{good.porcentage}}%</span></td>
+              <td><span style="color:#3f51b5">{{good.porcentage}}</span></td>
               <td><span style="color:#3f51b5">{{good.average}}</span></td>
             </tr>
           </table>
       </div>
     </div>
+   
 
   </div>`,
   props: ['questionnaires', 'aspect', 'index'],
@@ -49,61 +51,60 @@ Vue.component("donut-chart", {
   },
   computed: {
     bad() {
-      let answers = this.questionnaires.map(questionnaire => {
-        return JSON.parse(questionnaire.reactivesAnswers)
-      })
 
       let bad = 0;
       let length = 0;
       let questionnairesLength = this.questionnaires.length;
 
-      answers.forEach(answer => {
-        answer.forEach(element => {
 
-          if ((element.aspect == this.aspect) && (element.value < 3)) {
-            bad++
-          }
-          if (element.aspect == this.aspect) {
-            length++
-          }
+      JSON.parse(this.questionnaires[0].reactivesAnswers).forEach(reactive => {
+        if (reactive.aspect == this.aspect) length++;
+      })
+
+      this.questionnaires.forEach(questionnaire => {
+        JSON.parse(questionnaire.reactivesAnswers).forEach(reactive => {
+          if (reactive.aspect == this.aspect && reactive.value < 3) bad++;
         })
-      });
-      console.log()
+      })
+
+      let average = (bad / length)
+
       return {
-        length: bad,
-        average: (bad / 5).toFixed(2),
-        porcentage: ((bad * 100) / (length)).toFixed(2)
-      }
+        length,
+        average: average.toFixed(2),
+        porcentage: ((average / questionnairesLength) * 100).toFixed(2) + "%"
+      };
+
     },
     good() {
-      let answers = this.questionnaires.map(questionnaire => {
-        return JSON.parse(questionnaire.reactivesAnswers)
-      })
+
 
       let good = 0;
       let length = 0;
       let questionnairesLength = this.questionnaires.length;
 
-      answers.forEach(answer => {
-        answer.forEach(element => {
-          if ((element.aspect == this.aspect) && (element.value > 2)) {
-            good++
-          }
-          if (element.aspect == this.aspect) {
-            length++
-          }
-        })
-      });
-      console.log()
-      return {
-        length: good,
-        average: (good / 5).toFixed(2),
-        porcentage: ((good * 100) / (length)).toFixed(2)
-      }
-    },
 
+      JSON.parse(this.questionnaires[0].reactivesAnswers).forEach(reactive => {
+        if (reactive.aspect == this.aspect) length++;
+      })
+
+      this.questionnaires.forEach(questionnaire => {
+        JSON.parse(questionnaire.reactivesAnswers).forEach(reactive => {
+          if (reactive.aspect == this.aspect && reactive.value > 2) good++;
+        })
+      })
+
+      let average = (good / length)
+
+      return {
+        length,
+        average: average.toFixed(2),
+        porcentage: ((average / questionnairesLength) * 100).toFixed(2) + "%"
+      };
+
+    },
   },
   mounted() {
-    this.buildChart()
+    this.buildChart();
   }
 })

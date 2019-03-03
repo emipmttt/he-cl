@@ -120,7 +120,7 @@
           .catch(error => {
             this.buttonDisabled = false;
             M.toast({
-              html: 'No se procesar la información intentalo de nuevo más tarde'
+              html: 'No se pudo procesar la información intentalo de nuevo más tarde'
             });
             this.response = 'No se procesar la información intentalo de nuevo más tarde';
           })
