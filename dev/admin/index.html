@@ -15,7 +15,7 @@
   <!-- built files will be auto injected -->
   <script>
     if (localStorage.sessionData) {
-      if (JSON.parse(localStorage.sessionData).type != 1) {
+      if (JSON.parse(localStorage.sessionData).type) {} else {
         location.href = "/"
       }
     } else {

@@ -94,7 +94,7 @@
       },
       verify() {
         if (localStorage.sessionData) {
-          if (!JSON.parse(localStorage.sessionData).type) {
+          if (JSON.parse(localStorage.sessionData).type) {} else {
             location.href = "/"
           }
         } else {
