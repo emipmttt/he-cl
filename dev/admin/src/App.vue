@@ -89,7 +89,7 @@
     },
     methods: {
       logout() {
-        this.localStorage.sessionData = 0;
+        localStorage.sessionData = 0;
         this.verify();
       },
       verify() {
@@ -115,10 +115,9 @@
         }
       }
     },
-    created() {
-      this.verify();
-    },
     mounted() {
+      this.verify();
+
       var elems = document.querySelectorAll('.sidenav');
       var instances = M.Sidenav.init(elems, {});
     }
