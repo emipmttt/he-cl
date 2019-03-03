@@ -51,7 +51,15 @@
         </router-link>
       </li>
     </ul>
-
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li>
+      <a @click="logout">
+        <i class="material-icons">exit_to_app</i>
+        Salir
+      </a>
+    </li>
 
     <header class="navbar-fixed hide-on-large-only">
       <nav>
@@ -76,14 +84,25 @@
         screen: screen
       }
     },
-    mounted() {
-      if (localStorage.sessionData) {
-        if (!JSON.parse(localStorage.sessionData).type) {
+    methods: {
+      logout() {
+        this.localStorage.sessionData = 0;
+        this.verify();
+      },
+      verify() {
+        if (localStorage.sessionData) {
+          if (!JSON.parse(localStorage.sessionData).type) {
+            location.href = "/"
+          }
+        } else {
           location.href = "/"
         }
-      } else {
-        location.href = "/"
       }
+    },
+    created() {
+      this.verify();
+    },
+    mounted() {
       var elems = document.querySelectorAll('.sidenav');
       var instances = M.Sidenav.init(elems, {});
     }
