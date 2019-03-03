@@ -77,7 +77,11 @@
       }
     },
     mounted() {
-      if (JSON.parse(localStorage.sessionData).type != 1) {
+      if (localStorage.sessionData) {
+        if (!JSON.parse(localStorage.sessionData).type) {
+          location.href = "/"
+        }
+      } else {
         location.href = "/"
       }
       var elems = document.querySelectorAll('.sidenav');
