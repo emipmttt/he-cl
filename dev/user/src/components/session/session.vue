@@ -167,7 +167,7 @@
               console.log(response.data)
               this.buttonDisabled = false;
               if (response.data.status) {
-                localStorage.sessionData = JSON.stringify(response.data.userData);
+                sessionStorage.sessionData = JSON.stringify(response.data.userData);
                 M.toast({
                   html: '¡Bienvenido!'
                 });
@@ -214,7 +214,7 @@
             console.log(response.data)
             this.buttonDisabled = false;
             if (response.data.status) {
-              localStorage.sessionData = JSON.stringify(response.data.userData);
+              sessionStorage.sessionData = JSON.stringify(response.data.userData);
               M.toast({
                 html: '¡Bienvenido!'
               });

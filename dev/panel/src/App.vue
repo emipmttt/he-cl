@@ -55,7 +55,7 @@
     name: 'App',
     data() {
       return {
-        user: JSON.parse(localStorage.sessionData)
+        user: JSON.parse(sessionStorage.sessionData)
       }
     },
     methods: {
@@ -64,7 +64,7 @@
         axios
           .post("https://clima-laboral.human-express.com/php/session/logout.php")
           .then(response => {
-            localStorage.clear();
+            sessionStorage.clear();
             location.href = "/";
           })
           .catch(error => {

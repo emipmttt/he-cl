@@ -88,7 +88,7 @@
     data() {
       return {
         // campain data
-        user: JSON.parse(localStorage.sessionData),
+        user: JSON.parse(sessionStorage.sessionData),
         title: this.campain.title,
         numberOfParticipants: this.campain.numberOfParticipants,
         participants: 0,

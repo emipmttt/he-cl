@@ -89,12 +89,12 @@
     },
     methods: {
       logout() {
-        localStorage.sessionData = 0;
+        sessionStorage.sessionData = 0;
         this.verify();
       },
       verify() {
-        if (localStorage.sessionData) {
-          if (JSON.parse(localStorage.sessionData).type) {} else {
+        if (sessionStorage.sessionData) {
+          if (JSON.parse(sessionStorage.sessionData).type) {} else {
             location.href = "/"
           }
         } else {
@@ -104,8 +104,8 @@
     },
     computed: {
       isAdmin() {
-        if (localStorage.sessionData) {
-          if (JSON.parse(localStorage.sessionData).type) {
+        if (sessionStorage.sessionData) {
+          if (JSON.parse(sessionStorage.sessionData).type) {
             return true
           } else {
             return false

@@ -14,9 +14,9 @@
   <div id="app"></div>
   <!-- built files will be auto injected -->
   <script>
-    if (localStorage.sessionData) {
-      if (JSON.parse(localStorage.sessionData).type) {} else {
-        location.href = "/"
+    if (sessionStorage.sessionData) {
+      if (JSON.parse(sessionStorage.sessionData).type) {} else {
+        location.href = "/";
       }
     } else {
       location.href = "/"

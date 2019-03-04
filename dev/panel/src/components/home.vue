@@ -31,7 +31,7 @@
     data() {
       return {
         // session data
-        user: JSON.parse(localStorage.sessionData),
+        user: JSON.parse(sessionStorage.sessionData),
         // campains
         campainsStatus: 0,
         campains: null,
@@ -47,7 +47,7 @@
           .then(response => {
             console.log(response.data)
             if (response.data.status) {
-              localStorage.sessionData = JSON.stringify(response.data.userData);
+              sessionStorage.sessionData = JSON.stringify(response.data.userData);
               M.toast({
                 html: message
               });
