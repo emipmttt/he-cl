@@ -69,15 +69,12 @@
       principal del menú y consta de 8 dígitos.
     </p>
     <p>
-      <span class="green-text">INDIVIDUAL / EN LINEA:</span>
-      Permite visualizar en el navegador de internet el
-      “link” que se les podrá hacer llegar vía correo electrónico a los participantes
-      para que puedan resolver la “Encuesta de Satisfacción / Clima Laboral” ON
-      LINE.
-      Al ingresar a esta opción vía menú o a través del “link”, la plataforma solicitará
-      el “Código de acceso” que permite resolver el cuestionario de preguntas.
-      El “Código de acceso” se encuentra en la parte superior derecha de la pantalla
-      principal del menú y consta de 8 dígitos.
+      <span class="green-text">CAPTURA MASIVA:</span>
+      Despliega una pantalla que permite que cuestionarios
+      resueltos en hoja de respuestas por los participantes sean capturados en la
+      plataforma.
+      Al alimentar un cuestionario en su totalidad la plataforma automáticamente
+      ofrece una pantalla nueva de captura.
     </p>
     <h2 class="medium-text indigo-text">RESULTADOS GRAFICOS E INTERPRETATIVOS</h2>
     <p>
