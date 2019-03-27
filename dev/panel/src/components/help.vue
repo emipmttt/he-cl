@@ -89,7 +89,7 @@
       Permite exportar la totalidad de los registros contenidos en la base
       de datos de la plataforma en formato “Excel”. Dicho archivo podrá ser
       visualizado o guardado en cualquier dispositivo electrónico.
-    </p>
+    </p>  e34w22
     <p>
       <span class="green-text">Respuestas Global: </span>
       Despliega una gráfica de pastel cuantitativa por cada
