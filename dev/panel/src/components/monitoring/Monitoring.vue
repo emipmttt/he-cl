@@ -9,12 +9,12 @@
     <div v-else-if="questionnaires != false">
 
       <canvas id="monitoringChartByEntitie"></canvas>
-      <div v-for="data in dataTextGlobal">
+      <div :key="index" v-for="(data,index) in dataTextGlobal">
         {{data.element}}: <b>{{data.participants}}</b>
       </div>
 
       <h2 class="large-text">Monitoreo por Área</h2>
-      <div v-for="(element,index) in monitoringByArea">
+      <div :key="index" v-for="(element,index) in monitoringByArea">
         <h3 class="medium-text">
         </h3>
         <canvas :id="'monitoringChartByArea'+index"></canvas>
