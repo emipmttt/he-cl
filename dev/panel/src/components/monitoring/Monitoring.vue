@@ -85,7 +85,7 @@
       },
       getMonitoringData() {
         axios
-          .get("http://clima-laboral.human-express.com/php/monitoring/monitoring.php?user=" + this.user + "&campain=" +
+          .get("https://clima-laboral.human-express.com/php/monitoring/monitoring.php?user=" + this.user + "&campain=" +
             this.displayTitle.toLowerCase())
           .then(response => {
 
