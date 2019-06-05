@@ -122,8 +122,8 @@
                 >
                   <button class="btn green waves-effect waves-light">{{answer.value}}</button>
                 </form>
-                <form @submit.prevent="answeredOnInput(reactive.id)">
-                  <input id="answeredOnInput" type="number" v-model="inputForm">
+                <form @submit.prevent="answeredOnInput(index)">
+                  <input id="answeredOnInput" type="text" maxlength="1" v-model="inputForm">
                 </form>
               </div>
             </div>
@@ -175,6 +175,7 @@ export default {
 
       // questionnaire reactives
       reactives: [],
+      reactivesAll: [],
       aspectsList: {},
       aspectsTotalList: {},
       stopSetInterval: false,
@@ -278,7 +279,9 @@ export default {
             question.status = false;
           });
           response.data.reactives.reverse()[0].status = true;
-          this.reactives = response.data.reactives.reverse();
+          let reactives = response.data.reactives.reverse()
+          this.reactives = reactives;
+          this.reactivesAll = reactives;
           this.reactivesLength = response.data.reactives.reverse().length + 1;
           this.campains = response.data.campains;
 
@@ -376,14 +379,23 @@ export default {
       }
     },
     answeredOnInput(index) {
-      let reactive = this.reactives[index];
+      let reactive = this.reactivesAll[index];
+
       let answers = this.answersStringToObject(reactive.answersList);
-      answers.forEach(answer => {
-        if (this.inputForm == answer.value) {
-          this.answered(undefined, answer.aspect, answer.value);
-          this.inputForm = '';
-        }
-      });
+      console.log(this.reactivesAll);
+      
+      if (parseInt(this.inputForm) > 5) {
+        this.inputForm = 5;
+      } else {
+        answers.forEach(answer => {
+          console.log(this.inputForm, answer.value);
+
+          if (parseInt(this.inputForm) == parseInt(answer.value)) {
+            this.answered(undefined, answer.aspect, answer.value);
+            this.inputForm = "";
+          }
+        });
+      }
     },
     calculateAspects() {
       let aspectsCalculated = {};
