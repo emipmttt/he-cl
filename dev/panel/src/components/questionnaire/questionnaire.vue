@@ -279,7 +279,7 @@ export default {
             question.status = false;
           });
           response.data.reactives.reverse()[0].status = true;
-          let reactives = response.data.reactives.reverse()
+          let reactives = response.data.reactives.reverse();
           this.reactives = reactives;
           this.reactivesAll = reactives;
           this.reactivesLength = response.data.reactives.reverse().length + 1;
@@ -383,7 +383,7 @@ export default {
 
       let answers = this.answersStringToObject(reactive.answersList);
       console.log(this.reactivesAll);
-      
+
       if (parseInt(this.inputForm) > 5) {
         this.inputForm = 5;
       } else {
