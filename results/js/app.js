@@ -18,7 +18,14 @@ var app = new Vue({
     results: [],
     globalData: {},
     abcGlobalData: {}, //impresión
-    printStart: true
+    printStart: true,
+    calculatedAspects: {},
+
+
+    // construir objeto para graficas
+
+    aspectsList: {},
+    aspectsTotalList: {}
   },
   methods: {
     getCampainData() {
@@ -31,6 +38,7 @@ var app = new Vue({
             this.aspectsPre = response.data.aspects;
             this.condensed = response.data.condensed;
             this.textualRanges = response.data.textualRanges;
+            // console.log(this.questionnaires);
             if (this.category == 'global') {
               this.buildResultsGlobal();
             }
@@ -120,13 +128,55 @@ var app = new Vue({
       });
 
     },
+    answered(aspect, value) {
+
+      if (isNaN(this.aspectsList[aspect])) {
+        this.aspectsList[aspect] = value;
+      } else {
+        this.aspectsList[aspect] = this.aspectsList[aspect] + value;
+      }
+
+    },
+    addAspectsTotalList() {
+      JSON.parse(this.questionnaires[0].reactivesAnswers).forEach(reactive => {
+        let aspect = reactive.aspect;
+
+        // console.log(aspect);
+
+        if (isNaN(this.aspectsTotalList[aspect])) {
+          this.aspectsTotalList[aspect] = 1;
+        } else {
+          this.aspectsTotalList[aspect]++;
+        }
+      });
+      // console.log(this.aspectsTotalList);
+    },
+    calculateAspects() {
+      let aspectsCalculated = {};
+      Object.keys(this.aspectsTotalList).forEach(key => {
+        aspectsCalculated[key] =
+          this.aspectsList[key] / this.aspectsTotalList[key];
+      });
+      this.calculatedAspects = aspectsCalculated;
+    },
     buildResultsGlobal() {
 
       let aspects = {};
       let aspectsParticipants = 0;
 
       this.questionnaires.forEach(questionnaire => {
-        let aspect = JSON.parse(questionnaire.aspects);
+
+        // generar campo aspects
+
+        JSON.parse(questionnaire.reactivesAnswers).forEach(reactive => {
+          this.answered(reactive.aspect, reactive.value);
+        })
+        this.addAspectsTotalList();
+        this.calculateAspects();
+
+        // generar campo aspects
+
+        let aspect = this.calculatedAspects;
         Object.keys(aspect).sort().forEach(key => {
 
           if (isNaN(aspects[key])) {
@@ -141,6 +191,10 @@ var app = new Vue({
       });
 
 
+
+      // console.log(this.aspectsList);
+
+
       var labels = [];
       var data = [];
       var backgroundColor = [];
@@ -149,8 +203,10 @@ var app = new Vue({
       var globalData = [];
 
 
+
+
       Object.keys(aspects).forEach(key => {
-        console.log(aspects)
+        // console.log(aspects)
         total += (aspects[key] / aspectsParticipants);
         aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
         labels.push(key);
