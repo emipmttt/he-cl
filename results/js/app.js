@@ -161,6 +161,63 @@ var app = new Vue({
     },
     buildResultsGlobal() {
 
+      let reactives = JSON.parse(this.questionnaires[0].reactivesAnswers);
+      let aspectsLength = {}
+      let aspectsValues = {}
+      let reactivesValues = {};
+      let reactivesLength = {};
+      // obtener valores;
+      for (let index = 0; index < reactives.length; index++) {
+
+
+        let reactiveMedia = 0;
+        let aspect = "";
+
+        this.questionnaires.forEach(questionnaire => {
+
+          let reactive = JSON.parse(questionnaire.reactivesAnswers)[index];
+
+          reactiveMedia += ((5 * (reactive.value * 10)) / 5);
+          aspect = reactive.aspect;
+
+
+        })
+        if (isNaN(reactivesValues[aspect])) {
+          reactivesValues[aspect] = (reactiveMedia / this.questionnaires.length) / 10;
+        } else {
+          reactivesValues[aspect] += (reactiveMedia / this.questionnaires.length) / 10;
+        }
+        if (isNaN(reactivesLength[aspect])) {
+          reactivesLength[aspect] = 1;
+        } else {
+          reactivesLength[aspect]++;
+        }
+
+      }
+
+      let aspectsMedia = {}
+      Object.keys(reactivesValues).forEach(reactive => {
+        aspectsMedia[reactive] = (((reactivesValues[reactive] / reactivesLength[reactive]) * 100) / 5).toFixed(2)
+      })
+
+      console.log(aspectsMedia);
+
+
+
+      reactives.forEach(reactive => {
+        if (isNaN(aspectsLength[reactive.aspect])) {
+          aspectsLength[reactive.aspect] = 1;
+        } else {
+          aspectsLength[reactive.aspect]++;
+        }
+      })
+
+
+
+      console.log(aspectsValues)
+      console.log(aspectsLength)
+      console.log(aspectsValues['Comunicación'] / aspectsLength['Comunicación'])
+
       let aspects = {};
       let aspectsParticipants = 0;
 
@@ -205,20 +262,24 @@ var app = new Vue({
 
 
 
-      Object.keys(aspects).forEach(key => {
+      Object.keys(aspectsMedia).forEach(key => {
         // console.log(aspects)
-        total += (aspects[key] / aspectsParticipants);
-        aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
+        total += parseFloat(aspectsMedia[key]);
+        console.log(aspectsParticipants)
+        // aspectsMedia[key] = (((aspectsMedia[key] / aspectsParticipants) / 5) * 100).toFixed(1);
         labels.push(key);
         backgroundColor.push("#bcd6ff");
-        data.push(aspects[key]);
+        data.push(aspectsMedia[key]);
 
         globalData.push({
           aspect: key,
-          value: aspects[key]
+          value: aspectsMedia[key]
         })
 
       });
+
+
+      total = (total / Object.keys(aspectsMedia).length).toFixed(2);
 
       this.abcGlobalData = globalData;
 
@@ -227,7 +288,7 @@ var app = new Vue({
 
       labels.push("Total");
       backgroundColor.push("#3f51b5");
-      data.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
+      data.push(total);
 
       setTimeout(() => {
           let ctx = document.getElementById('aspect-chart-global').getContext('2d');
@@ -279,7 +340,7 @@ var app = new Vue({
       })
 
       sortLabels.push("Total");
-      sortData.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
+      sortData.push(total);
 
 
       setTimeout(() => {

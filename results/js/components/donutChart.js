@@ -85,9 +85,9 @@ Vue.component("donut-chart", {
         qestaspect.push(aspectsnum)
       })
 
-      console.log(this.aspect, qestaspect, qestaspect.reduce(function (a, b) {
-        return a + b;
-      }));
+      // console.log(this.aspect, qestaspect, qestaspect.reduce(function (a, b) {
+      //   return a + b;
+      // }));
       // console.log(this.aspect, bad, badQuL, badQu)
       // console.log(this.aspect, bad)
       // console.log(this.aspect, "total: ", qestaspect, " mal: ", bad)
