@@ -232,7 +232,7 @@
 
               <p>{{response}}</p>
 
-              <button class="btn waves-effect indigo">
+              <button :disabled="buttonDisabled" class="btn waves-effect indigo">
                 <i class="material-icons left">send</i>
                 Enviar
               </button>
@@ -290,7 +290,11 @@ export default {
       response: "",
 
       // reactivos y respuestas
-      reactivesAnswers: []
+      reactivesAnswers: [],
+
+      // disabled button
+
+      buttonDisabled: false
     };
   },
   methods: {
@@ -305,7 +309,9 @@ export default {
         age: this.age,
         antiquity: this.antiquity,
         studies: this.studies,
-        suggestion: this.suggestion.replace(/(\r\n\t|\n|\r\t)/g, ""),
+        suggestion: this.suggestion
+          .replace(/(\r\n\t|\n|\r\t)/g, "")
+          .replace(/,/g, " "),
         aspects: JSON.stringify(this.calculatedAspects),
         user: this.user,
         title: this.displayTitle.toLowerCase(),
@@ -327,6 +333,7 @@ export default {
             }, 1000);
           } else {
             this.response = response.data.message;
+            this.buttonDisabled = false;
           }
         })
         .catch(error => {

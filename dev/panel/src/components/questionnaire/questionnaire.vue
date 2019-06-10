@@ -140,7 +140,7 @@
           <label for="textarea1">¿Cómo podríamos mejorar?</label>
         </div>
         <p>{{response}}</p>
-        <button class="btn waves-effect indigo">
+        <button :disabled="buttonDisabled" class="btn waves-effect indigo">
           <i class="material-icons left">send</i>
           Enviar
         </button>
@@ -201,7 +201,10 @@ export default {
       reactivesAnswers: [],
 
       // respuesta con input
-      inputForm: ""
+      inputForm: "",
+
+      // disabled button
+      buttonDisabled: false
     };
   },
   methods: {
@@ -216,7 +219,9 @@ export default {
         age: this.age,
         antiquity: this.antiquity,
         studies: this.studies,
-        suggestion: this.suggestion.replace(/(\r\n\t|\n|\r\t)/g, ""),
+        suggestion: this.suggestion
+          .replace(/(\r\n\t|\n|\r\t)/g, "")
+          .replace(/,/g, " "),
         aspects: JSON.stringify(this.calculatedAspects),
         user: this.user,
         title: this.title.toLowerCase(),
@@ -239,6 +244,7 @@ export default {
               location.reload();
             }, 1000);
           } else {
+            this.buttonDisabled = false;
             this.response = response.data.message;
           }
         })
