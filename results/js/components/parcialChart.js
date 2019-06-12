@@ -186,7 +186,7 @@ Vue.component("parcial-chart", {
         // this.abcGlobalData = globalData;
 
 
-        // this.globalData = globalData;
+        this.globalData = globalData;
 
         labels.push("Total");
         backgroundColor.push("#3f51b5");

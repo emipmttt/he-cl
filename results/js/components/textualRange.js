@@ -38,10 +38,12 @@ Vue.component("textual-range", {
       axios.get("https://clima-laboral.human-express.com/php/textualRanges/read.php?query=*")
         .then(response => {
           this.textualRanges = response.data.textualRanges;
+
           this.compareData();
         })
     },
     compareData() {
+      console.log(this.data)
       this.data.sort((a, b) => {
         if (a.aspect > b.aspect) return 1;
         if (a.aspect < b.aspect) return -1;
@@ -59,6 +61,9 @@ Vue.component("textual-range", {
           recommendation: textualRange.recommendations
         })
       });
+
+      console.log(this.valuesBuilt);
+
     }
   },
   mounted() {

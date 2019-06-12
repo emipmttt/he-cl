@@ -63,7 +63,6 @@ Vue.component("global-parcial-chart", {
     },
 
     buildChart(params) {
-      console.clear();
 
       console.log(params);
       var labels = [];
