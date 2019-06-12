@@ -5,9 +5,6 @@ Vue.component("parcial-chart", {
   <div v-for="value in valuesBuilt">
     Gráfica {{value.title}}
     <canvas :id="'entitie-global-chart-'+value.title" style="width:100%"></canvas>
-
-    
-
     <textual-range :data="globalData"></textual-range>
 
   </div>
@@ -32,6 +29,7 @@ Vue.component("parcial-chart", {
         params.push(element[this.type]);
       });
 
+
       var unique = (value, index, self) => {
         return self.indexOf(value) === index;
       }
@@ -52,9 +50,11 @@ Vue.component("parcial-chart", {
           questionnaires
         })
 
-      });
 
-      console.log(this.type);
+      });
+      // console.log(paramsBuilt);
+
+      // console.log(this.type);
 
       // console.log(params);
       // console.log(paramsBuilt);
@@ -64,10 +64,45 @@ Vue.component("parcial-chart", {
       this.buildChart(paramsBuilt);
 
     },
+    answered(aspect, value) {
+
+      if (isNaN(this.aspectsList[aspect])) {
+        this.aspectsList[aspect] = value;
+      } else {
+        this.aspectsList[aspect] = this.aspectsList[aspect] + value;
+      }
+
+    },
+    addAspectsTotalList() {
+      JSON.parse(this.questionnaires[0].reactivesAnswers).forEach(reactive => {
+        let aspect = reactive.aspect;
+
+        // console.log(aspect);
+
+        if (isNaN(this.aspectsTotalList[aspect])) {
+          this.aspectsTotalList[aspect] = 1;
+        } else {
+          this.aspectsTotalList[aspect]++;
+        }
+      });
+      // console.log(this.aspectsTotalList);
+    },
+    calculateAspects() {
+      let aspectsCalculated = {};
+      Object.keys(this.aspectsTotalList).forEach(key => {
+        aspectsCalculated[key] =
+          this.aspectsList[key] / this.aspectsTotalList[key];
+      });
+      this.calculatedAspects = aspectsCalculated;
+    },
+    newBuiltChart() {
+
+
+    },
 
 
     buildChart(params) {
-      console.log(params);
+      // console.log(params);
       var labels = [];
       var datasets = [{
         label: "Porcentaje %",
@@ -79,25 +114,48 @@ Vue.component("parcial-chart", {
 
       params.forEach(param => {
 
-        console.log(param);
+        let reactives = JSON.parse(param.questionnaires[0].reactivesAnswers);
+        let aspectsLength = {}
+        let aspectsValues = {}
+        let reactivesValues = {};
+        let reactivesLength = {};
+        // obtener valores;
+        for (let index = 0; index < reactives.length; index++) {
 
-        let aspects = {};
-        let aspectsParticipants = 0;
 
-        param.questionnaires.forEach(questionnaire => {
-          let aspect = JSON.parse(questionnaire.aspects);
-          Object.keys(aspect).sort().forEach(key => {
+          let reactiveMedia = 0;
+          let aspect = "";
 
-            if (isNaN(aspects[key])) {
-              aspects[key] = aspect[key];
-            } else {
-              aspects[key] += aspect[key];
-            }
+          param.questionnaires.forEach(questionnaire => {
 
-          });
+            let reactive = JSON.parse(questionnaire.reactivesAnswers)[index];
 
-          aspectsParticipants++;
-        });
+            reactiveMedia += ((5 * (reactive.value * 10)) / 5);
+            aspect = reactive.aspect;
+
+
+          })
+          if (isNaN(reactivesValues[aspect])) {
+            reactivesValues[aspect] = (reactiveMedia / param.questionnaires.length) / 10;
+          } else {
+            reactivesValues[aspect] += (reactiveMedia / param.questionnaires.length) / 10;
+          }
+          if (isNaN(reactivesLength[aspect])) {
+            reactivesLength[aspect] = 1;
+          } else {
+            reactivesLength[aspect]++;
+          }
+
+        }
+
+        let aspectsMedia = {}
+        Object.keys(reactivesValues).forEach(reactive => {
+          aspectsMedia[reactive] = (((reactivesValues[reactive] / reactivesLength[reactive]) * 100) / 5).toFixed(2)
+        })
+
+        // console.log(aspectsMedia);
+
+
 
         var labels = [];
         var data = [];
@@ -106,25 +164,33 @@ Vue.component("parcial-chart", {
 
         var globalData = [];
 
-        Object.keys(aspects).forEach(key => {
-          total += (aspects[key] / aspectsParticipants);
-          aspects[key] = (((aspects[key] / aspectsParticipants) / 5) * 100).toFixed(1);
+
+        Object.keys(aspectsMedia).forEach(key => {
+          // console.log(aspects)
+          total += parseFloat(aspectsMedia[key]);
+          // aspectsMedia[key] = (((aspectsMedia[key] / aspectsParticipants) / 5) * 100).toFixed(1);
           labels.push(key);
           backgroundColor.push("#bcd6ff");
-          data.push(aspects[key]);
+          data.push(aspectsMedia[key]);
 
           globalData.push({
             aspect: key,
-            value: aspects[key]
+            value: aspectsMedia[key]
           })
 
         });
 
-        this.globalData = globalData;
+
+        total = (total / Object.keys(aspectsMedia).length).toFixed(2);
+
+        // this.abcGlobalData = globalData;
+
+
+        // this.globalData = globalData;
 
         labels.push("Total");
         backgroundColor.push("#3f51b5");
-        data.push((((total / Object.keys(aspects).length) / 5) * 100).toFixed(1));
+        data.push(total);
 
         setTimeout(() => {
             let ctx = document.getElementById('entitie-global-chart-' + param.title).getContext('2d');

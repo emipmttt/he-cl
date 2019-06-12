@@ -77,7 +77,7 @@ Vue.component("global-parcial-chart", {
       var totalValues = [];
       var labels = [];
 
-      params.forEach(param => {
+      params.forEach(param => { 
 
         console.log(param);
 
