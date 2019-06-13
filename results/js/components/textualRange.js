@@ -26,7 +26,7 @@ Vue.component("textual-range", {
 </table>
       
   `,
-  props: ["data"],
+  props: ["textualRangeData"],
   data() {
     return {
       textualRanges: [],
@@ -43,30 +43,38 @@ Vue.component("textual-range", {
         })
     },
     compareData() {
-      console.log(this.data)
-      this.data.sort((a, b) => {
-        if (a.aspect > b.aspect) return 1;
-        if (a.aspect < b.aspect) return -1;
-      }).forEach(element => {
-        var value = parseInt((element.value / 10) / 2);
-        var aspect = element.aspect;
-        let textualRange = this.textualRanges.find(textualRange => {
-          return ((parseInt(textualRange.rangeNum) == value) && (textualRange.title == aspect));
-        });
-        this.valuesBuilt.push({
-          aspect,
-          range: value,
-          value: element.value,
-          diagnosis: textualRange.diagnosis,
-          recommendation: textualRange.recommendations
-        })
-      });
+      // console.log(this.textualRangeData)
+      this.textualRangeData
+        // .sort((a, b) => {
+        //   if (a.aspect > b.aspect) return 1;
+        //   if (a.aspect < b.aspect) return -1;
+        // })
+        .forEach(element => {
+          var value = parseInt((element.value / 10) / 2);
+          var aspect = element.aspect;
+          let textualRange = this.textualRanges.find(textualRange => {
+            return ((parseInt(textualRange.rangeNum) == value) && (textualRange.title == aspect));
+          });
 
-      console.log(this.valuesBuilt);
+          console.log(element.value)
+
+          this.valuesBuilt.push({
+            aspect,
+            range: value,
+            value: element.value,
+            diagnosis: textualRange.diagnosis,
+            recommendation: textualRange.recommendations
+          })
+        });
+
+      // console.log(this.valuesBuilt);
 
     }
   },
   mounted() {
+    setTimeout(() => {
+      console.log(this.textualRangeData)
+    }, 1000);
     this.getTextualRanges();
   }
 })

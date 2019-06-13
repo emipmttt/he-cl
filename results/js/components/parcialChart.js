@@ -5,7 +5,7 @@ Vue.component("parcial-chart", {
   <div v-for="value in valuesBuilt">
     Gráfica {{value.title}}
     <canvas :id="'entitie-global-chart-'+value.title" style="width:100%"></canvas>
-    <textual-range :data="globalData"></textual-range>
+    <textual-range :textual-range-data="textualRangeData"></textual-range>
 
   </div>
 </div>
@@ -16,7 +16,8 @@ Vue.component("parcial-chart", {
     return {
       condensed: [],
       valuesBuilt: [],
-      globalData: []
+      globalData: [],
+      textualRangeData: []
 
     }
   },
@@ -95,10 +96,7 @@ Vue.component("parcial-chart", {
       });
       this.calculatedAspects = aspectsCalculated;
     },
-    newBuiltChart() {
 
-
-    },
 
 
     buildChart(params) {
@@ -173,12 +171,14 @@ Vue.component("parcial-chart", {
           backgroundColor.push("#bcd6ff");
           data.push(aspectsMedia[key]);
 
-          globalData.push({
+          this.textualRangeData.push({
             aspect: key,
             value: aspectsMedia[key]
           })
 
         });
+
+        console.log(this.textualRangeData)
 
 
         total = (total / Object.keys(aspectsMedia).length).toFixed(2);
