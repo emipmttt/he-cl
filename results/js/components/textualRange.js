@@ -51,12 +51,13 @@ Vue.component("textual-range", {
         // })
         .forEach(element => {
           var value = parseInt((element.value / 10) / 2);
+          // console.log(value)
           var aspect = element.aspect;
           let textualRange = this.textualRanges.find(textualRange => {
             return ((parseInt(textualRange.rangeNum) == value) && (textualRange.title == aspect));
           });
 
-          console.log(element.value)
+          // console.log(element.value)
 
           this.valuesBuilt.push({
             aspect,

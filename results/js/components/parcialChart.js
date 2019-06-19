@@ -5,7 +5,7 @@ Vue.component("parcial-chart", {
   <div v-for="value in valuesBuilt">
     Gráfica {{value.title}}
     <canvas :id="'entitie-global-chart-'+value.title" style="width:100%"></canvas>
-    <textual-range :textual-range-data="textualRangeData"></textual-range>
+    <textual-range :textual-range-data="textualRangeData[value.title]"></textual-range>
 
   </div>
 </div>
@@ -17,7 +17,7 @@ Vue.component("parcial-chart", {
       condensed: [],
       valuesBuilt: [],
       globalData: [],
-      textualRangeData: []
+      textualRangeData: {}
 
     }
   },
@@ -170,15 +170,10 @@ Vue.component("parcial-chart", {
           labels.push(key);
           backgroundColor.push("#bcd6ff");
           data.push(aspectsMedia[key]);
-
-          this.textualRangeData.push({
-            aspect: key,
-            value: aspectsMedia[key]
-          })
-
         });
 
-        console.log(this.textualRangeData)
+
+        // console.log(this.textualRangeData)
 
 
         total = (total / Object.keys(aspectsMedia).length).toFixed(2);
@@ -188,9 +183,34 @@ Vue.component("parcial-chart", {
 
         this.globalData = globalData;
 
+        //pasar los datos para el textual range
+
+        console.log(labels, data)
+        labels.forEach((aspect, index) => {
+          let textualRangeData = this.textualRangeData;
+
+          if (Array.isArray(textualRangeData[param.title])) {
+            textualRangeData[param.title].push({
+              aspect: aspect,
+              value: data[index]
+            })
+          } else {
+            textualRangeData[param.title] = [];
+            textualRangeData[param.title].push({
+              aspect: aspect,
+              value: data[index]
+            })
+          }
+
+          this.textualRangeData = textualRangeData;
+        });
+
+        // pasar los datos para el textual range
+
         labels.push("Total");
         backgroundColor.push("#3f51b5");
         data.push(total);
+
 
         setTimeout(() => {
             let ctx = document.getElementById('entitie-global-chart-' + param.title).getContext('2d');
