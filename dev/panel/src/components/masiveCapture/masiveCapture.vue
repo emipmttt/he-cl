@@ -31,7 +31,7 @@
     },
     methods: {
       get() {
-        axios.get('https://clima-laboral.human-express.com/php/campains/read.php?query=*&campain=' + this.displayTitle +
+        axios.get('https://nom035.human-express.com/php/campains/read.php?query=*&campain=' + this.displayTitle +
             "&user=" + this.user)
           .then(response => {
             response.data.reactives.forEach(question => {
@@ -53,11 +53,11 @@
           })
       },
       verifyCampain() {
-        axios.get('https://clima-laboral.human-express.com/php/questionnaire/read.php?query=verify&campain=' +
+        axios.get('https://nom035.human-express.com/php/questionnaire/read.php?query=verify&campain=' +
             this.displayTitle + "&user=" + this.user + "&numberOfParticipants=" + this.thisCampain.numberOfParticipants
           )
           .then(response => {
-            console.log('https://clima-laboral.human-express.com/php/questionnaire/read.php?query=verify&campain=' +
+            console.log('https://nom035.human-express.com/php/questionnaire/read.php?query=verify&campain=' +
               this.displayTitle + "&user=" + this.user + "&numberOfParticipants=" + this.thisCampain.numberOfParticipants
             )
             this.thisCampain.status = response.data.status;

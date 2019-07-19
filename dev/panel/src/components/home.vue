@@ -43,7 +43,7 @@
     methods: {
       getUserData(message) {
         axios
-          .post("https://clima-laboral.human-express.com/php/users/read.php?query=user&user=" + this.user.id)
+          .post("https://nom035.human-express.com/php/users/read.php?query=user&user=" + this.user.id)
           .then(response => {
             console.log(response.data)
             if (response.data.status) {

@@ -87,7 +87,7 @@
           title: this.title,
         };
         console.log(data);
-        axios.post('https://clima-laboral.human-express.com/php/aspects/update.php', this.createFormData(data))
+        axios.post('https://nom035.human-express.com/php/aspects/update.php', this.createFormData(data))
           .then(response => {
             this.buttonDisabled = false;
             console.log(response.data);
@@ -111,7 +111,7 @@
           let data = {
             id: this.id
           };
-          axios.post("https://clima-laboral.human-express.com/php/aspects/delete.php", this.createFormData(data))
+          axios.post("https://nom035.human-express.com/php/aspects/delete.php", this.createFormData(data))
             .then(element => {
               M.toast({
                 html: 'Se ha eliminado el aspecto'

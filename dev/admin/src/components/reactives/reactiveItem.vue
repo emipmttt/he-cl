@@ -163,7 +163,7 @@ export default {
         timer: this.timer
       };
       console.log(data);
-      axios.post('https://clima-laboral.human-express.com/php/reactives/update.php', this.createFormData(data))
+      axios.post('https://nom035.human-express.com/php/reactives/update.php', this.createFormData(data))
         .then(response => {
           this.buttonDisabled = false;
           console.log(response.data);
@@ -189,7 +189,7 @@ export default {
           id: this.id
         };
 
-        axios.post("https://clima-laboral.human-express.com/php/reactives/delete.php", this.createFormData(data))
+        axios.post("https://nom035.human-express.com/php/reactives/delete.php", this.createFormData(data))
           .then(element => {
             M.toast({
               html: 'Se ha eliminado el reactivo'

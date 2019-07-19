@@ -231,7 +231,7 @@ export default {
       };
       axios
         .post(
-          "https://clima-laboral.human-express.com/php/questionnaire/create.php",
+          "https://nom035.human-express.com/php/questionnaire/create.php",
           this.createFormData(data)
         )
         .then(response => {
@@ -275,7 +275,7 @@ export default {
     get() {
       axios
         .get(
-          "https://clima-laboral.human-express.com/php/campains/read.php?query=*&campain=" +
+          "https://nom035.human-express.com/php/campains/read.php?query=*&campain=" +
             this.title +
             "&user=" +
             this.user

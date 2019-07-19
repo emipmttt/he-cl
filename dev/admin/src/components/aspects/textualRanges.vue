@@ -108,7 +108,7 @@
         console.log(data);
         this.buttonDisabled = true;
         axios
-          .post('https://clima-laboral.human-express.com/php/textualRanges/create.php', this.createFormData(data))
+          .post('https://nom035.human-express.com/php/textualRanges/create.php', this.createFormData(data))
           .then(response => {
             this.buttonDisabled = false;
             console.log(response);
@@ -129,7 +129,7 @@
           })
       },
       get() {
-        axios.get('https://clima-laboral.human-express.com/php/textualRanges/read.php?query=dependency&dependency=' +
+        axios.get('https://nom035.human-express.com/php/textualRanges/read.php?query=dependency&dependency=' +
             this.aspectId +
             '&typeDependency=aspect')
           .then(response => {

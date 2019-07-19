@@ -156,7 +156,7 @@
     methods: {
       get() {
         axios
-          .get("https://clima-laboral.human-express.com/php/questionnaire/read.php?query=*&user=" + this.user.id +
+          .get("https://nom035.human-express.com/php/questionnaire/read.php?query=*&user=" + this.user.id +
             "&campain=" + this.title)
           .then(response => {
             console.log(response.data)

@@ -56,7 +56,7 @@ export default {
       if (this.create) window.scroll(0, 0);
     },
     get() {
-      axios.get('https://clima-laboral.human-express.com/php/campains/read.php?query=*&campain=' + this.displayTitle + "&user=" + this.user)
+      axios.get('https://nom035.human-express.com/php/campains/read.php?query=*&campain=' + this.displayTitle + "&user=" + this.user)
         .then(response => {
           this.reactives = response.data.reactives;
           console.log(response);

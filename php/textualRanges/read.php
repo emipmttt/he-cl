@@ -21,7 +21,7 @@ switch ($query) {
 
         break;
     case '*':
-        $sqlReadTextualRanges = "SELECT A.title, B.diagnosis, B.recommendations, B.rangeNum FROM textualRanges B, aspects A WHERE A.id = B.dependency";
+        $sqlReadTextualRanges = "SELECT A.title, B.id B.diagnosis, B.recommendations, B.rangeNum FROM textualRanges B, aspects A WHERE A.id = B.dependency";
 
         $textualRanges = readTextualRanges($sqlReadTextualRanges, $conn);
         if (!$textualRanges) {

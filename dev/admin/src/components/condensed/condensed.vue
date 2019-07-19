@@ -107,7 +107,7 @@
           aspects: JSON.stringify(this.aspectsSelected)
         };
         console.log(data);
-        axios.post('https://clima-laboral.human-express.com/php/condensed/create.php', this.createFormData(data))
+        axios.post('https://nom035.human-express.com/php/condensed/create.php', this.createFormData(data))
           .then(response => {
             this.buttonDisabled = false;
             console.log(response.data);
@@ -127,7 +127,7 @@
           })
       },
       get() {
-        axios.get('https://clima-laboral.human-express.com/php/condensed/read.php?query=*')
+        axios.get('https://nom035.human-express.com/php/condensed/read.php?query=*')
           .then(response => {
             this.condensed = response.data.condensed;
             console.log(response);
@@ -135,7 +135,7 @@
           })
       },
       getAspects() {
-        axios.get('https://clima-laboral.human-express.com/php/aspects/read.php?query=*')
+        axios.get('https://nom035.human-express.com/php/aspects/read.php?query=*')
           .then(response => {
             this.aspects = response.data.aspects;
             console.log(response.data);

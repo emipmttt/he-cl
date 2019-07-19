@@ -29,7 +29,7 @@ var app = new Vue({
   },
   methods: {
     getCampainData() {
-      axios.get(`https://clima-laboral.human-express.com/php/monitoring/results.php?user=${this.user}&campain=${this.urlToString(this.campain)}`)
+      axios.get(`https://nom035.human-express.com/php/monitoring/results.php?user=${this.user}&campain=${this.urlToString(this.campain)}`)
         .then(response => {
           this.users = response.data.users;
           if (response.data.status) {
