@@ -62,7 +62,7 @@
       logout() {
 
         axios
-          .post("https://nom035.human-express.com/php/session/logout.php")
+          .post("https://clima-laboral.human-express.com/php/session/logout.php")
           .then(response => {
             sessionStorage.clear();
             location.href = "/";

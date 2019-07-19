@@ -139,7 +139,7 @@ export default {
         timer: this.timer
       };
       console.log(data);
-      axios.post('https://nom035.human-express.com/php/reactives/create.php', this.createFormData(data))
+      axios.post('https://clima-laboral.human-express.com/php/reactives/create.php', this.createFormData(data))
         .then(response => {
           this.buttonDisabled = false;
           console.log(response.data);
@@ -159,7 +159,7 @@ export default {
         })
     },
     get() {
-      axios.get('https://nom035.human-express.com/php/reactives/read.php?query=*')
+      axios.get('https://clima-laboral.human-express.com/php/reactives/read.php?query=*')
         .then(response => {
           this.reactives = response.data.reactives;
           console.log(response);

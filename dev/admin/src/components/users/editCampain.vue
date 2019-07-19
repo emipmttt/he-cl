@@ -108,7 +108,7 @@
         console.log(data);
 
         axios
-          .post('https://nom035.human-express.com/php/campains/update.php', this.createFormData(data))
+          .post('https://clima-laboral.human-express.com/php/campains/update.php', this.createFormData(data))
           .then(response => {
             this.buttonDisabled = false;
             console.log(response.data);

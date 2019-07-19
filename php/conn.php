@@ -8,9 +8,9 @@
   $response = new stdClass();
 
   $DATABASE_SERVER = "localhost";
-  $DATABASE_USER = "humanexpress_nom035";
+  $DATABASE_USER = "humanexpress_clima-laboral";
   $DATABASE_PASSWORD = "climadbpass";
-  $DATABASE_NAME = "humanexpress_nom035";
+  $DATABASE_NAME = "humanexpress_clima-laboral";
 
   $conn = mysqli_connect($DATABASE_SERVER, $DATABASE_USER, $DATABASE_PASSWORD, $DATABASE_NAME);
   mysqli_set_charset($conn,"utf8");

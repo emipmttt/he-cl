@@ -104,7 +104,7 @@
           aspects: JSON.stringify(this.aspectsSelected)
         };
         console.log(data);
-        axios.post('https://nom035.human-express.com/php/condensed/update.php', this.createFormData(data))
+        axios.post('https://clima-laboral.human-express.com/php/condensed/update.php', this.createFormData(data))
           .then(response => {
             this.buttonDisabled = false;
             console.log(response.data);
@@ -129,7 +129,7 @@
           let data = {
             id: this.id
           };
-          axios.post("https://nom035.human-express.com/php/condensed/delete.php", this.createFormData(data))
+          axios.post("https://clima-laboral.human-express.com/php/condensed/delete.php", this.createFormData(data))
             .then(element => {
               M.toast({
                 html: 'Se ha eliminado el condensed_o'
@@ -180,7 +180,7 @@
         }
       },
       getAspects() {
-        axios.get('https://nom035.human-express.com/php/aspects/read.php?query=*')
+        axios.get('https://clima-laboral.human-express.com/php/aspects/read.php?query=*')
           .then(response => {
             this.aspects = response.data.aspects;
             console.log(response.data);

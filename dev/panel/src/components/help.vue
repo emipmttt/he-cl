@@ -1,6 +1,6 @@
 <template>
   <div class="container" style="text-align: justify">
-    <h1 class="large-text indigo-text">Encuesta de Satisfacción / NOM035</h1>
+    <h1 class="large-text indigo-text">Encuesta de Satisfacción / clima-laboral</h1>
     <p class="indigo-text">
       Se puede utilizar cualquier navegador para acceder vía internet a esta
       plataforma, pero se recomienda probar inicialmente Mozilla Firefox,
@@ -12,7 +12,7 @@
     <p>
       <span class="green-text">Aun no hay diagnósticos:</span>
       Este mensaje se presenta cuando no se ha creado en la plataforma un diagnóstico personalizado de “Encuesta de
-      Satisfacción / NOM035” para la empresa.
+      Satisfacción / clima-laboral” para la empresa.
     </p>
     <p>
       <span class="green-text">Contáctanos para la asignación de diagnósticos:</span>
@@ -43,7 +43,7 @@
     <p>
       Le llamaremos al conjunto de información necesaria y definiciones que se
       requieren en esta plataforma para que se pueda aplicar con éxito una “Encuesta
-      de Satisfacción / NOM035” personalizada para su empresa.
+      de Satisfacción / clima-laboral” personalizada para su empresa.
     </p>
     <h2 class="medium-text indigo-text">¿Cómo se da el alta de un diagnostico en esta plataforma?</h2>
     <p>
@@ -61,7 +61,7 @@
       <span class="green-text">INDIVIDUAL / EN LINEA:</span>
       Permite visualizar en el navegador de internet el
       “link” que se les podrá hacer llegar vía correo electrónico a los participantes
-      para que puedan resolver la “Encuesta de Satisfacción / NOM035” ON
+      para que puedan resolver la “Encuesta de Satisfacción / clima-laboral” ON
       LINE.
       Al ingresar a esta opción vía menú o a través del “link”, la plataforma solicitará
       el “Código de acceso” que permite resolver el cuestionario de preguntas.
@@ -93,7 +93,7 @@
     <p>
       <span class="green-text">Respuestas Global: </span>
       Despliega una gráfica de pastel cuantitativa por cada
-      aspecto evaluado en la “Encuesta de Satisfacción / NOM035”.
+      aspecto evaluado en la “Encuesta de Satisfacción / clima-laboral”.
     </p>
     <p>
       <span class="green-text">Global:</span>
@@ -104,7 +104,7 @@
       <span class="green-text">Entidad: </span>
       Despliega 2 gráficas de barras verticales de manera cualitativa y en
       porcentaje; la primera grafica con todas las entidades definidas en la “Encuesta
-      de Satisfacción / NOM035” y segunda gráfica por cada una de las entidades
+      de Satisfacción / clima-laboral” y segunda gráfica por cada una de las entidades
       por separado adicionando una barra final “TOTAL” que refleja el porcentaje
       promedio de todos los aspectos que le preceden.
       Seguido de lo anterior se muestra la interpretación textual de resultados de la
@@ -114,7 +114,7 @@
       <span class="green-text">Área / Departamento: </span>
       Despliega 2 gráficas de barras verticales de manera
       cualitativa y en porcentaje; la primera grafica con todas las áreas o
-      departamentos definidos en la “Encuesta de Satisfacción / NOM035” y
+      departamentos definidos en la “Encuesta de Satisfacción / clima-laboral” y
       segunda gráfica por cada una de las áreas o departamentos por separado
       adicionando una barra final “TOTAL” que refleja el porcentaje promedio de
       todos los aspectos que le preceden.
@@ -125,7 +125,7 @@
       <span class="green-text">Turno:</span>
       Despliega 2 gráficas de barras verticales de manera cualitativa y en
       porcentaje; la primera grafica con todos los turnos definidos en la “Encuesta de
-      Satisfacción / NOM035” y segunda gráfica por cada turno por separado
+      Satisfacción / clima-laboral” y segunda gráfica por cada turno por separado
       adicionando una barra final “TOTAL” que refleja el porcentaje promedio de
       todos los aspectos que le preceden.
       Seguido de lo anterior se muestra la interpretación textual de resultados de la
@@ -135,7 +135,7 @@
       <span class="green-text">Género:</span>
       Despliega 2 gráficas de barras verticales de manera cualitativa y en
       porcentaje; la primera grafica con todos los géneros definidos en la “Encuesta de
-      Satisfacción / NOM035” y segunda gráfica por cada género por separado
+      Satisfacción / clima-laboral” y segunda gráfica por cada género por separado
       adicionando una barra final “TOTAL” que refleja el porcentaje promedio de
       todos los aspectos que le preceden.
       Seguido de lo anterior se muestra la interpretación textual de resultados de la
@@ -145,7 +145,7 @@
       <span class="green-text">Rango de edad: </span>
       Despliega 2 gráficas de barras verticales de manera cualitativa
       y en porcentaje; la primera grafica con todos los rangos de edad definidos en la
-      “Encuesta de Satisfacción / NOM035” y segunda gráfica por cada rango de
+      “Encuesta de Satisfacción / clima-laboral” y segunda gráfica por cada rango de
       edad por separado adicionando una barra final “TOTAL” que refleja el
       porcentaje promedio de todos los aspectos que le preceden.
       Seguido de lo anterior se muestra la interpretación textual de resultados de la
@@ -155,7 +155,7 @@
       <span class="green-text">Estudios concluidos: </span>
       Despliega 2 gráficas de barras verticales de manera
       cualitativa y en porcentaje; la primera grafica con todos los niveles de estudios
-      concluidos definidos en la “Encuesta de Satisfacción / NOM035” y segunda
+      concluidos definidos en la “Encuesta de Satisfacción / clima-laboral” y segunda
       gráfica por cada nivel de estudios concluidos por separado adicionando una
       barra final “TOTAL” que refleja el porcentaje promedio de todos los aspectos
       que le preceden.
@@ -166,7 +166,7 @@
       <span class="green-text">Antigüedad en la empresa: </span>
       Despliega 2 gráficas de barras verticales de
       manera cualitativa y en porcentaje; la primera grafica con todos los rangos de
-      antigüedad definidos en la “Encuesta de Satisfacción / NOM035” y segunda
+      antigüedad definidos en la “Encuesta de Satisfacción / clima-laboral” y segunda
       gráfica por cada rango de antigüedad por separado adicionando una barra final
       “TOTAL” que refleja el porcentaje promedio de todos los aspectos que le
       preceden.
@@ -203,7 +203,7 @@
     </p>
     <p>
       <span class="green-text">Escala de Calificación:</span>
-      La escala de calificación de cada pregunta del cuestionario de “Encuesta de Satisfacción / NOM035” es:
+      La escala de calificación de cada pregunta del cuestionario de “Encuesta de Satisfacción / clima-laboral” es:
     </p>
     <table>
       <thead>

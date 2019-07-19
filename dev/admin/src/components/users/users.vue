@@ -49,7 +49,7 @@
     },
     methods: {
       get() {
-        axios.get('https://nom035.human-express.com/php/users/read.php?query=*')
+        axios.get('https://clima-laboral.human-express.com/php/users/read.php?query=*')
           .then(response => {
             console.log(response.data);
 

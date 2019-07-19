@@ -35,7 +35,7 @@ Vue.component("textual-range", {
   },
   methods: {
     getTextualRanges() {
-      axios.get("https://nom035.human-express.com/php/textualRanges/read.php?query=*")
+      axios.get("https://clima-laboral.human-express.com/php/textualRanges/read.php?query=*")
         .then(response => {
           this.textualRanges = response.data.textualRanges;
 

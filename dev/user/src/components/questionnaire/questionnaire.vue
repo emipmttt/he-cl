@@ -10,7 +10,7 @@
             <div v-if="!userCodeStatus">
               <form @submit.prevent="verifyUserCode" class="card-panel">
                 <p class="left-align">
-                  <b class="medium-text">Te damos la Bienvenida a la Encuesta de NOM035</b>
+                  <b class="medium-text">Te damos la Bienvenida a la Encuesta de clima-laboral</b>
                   <br>
                   <span
                     class="normal-text"
@@ -319,7 +319,7 @@ export default {
       };
       axios
         .post(
-          "https://nom035.human-express.com/php/questionnaire/create.php",
+          "https://clima-laboral.human-express.com/php/questionnaire/create.php",
           this.createFormData(data)
         )
         .then(response => {
@@ -364,7 +364,7 @@ export default {
       console.clear();
       axios
         .get(
-          "https://nom035.human-express.com/php/campains/read.php?query=*&campain=" +
+          "https://clima-laboral.human-express.com/php/campains/read.php?query=*&campain=" +
             this.displayTitle +
             "&user=" +
             this.user

@@ -106,10 +106,10 @@
     $message = '
     <div style="text-align:center;color:#333">
     <div style="width:60%;display:inline-block">
-      <img src="https://nom035.human-express.com/user/img/logo.de0ec56.png">
+      <img src="https://clima-laboral.human-express.com/user/img/logo.de0ec56.png">
       <p style="text-align:left">
-        Recibiste este email porque solicitaste un cambio de contraseña en NOM035| human express.</p>
-      <a href="https://nom035.human-express.com/#/reestablecer/'.$code.'" style="width:90%;text-decoration:none;background:#3f51b5;padding:10px 10px; border-radius:5rem;color:#e9e9e9">Restablecer contraseña</a>
+        Recibiste este email porque solicitaste un cambio de contraseña en clima-laboral| human express.</p>
+      <a href="https://clima-laboral.human-express.com/#/reestablecer/'.$code.'" style="width:90%;text-decoration:none;background:#3f51b5;padding:10px 10px; border-radius:5rem;color:#e9e9e9">Restablecer contraseña</a>
 
       <p style="text-align:left">
         Si no solicitaste ningún cambio sólo ignora este mensaje
@@ -117,8 +117,8 @@
 
       Puedes copiar y pegar el siguiente link a tu navegador:
       <br>
-      <a href="https://nom035.human-express.com/#/reestablecer/'.$code.'">
-        https://nom035.human-express.com/#/reestablecer/'.$code.'
+      <a href="https://clima-laboral.human-express.com/#/reestablecer/'.$code.'">
+        https://clima-laboral.human-express.com/#/reestablecer/'.$code.'
       </a>
 
       <hr>
@@ -134,7 +134,7 @@
 
     $message = utf8_decode($message);
 
-    $title = "Reestablece tu clave para NOM035| HE ";
+    $title = "Reestablece tu clave para clima-laboral| HE ";
     $title = "=?ISO-8859-1?B?".$title."=?=";
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";

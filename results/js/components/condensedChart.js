@@ -15,7 +15,7 @@ Vue.component("condensed-chart", {
   },
   methods: {
     getTextualRanges() {
-      axios.get("https://nom035.human-express.com/php/condensed/read.php?query=*")
+      axios.get("https://clima-laboral.human-express.com/php/condensed/read.php?query=*")
         .then(response => {
           this.condensed = response.data.condensed;
           this.buildDataToUse();
